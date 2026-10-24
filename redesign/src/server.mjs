@@ -197,7 +197,7 @@ async function handle(req,res){
   if(store.getUserByEmail(email))return respond(res,200,{message:'Jika email dapat didaftarkan, tautan verifikasi akan dikirim.'});
   const user=store.createUser({email,name,passwordHash:hashPassword(b.password)});
   const token=randomString(36);store.saveToken(token,user.id,'verify',86400000);
-  await sendMail(config,{to:email,subject:'Verifikasi email — Febro Ecosystem',heading:'Konfirmasi alamat email',text:'Aktifkan akunmu melalui tautan berikut. Tautan berlaku 24 jam.',button:'Verifikasi email',url:`${base('auth')}/auth/verify?token=${encodeURIComponent(token)}`});
+  await sendMail(config,{to:email,subject:'Verifikasi email — Febro Space',heading:'Konfirmasi alamat email',text:'Aktifkan akunmu melalui tautan berikut. Tautan berlaku 24 jam.',button:'Verifikasi email',url:`${base('auth')}/auth/verify?token=${encodeURIComponent(token)}`});
   return respond(res,201,{message:'Akun dibuat. Cek inbox dan folder spam untuk verifikasi email.'});
  }
  if(method==='GET'&&p==='/auth/verify'){
@@ -217,7 +217,7 @@ async function handle(req,res){
   if(site!=='auth')fail(404,'Endpoint tidak tersedia');guardOrigin(req,site);rate(req,'authforgot',4,3600000);
   const b=await json(req),email=normalizeEmail(b.email),user=store.getUserByEmail(email);
   if(user){const token=randomString(36);store.saveToken(token,user.id,'reset',15*60000);
-    await sendMail(config,{to:email,subject:'Reset password — Febro Ecosystem',heading:'Atur ulang password',text:'Kami menerima permintaan untuk mengubah password akunmu. Tautan berlaku 15 menit dan hanya dapat dipakai sekali.',button:'Reset password',url:`${base('auth')}/reset?token=${encodeURIComponent(token)}`});}
+    await sendMail(config,{to:email,subject:'Reset password — Febro Space',heading:'Atur ulang password',text:'Kami menerima permintaan untuk mengubah password akunmu. Tautan berlaku 15 menit dan hanya dapat dipakai sekali.',button:'Reset password',url:`${base('auth')}/reset?token=${encodeURIComponent(token)}`});}
   return respond(res,200,{message:'Jika email terdaftar, tautan reset password akan dikirim.'});
  }
  if(method==='POST'&&p==='/v1/auth/reset'){
@@ -228,7 +228,7 @@ async function handle(req,res){
  }
  if(method==='POST'&&p==='/v1/auth/resend'){
   if(site!=='auth')fail(404,'Endpoint tidak tersedia');guardOrigin(req,site);rate(req,'resend',3,3600000);const b=await json(req),email=normalizeEmail(b.email),user=store.getUserByEmail(email);
-  if(user&&!user.email_verified){const token=randomString(36);store.saveToken(token,user.id,'verify',86400000);await sendMail(config,{to:email,subject:'Verifikasi email — Febro Ecosystem',heading:'Verifikasi alamat email',text:'Konfirmasi kepemilikan alamat email untuk mengaktifkan akun. Tautan berlaku 24 jam.',button:'Verifikasi',url:`${base('auth')}/auth/verify?token=${token}`});}
+  if(user&&!user.email_verified){const token=randomString(36);store.saveToken(token,user.id,'verify',86400000);await sendMail(config,{to:email,subject:'Verifikasi email — Febro Space',heading:'Verifikasi alamat email',text:'Konfirmasi kepemilikan alamat email untuk mengaktifkan akun. Tautan berlaku 24 jam.',button:'Verifikasi',url:`${base('auth')}/auth/verify?token=${token}`});}
   return respond(res,200,{message:'Jika email terdaftar dan belum aktif, tautan verifikasi telah dikirim.'});
  }
  if(method==='GET'&&p==='/auth/google/start'){
@@ -262,7 +262,7 @@ async function handle(req,res){
     user=store.createUser({email:profile.email,name:profile.name,verified:profile.authoritative,googleSub:profile.sub});
     if(!profile.authoritative&&config.smtpUser&&config.smtpPass&&!config.smtpPass.startsWith('REPLACE')){
       const token=randomString(36);store.saveToken(token,user.id,'verify',86400000);
-      await sendMail(config,{to:user.email,subject:'Verifikasi email — Febro Ecosystem',heading:'Verifikasi alamat email',text:'Google login dengan alamat email non-Gmail membutuhkan verifikasi kepemilikan mailbox sebelum fitur pribadi dapat digunakan.',button:'Verifikasi email',url:`${base('auth')}/auth/verify?token=${token}`});
+      await sendMail(config,{to:user.email,subject:'Verifikasi email — Febro Space',heading:'Verifikasi alamat email',text:'Google login dengan alamat email non-Gmail membutuhkan verifikasi kepemilikan mailbox sebelum fitur pribadi dapat digunakan.',button:'Verifikasi email',url:`${base('auth')}/auth/verify?token=${token}`});
     }
   }
   if(user.disabled)fail(403,'Akun dinonaktifkan');
@@ -368,6 +368,6 @@ async function handle(req,res){
 function sanitizeSnippet(b){const title=String(b.title||'').trim(),language=String(b.language||'plaintext').toLowerCase().trim(),content=String(b.content||'');const visibility=b.visibility==='public'?'public':'private';if(title.length<2||title.length>120||!content.trim()||content.length>40000||!/^[a-z0-9+#_-]{1,25}$/.test(language))fail(400,'Judul, bahasa, atau kode tidak valid (maks. 40.000 karakter)');return{title,language,content,visibility};}
 const server=http.createServer(async(req,res)=>{try{await context.run({unified:String(req.headers.host||'').split(':')[0].toLowerCase()===ecoHost},()=>handle(req,res));}catch(err){const status=err.status>=400&&err.status<600?err.status:500;if(!res.headersSent){console.error(status===500?'Server error:':'Request:',String(err.message));respond(res,status,{error:status===500?'Kesalahan server, coba lagi nanti.':err.message});}else res.destroy();}});
 if(process.argv[1]&&fileURLToPath(import.meta.url)===path.resolve(process.argv[1])||process.env.RUN_SERVER==='true'){
- server.listen(config.port,config.host,()=>console.log(`Febro Ecosystem ready at http://${config.host}:${config.port}`));
+ server.listen(config.port,config.host,()=>console.log(`Febro Space ready at http://${config.host}:${config.port}`));
 }
 export {server,config,store};

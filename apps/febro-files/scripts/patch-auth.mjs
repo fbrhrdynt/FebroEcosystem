@@ -4,7 +4,7 @@ import {spawnSync} from 'node:child_process';
 const root=process.env.ECOSYSTEM_ROOT||'/opt/febro-ecosystem';
 const file=path.join(root,'src','server.mjs'),oidc=path.join(root,'src','oidc.mjs');
 const here=path.resolve(import.meta.dirname,'..');
-if(!fs.existsSync(file))throw Error('Existing Febro Ecosystem not found at '+file);
+if(!fs.existsSync(file))throw Error('Existing Febro Space not found at '+file);
 const old=fs.readFileSync(file,'utf8');
 if(old.includes('initOidc')&&old.includes('/oauth/authorize')){console.log('OIDC bridge already installed; no source changes.');process.exit(0);}
 const replacements=[

@@ -45,7 +45,7 @@ export async function stampPdf(buffer,{id,verifyUrl,pageIndex,x,y,size}){
  const drawY=h-y*h-qrSize;
  if(drawY<0)throw bad('QR melewati batas bawah halaman');
  page.drawImage(img,{x:x*w,y:drawY,width:qrSize,height:qrSize});
- pdf.setProducer('Febro Ecosystem — by Febro Herdyanto');
+ pdf.setProducer('Febro Space — by Febro Herdyanto');
  pdf.setSubject(`Registry verification: ${id}`);
  return Buffer.from(await pdf.save({useObjectStreams:false}));
 }
