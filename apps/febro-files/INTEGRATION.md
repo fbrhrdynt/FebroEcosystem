@@ -30,3 +30,9 @@ responsible for its existing local attachment fallback and all authorization rul
 Run `npm run check` and `npm test`. The integration suite uses isolated databases
 and a mock CMS authority; it never sends production emails or accesses private
 production documents.
+
+Febro One uses its own `FEBRO_ONE_FILES_SERVICE_TOKEN` and `service:febro-one`
+owner through the same bridge routes. Upload parameters are `kind=attachment`,
+`entry=<One record UUID>`, and `name=<filename>`. CMS and One tokens cannot read or
+modify one another's objects. One must authorize its own user/record access before
+calling the bridge, and retain its local attachment fallback.

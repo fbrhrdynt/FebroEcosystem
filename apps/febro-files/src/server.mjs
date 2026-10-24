@@ -146,33 +146,38 @@ function serveAsset(res,p){
 
 // Service-to-service bridge for febro.id. Independent of browser sessions and CSRF.
 // This identity owns only its own folder tree, never a personal user's files.
-const bridgeSub='service:febro-profile';
 function bridgeUser(req){
- const secret=process.env.FEBRO_PROFILE_SERVICE_TOKEN||'';
  const header=String(req.headers.authorization||'');
  const supplied=header.startsWith('Bearer ')?header.slice(7):'';
- if(secret.length<48||supplied.length!==secret.length||
-    !timingSafeEqual(Buffer.from(supplied),Buffer.from(secret)))throw err('Unauthorized integration',401);
- return repo.upsertAccount({sub:bridgeSub,email:'service-febro-profile@internal.invalid',name:'Febro Profile Integration'});
+ const identities=[['FEBRO_PROFILE_SERVICE_TOKEN','service:febro-profile'],['FEBRO_ONE_FILES_SERVICE_TOKEN','service:febro-one']];
+ for(const [key,sub] of identities){
+  const secret=process.env[key]||'';
+  if(secret.length>=48&&Buffer.byteLength(supplied)===Buffer.byteLength(secret)&&timingSafeEqual(Buffer.from(supplied),Buffer.from(secret))){
+   const account=repo.upsertAccount({sub,email:sub.slice(8)+'@internal.invalid',name:sub.slice(8)+' Integration'});
+   if(account.blocked)throw err('Integration disabled',403);
+   return account;
+  }
+ }
+ throw err('Unauthorized integration',401);
 }
-function bridgeFolder(parent,name){
- const existing=repo.list(bridgeSub,parent).find(n=>n.kind==='folder'&&n.name===name);
- return existing||repo.createFolder(bridgeSub,parent,name);
+function bridgeFolder(sub,parent,name){
+ const existing=repo.list(sub,parent).find(n=>n.kind==='folder'&&n.name===name);
+ return existing||repo.createFolder(sub,parent,name);
 }
 async function handleBridge(req,res,u){
- const user=bridgeUser(req),p=u.pathname,method=req.method;
+ const user=bridgeUser(req),bridgeSub=user.sub,p=u.pathname,method=req.method;
  limit(req,'profile-bridge',150,60000);
- const root=bridgeFolder(null,'Applications');
- const app=bridgeFolder(root.id,'febro.id');
+ const root=bridgeFolder(bridgeSub,null,'Applications');
+ const app=bridgeFolder(bridgeSub,root.id,bridgeSub==='service:febro-profile'?'febro.id':'one.febro.id');
  const match=p.match(/^\/api\/integrations\/v1\/files\/([a-f0-9-]{36})(?:\/(preview|download))?$/);
  if(method==='POST'&&p==='/api/integrations/v1/files'){
   const kind=u.searchParams.get('kind'),entry=u.searchParams.get('entry'),name=u.searchParams.get('name');
-  if(!['project','certification','post','experience','education','tool','cv'].includes(kind)||
-     !/^[1-9][0-9]{0,12}$/.test(entry||'')||
+  if(!(bridgeSub==='service:febro-one'?['attachment']:['project','certification','post','experience','education','tool','cv']).includes(kind)||
+     !(bridgeSub==='service:febro-one'?uid.test(entry||''):/^[1-9][0-9]{0,12}$/.test(entry||''))||
      !name||name.length>180||/[\\/\x00-\x1f\x7f]/.test(name))throw err('Invalid file destination',400);
-  const category=bridgeFolder(app.id,kind);
-  const destination=bridgeFolder(category.id,entry);
-  return upload(req,res,user,kind==='cv'?bridgeFolder(destination.id,uuid()).id:destination.id,name);
+  const category=bridgeFolder(bridgeSub,app.id,kind);
+  const destination=bridgeFolder(bridgeSub,category.id,entry);
+  return upload(req,res,user,kind==='cv'?bridgeFolder(bridgeSub,destination.id,uuid()).id:destination.id,name);
  }
  if(!match)throw err('Integration route not found',404);
  const id=match[1],action=match[2];

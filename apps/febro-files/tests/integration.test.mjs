@@ -14,6 +14,7 @@ await new Promise(r=>authority.listen(0,'127.0.0.1',r));process.env.FEBRO_CMS_AP
 const {server,repo}=await import('../src/server.mjs');await new Promise(r=>server.listen(3483,'127.0.0.1',r));
 const base='http://127.0.0.1:3483',bearer={Authorization:'Bearer '+process.env.FEBRO_PROFILE_SERVICE_TOKEN};
 let remoteId;
+process.env.FEBRO_ONE_FILES_SERVICE_TOKEN=randomBytes(32).toString('hex');
 test('service bridge requires authentication and isolates personal files',async()=>{
  assert.equal((await fetch(base+'/api/integrations/v1/files')).status,401);
  const personal=repo.upsertAccount({sub:'personal',email:'private@example.com',name:'Private'});
@@ -24,6 +25,15 @@ test('service bridge requires authentication and isolates personal files',async(
  assert.equal(upload.status,201);remoteId=(await upload.json()).item.id;
  assert.equal((await fetch(base+'/api/integrations/v1/files/'+remoteId+'/download')).status,401);
  const download=await fetch(base+'/api/integrations/v1/files/'+remoteId+'/download',{headers:bearer});assert.equal(await download.text(),content.toString());
+});
+test('One identity can manage its attachments without CMS file access',async()=>{
+ const headers={Authorization:'Bearer '+process.env.FEBRO_ONE_FILES_SERVICE_TOKEN,'Content-Type':'application/octet-stream'};
+ assert.equal((await fetch(base+'/api/integrations/v1/files/'+remoteId+'/download',{headers})).status,404);
+ const uploaded=await fetch(base+'/api/integrations/v1/files?kind=attachment&entry=11111111-1111-1111-1111-111111111111&name=one.txt',{method:'POST',headers,body:Buffer.from('One attachment')});assert.equal(uploaded.status,201);
+ const id=(await uploaded.json()).item.id;
+ assert.equal((await fetch(base+'/api/integrations/v1/files/'+id+'/download',{headers:bearer})).status,404);
+ assert.equal(await (await fetch(base+'/api/integrations/v1/files/'+id+'/download',{headers})).text(),'One attachment');
+ assert.equal((await fetch(base+'/api/integrations/v1/files?kind=cv&entry=1&name=one.txt',{method:'POST',headers,body:Buffer.from('Invalid')})).status,400);
 });
 test('CMS authority controls every access; IDOR, revoke, expiry, CSRF and outage fail closed',async()=>{
  grant={id:1,expiresAt:Date.now()+60000,files:[{id:7,remoteId,name:'private.pdf',caption:'Document',preview:true,download:false}]};
