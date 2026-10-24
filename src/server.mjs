@@ -12,6 +12,7 @@ import { parseUpload,pdfInfo,stampPdf,privatePath,writePrivate,hashBuffer,conver
 import { renderQr } from './qr.mjs';
 import { initOidc } from './oidc.mjs';
 import {initControlPlane,isCentralAdmin} from './control-plane.mjs';
+import {controlOverview} from './control-analytics.mjs';
 
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 if(fs.existsSync(path.join(ROOT,'.env')))process.loadEnvFile(path.join(ROOT,'.env'));
@@ -121,6 +122,7 @@ async function handle(req,res){
  if(site==='auth'&&p.startsWith('/v1/control/')){
   const actor=getUser(req);if(!isCentralAdmin(actor))fail(403,'Administrator verified account required');
   rate(req,'control',60,60000);
+  if(method==='GET'&&p==='/v1/control/overview')return respond(res,200,controlOverview(store.db));
   if(method==='GET'&&p==='/v1/control/users')return respond(res,200,control.userList(Number(u.searchParams.get('offset'))||0));
   if(method==='GET'&&p==='/v1/control/apps')return respond(res,200,{apps:control.appList()});
   if(method==='GET'&&p==='/v1/control/audit')return respond(res,200,{items:control.log()});
