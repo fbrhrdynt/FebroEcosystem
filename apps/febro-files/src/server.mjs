@@ -1,4 +1,5 @@
 import http from 'node:http';
+import {createDocumentAccess} from './document-access.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -142,8 +143,53 @@ function serveAsset(res,p){
  const type=f.endsWith('.js')?'text/javascript; charset=utf-8':f.endsWith('.css')?'text/css; charset=utf-8':f.endsWith('.svg')?'image/svg+xml':'text/html; charset=utf-8';
  const content=fs.readFileSync(file);res.writeHead(200,{'Content-Type':type,'Content-Length':content.length});res.end(res.req?.method==='HEAD'?undefined:content);return true;
 }
+
+// Service-to-service bridge for febro.id. Independent of browser sessions and CSRF.
+// This identity owns only its own folder tree, never a personal user's files.
+const bridgeSub='service:febro-profile';
+function bridgeUser(req){
+ const secret=process.env.FEBRO_PROFILE_SERVICE_TOKEN||'';
+ const header=String(req.headers.authorization||'');
+ const supplied=header.startsWith('Bearer ')?header.slice(7):'';
+ if(secret.length<48||supplied.length!==secret.length||
+    !timingSafeEqual(Buffer.from(supplied),Buffer.from(secret)))throw err('Unauthorized integration',401);
+ return repo.upsertAccount({sub:bridgeSub,email:'service-febro-profile@internal.invalid',name:'Febro Profile Integration'});
+}
+function bridgeFolder(parent,name){
+ const existing=repo.list(bridgeSub,parent).find(n=>n.kind==='folder'&&n.name===name);
+ return existing||repo.createFolder(bridgeSub,parent,name);
+}
+async function handleBridge(req,res,u){
+ const user=bridgeUser(req),p=u.pathname,method=req.method;
+ limit(req,'profile-bridge',150,60000);
+ const root=bridgeFolder(null,'Applications');
+ const app=bridgeFolder(root.id,'febro.id');
+ const match=p.match(/^\/api\/integrations\/v1\/files\/([a-f0-9-]{36})(?:\/(preview|download))?$/);
+ if(method==='POST'&&p==='/api/integrations/v1/files'){
+  const kind=u.searchParams.get('kind'),entry=u.searchParams.get('entry'),name=u.searchParams.get('name');
+  if(!['project','certification','post','experience','education','tool','cv'].includes(kind)||
+     !/^[1-9][0-9]{0,12}$/.test(entry||'')||
+     !name||name.length>180||/[\\/\x00-\x1f\x7f]/.test(name))throw err('Invalid file destination',400);
+  const category=bridgeFolder(app.id,kind);
+  const destination=bridgeFolder(category.id,entry);
+  return upload(req,res,user,kind==='cv'?bridgeFolder(destination.id,uuid()).id:destination.id,name);
+ }
+ if(!match)throw err('Integration route not found',404);
+ const id=match[1],action=match[2];
+ const node=repo.requireActive(bridgeSub,id,'file');
+ // No other service or user account can access this integration's objects.
+ if(method==='GET'&&!action)return response(res,200,{item:{id:node.id,name:node.name,size:node.size,sha256:node.sha256,mime:node.mime}});
+ if(['GET','HEAD'].includes(method)&&action==='preview')return streamPreview(req,res,node);
+ if(method==='GET'&&action==='download')return streamFile(res,node);
+ if(method==='DELETE'&&!action){repo.trash(bridgeSub,id);return response(res,200,{ok:true});}
+ throw err('Method not allowed',405);
+}
+
+const documentAccess=createDocumentAccess({repo,config,origin,readJson,parseCookies,limit,response,streamPreview,streamFile,err});
 async function handle(req,res){
  security(res);const u=new URL(req.url||'/',origin),p=u.pathname,method=req.method;
+ if(p.startsWith('/access'))return documentAccess(req,res,u);
+ if(p.startsWith('/api/integrations/v1/'))return handleBridge(req,res,u);
  if(['GET','HEAD'].includes(method)&&p==='/health')return response(res,200,{status:'ok',app:'febro-files',by:'Febro Herdyanto'});
  if(method==='GET'&&p==='/robots.txt'){res.writeHead(200,{'Content-Type':'text/plain'});return res.end('User-agent: *\nDisallow: /\n');}
  if(method==='GET'&&p==='/auth/start'){

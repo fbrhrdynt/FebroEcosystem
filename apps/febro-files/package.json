@@ -1,7 +1,16 @@
 {
-  "name":"febro-files","version":"1.0.0","private":true,"type":"module",
-  "description":"Private file manager with hosted OIDC SSO — by Febro Herdyanto",
-  "engines":{"node":">=22.13.0"},
-  "scripts":{"start":"node src/server.mjs","check":"node --check src/server.mjs && node --check src/db.mjs && node --check public/app.js","test":"node --test tests/*.test.mjs"},
-  "dependencies":{}
+  "name": "febro-files",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Private file manager with hosted OIDC SSO \u2014 by Febro Herdyanto",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "check": "node --check src/server.mjs && node --check src/document-access.mjs && node --check src/db.mjs && node --check public/app.js",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {}
 }
