@@ -225,8 +225,8 @@ async function handle(req,res){
   if(!isEmail(email)||name.length<2||!passwordCheck(b.password))fail(400,'Masukkan nama, email valid dan password 12–128 karakter');
   if(store.getUserByEmail(email))return respond(res,200,{message:'Jika email dapat didaftarkan, tautan verifikasi akan dikirim.'});
   const user=store.createUser({email,name,passwordHash:hashPassword(b.password)});
-  const token=randomString(36);store.saveToken(token,user.id,'verify',86400000);
-  await sendMail(config,{to:email,subject:'Verifikasi email — Febro Ecosystem',heading:'Konfirmasi alamat email',text:'Aktifkan akunmu melalui tautan berikut. Tautan berlaku 24 jam.',button:'Verifikasi email',url:`${base('auth')}/auth/verify?token=${encodeURIComponent(token)}`});
+  const token=randomString(36);store.saveToken(token,user.id,'verify',15*60000);
+  await sendMail(config,{to:email,subject:'Verifikasi email — Febro Ecosystem',heading:'Konfirmasi alamat email',text:'Aktifkan akunmu melalui tautan berikut. Tautan berlaku 15 menit.',button:'Verifikasi email',url:`${base('auth')}/auth/verify?token=${encodeURIComponent(token)}`});
   return respond(res,201,{message:'Akun dibuat. Cek inbox dan folder spam untuk verifikasi email.'});
  }
  if(method==='GET'&&p==='/auth/verify'){
@@ -257,7 +257,7 @@ async function handle(req,res){
  }
  if(method==='POST'&&p==='/v1/auth/resend'){
   if(site!=='auth')fail(404,'Endpoint tidak tersedia');guardOrigin(req,site);rate(req,'resend',3,3600000);const b=await json(req),email=normalizeEmail(b.email),user=store.getUserByEmail(email);
-  if(user&&!user.email_verified){const token=randomString(36);store.saveToken(token,user.id,'verify',86400000);await sendMail(config,{to:email,subject:'Verifikasi email — Febro Ecosystem',heading:'Verifikasi alamat email',text:'Konfirmasi kepemilikan alamat email untuk mengaktifkan akun. Tautan berlaku 24 jam.',button:'Verifikasi',url:`${base('auth')}/auth/verify?token=${token}`});}
+  if(user&&!user.email_verified){const token=randomString(36);store.saveToken(token,user.id,'verify',15*60000);await sendMail(config,{to:email,subject:'Verifikasi email — Febro Ecosystem',heading:'Verifikasi alamat email',text:'Konfirmasi kepemilikan alamat email untuk mengaktifkan akun. Tautan berlaku 15 menit.',button:'Verifikasi',url:`${base('auth')}/auth/verify?token=${token}`});}
   return respond(res,200,{message:'Jika email terdaftar dan belum aktif, tautan verifikasi telah dikirim.'});
  }
  if(method==='GET'&&p==='/auth/google/start'){
@@ -290,7 +290,7 @@ async function handle(req,res){
     if(store.getUserByEmail(profile.email))fail(409,'Email sudah terdaftar. Login via email dahulu dan hubungkan Google dari halaman Account.');
     user=store.createUser({email:profile.email,name:profile.name,verified:profile.authoritative,googleSub:profile.sub});
     if(!profile.authoritative&&config.smtpUser&&config.smtpPass&&!config.smtpPass.startsWith('REPLACE')){
-      const token=randomString(36);store.saveToken(token,user.id,'verify',86400000);
+      const token=randomString(36);store.saveToken(token,user.id,'verify',15*60000);
       await sendMail(config,{to:user.email,subject:'Verifikasi email — Febro Ecosystem',heading:'Verifikasi alamat email',text:'Google login dengan alamat email non-Gmail membutuhkan verifikasi kepemilikan mailbox sebelum fitur pribadi dapat digunakan.',button:'Verifikasi email',url:`${base('auth')}/auth/verify?token=${token}`});
     }
   }
