@@ -13,6 +13,7 @@ import { renderQr } from './qr.mjs';
 import { initOidc } from './oidc.mjs';
 import {initControlPlane,isCentralAdmin} from './control-plane.mjs';
 import {controlOverview} from './control-analytics.mjs';
+import {initTelemetry} from './telemetry.mjs';
 
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 if(fs.existsSync(path.join(ROOT,'.env')))process.loadEnvFile(path.join(ROOT,'.env'));
@@ -29,6 +30,7 @@ const SITES=['tools','lab','api','docs','qr','convert','snip','short','verify','
 const domains=Object.fromEntries(SITES.map(site=>[`${site}.${config.domain}`,site]));
 const store=createStore(config.dataDir);
 const control=initControlPlane(store.db,config.dataDir);
+const telemetry=initTelemetry(store.db);
 // Logout HTTP flow verified by tests/oidc-http.test.mjs before advertising.
 const oidc=initOidc(store.db,config.dataDir,`https://auth.${config.domain}`,{logoutVerified:true});
 const allow=limiter();
@@ -118,11 +120,18 @@ async function handle(req,res){
  if(method==='GET'&&p==='/robots.txt'){res.writeHead(200,{'Content-Type':'text/plain'});res.end(['verify','auth','snip','short'].includes(site)?'User-agent: *\nDisallow: /\n':'User-agent: *\nDisallow: /v1/\n');return;}
  if(method==='OPTIONS'&&p.startsWith('/v1/api/')){res.writeHead(204);res.end();return;}
  rate(req,'all',300,60000);
+ // Telemetry ingestion is server-to-server only, authenticated by per-app secret.
+ if(site==='auth'&&p==='/v1/telemetry/events'&&method==='POST'){
+  rate(req,'telemetry',120,60000);
+  telemetry.authenticate(req);
+  const event=await json(req,2048);
+  return respond(res,202,telemetry.ingest(req,event));
+ }
  // Central account control plane. Browser session required; no token or secret exposure.
  if(site==='auth'&&p.startsWith('/v1/control/')){
   const actor=getUser(req);if(!isCentralAdmin(actor))fail(403,'Administrator verified account required');
   rate(req,'control',60,60000);
-  if(method==='GET'&&p==='/v1/control/overview')return respond(res,200,controlOverview(store.db));
+  if(method==='GET'&&p==='/v1/control/overview')return respond(res,200,{...controlOverview(store.db),telemetry:telemetry.summary(Number(u.searchParams.get('days'))||7)});
   if(method==='GET'&&p==='/v1/control/users')return respond(res,200,control.userList(Number(u.searchParams.get('offset'))||0));
   if(method==='GET'&&p==='/v1/control/apps')return respond(res,200,{apps:control.appList()});
   if(method==='GET'&&p==='/v1/control/audit')return respond(res,200,{items:control.log()});
