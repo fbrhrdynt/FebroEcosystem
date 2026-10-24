@@ -66,12 +66,10 @@ export function initTelemetry(db){
   MAX(occurred_at) AS lastEvent FROM space_telemetry WHERE occurred_at>=?
   GROUP BY app ORDER BY uniqueUsers DESC,events DESC`).all(since);
   const online=db.prepare(`SELECT COUNT(DISTINCT user_id) AS n FROM (
-    SELECT user_id,app,MAX(occurred_at) last_event FROM space_telemetry
-    WHERE occurred_at>=? GROUP BY user_id,app
-    HAVING (SELECT event_type FROM space_telemetry t
-      WHERE t.user_id=space_telemetry.user_id AND t.app=space_telemetry.app
-      ORDER BY occurred_at DESC,id DESC LIMIT 1)!='logout'
-  )`).get(onlineSince).n;
+  SELECT user_id,app,event_type,occurred_at,
+  ROW_NUMBER() OVER(PARTITION BY user_id,app ORDER BY occurred_at DESC,id DESC) AS rank
+  FROM space_telemetry
+ ) WHERE rank=1 AND event_type!='logout' AND occurred_at>=?`).get(onlineSince).n;
   return {status:'integrated',onlineUsers:Number(online),onlineDefinition:'Recent heartbeat or activity within 2 minutes, excluding latest logout per app',days,apps:perApp};
  }
  function prune(){
