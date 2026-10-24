@@ -1,0 +1,50 @@
+{
+  "version": "2.0.0",
+  "name": "febro-ecosystem",
+  "dependencies": {
+    "google-auth-library": {
+      "version": "9.15.1",
+      "resolved": "https://registry.npmjs.org/google-auth-library/-/google-auth-library-9.15.1.tgz",
+      "overridden": false,
+      "dependencies": {
+        "gaxios": {
+          "version": "6.7.1",
+          "resolved": "https://registry.npmjs.org/gaxios/-/gaxios-6.7.1.tgz",
+          "overridden": false,
+          "dependencies": {
+            "uuid": {
+              "version": "9.0.1",
+              "resolved": "https://registry.npmjs.org/uuid/-/uuid-9.0.1.tgz",
+              "overridden": false
+            }
+          }
+        },
+        "gcp-metadata": {
+          "version": "6.1.1",
+          "resolved": "https://registry.npmjs.org/gcp-metadata/-/gcp-metadata-6.1.1.tgz",
+          "overridden": false,
+          "dependencies": {
+            "gaxios": {
+              "version": "6.7.1"
+            }
+          }
+        },
+        "gtoken": {
+          "version": "7.1.0",
+          "resolved": "https://registry.npmjs.org/gtoken/-/gtoken-7.1.0.tgz",
+          "overridden": false,
+          "dependencies": {
+            "gaxios": {
+              "version": "6.7.1"
+            }
+          }
+        }
+      }
+    },
+    "nodemailer": {
+      "version": "6.10.1",
+      "resolved": "https://registry.npmjs.org/nodemailer/-/nodemailer-6.10.1.tgz",
+      "overridden": false
+    }
+  }
+}

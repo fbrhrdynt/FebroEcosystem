@@ -1,0 +1,14 @@
+[
+  {
+    "app": "lamariva",
+    "exitCode": 0,
+    "seconds": 84.86,
+    "log": "/opt/febro-ecosystem/phase5/evidence/build-lamariva.log"
+  },
+  {
+    "app": "voltlab",
+    "exitCode": 0,
+    "seconds": 77.62,
+    "log": "/opt/febro-ecosystem/phase5/evidence/build-voltlab.log"
+  }
+]

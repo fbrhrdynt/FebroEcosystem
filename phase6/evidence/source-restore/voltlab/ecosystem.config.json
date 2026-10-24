@@ -1,0 +1,17 @@
+{
+  "apps": [
+    {
+      "name": "voltlab",
+      "script": "scripts/start-server.mjs",
+      "instances": 1,
+      "exec_mode": "fork",
+      "autorestart": true,
+      "watch": false,
+      "restart_delay": 3000,
+      "kill_timeout": 10000,
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}

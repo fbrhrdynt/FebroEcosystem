@@ -1,0 +1,116 @@
+{
+  "files.sqlite": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/files.sqlite",
+    "sha256": "d4b662d17bbff351d6d279b8acd21c6c97b06eca1fe259aaeed51f210a8d5bcd",
+    "mode": "0o600",
+    "bytes": 94208
+  },
+  "files.sqlite-wal": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/files.sqlite-wal",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mode": "0o600",
+    "bytes": 0
+  },
+  "central.sqlite-wal": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/central.sqlite-wal",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mode": "0o600",
+    "bytes": 0
+  },
+  "central.sqlite": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/central.sqlite",
+    "sha256": "3822b9d261d2f40d2d04aaac696afdde53a95c7b14f848ce6d09097ea025ca9a",
+    "mode": "0o600",
+    "bytes": 151552
+  },
+  "play-source.tar.gz": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/play-source.tar.gz",
+    "sha256": "0ce6ff094074b8429ddc5f5ffa82218cec5f5f8dc339473fc804d797c99a4a88",
+    "mode": "0o600",
+    "bytes": 5026090
+  },
+  "files-source.tar.gz": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/files-source.tar.gz",
+    "sha256": "f9facd0fb25dbc1cd46b218cdf8a96cdf86d4d8ff341ca697d45a721f403a9db",
+    "mode": "0o600",
+    "bytes": 41782
+  },
+  "lamariva.dump": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/lamariva.dump",
+    "sha256": "1de3fc2079f541944585fb5d777cdf589dfdbc1001b839591c801646b1e5527d",
+    "mode": "0o600",
+    "bytes": 36650
+  },
+  "itinerary.dump": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/itinerary.dump",
+    "sha256": "20cb203d8336a8fb49dccf28bc6fcabe16dc1cfaf377d4c3ed2148be8bd91fb1",
+    "mode": "0o600",
+    "bytes": 35449
+  },
+  "voltlab-source.tar.gz": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/voltlab-source.tar.gz",
+    "sha256": "a52b1cc3fbe0881e9ad3969e86696e344d604448874dbdf4100048f930467ba0",
+    "mode": "0o600",
+    "bytes": 2295128
+  },
+  "central.sqlite-shm": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/central.sqlite-shm",
+    "sha256": "fd4c9fda9cd3f9ae7c962b0ddf37232294d55580e1aa165aa06129b8549389eb",
+    "mode": "0o600",
+    "bytes": 32768
+  },
+  "assets-and-private-config.tar.gz": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/assets-and-private-config.tar.gz",
+    "sha256": "f6222fcfae2f87b5adcc63ae2c724e2d01c492b9158b53ff81aae7ef627a9fa8",
+    "mode": "0o600",
+    "bytes": 1035119
+  },
+  "ls-itinerary.service": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/ls-itinerary.service",
+    "sha256": "067f8fbb4dc9dba118697f2475e9dcb117a998296cb152706f2ff420500c499f",
+    "mode": "0o600",
+    "bytes": 401
+  },
+  "play.sqlite": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/play.sqlite",
+    "sha256": "9980e51eb44e46bca3307c8869c1703ebb557e55cd1cda3580569ee69cce1d64",
+    "mode": "0o600",
+    "bytes": 45056
+  },
+  "files.sqlite-shm": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/files.sqlite-shm",
+    "sha256": "fd4c9fda9cd3f9ae7c962b0ddf37232294d55580e1aa165aa06129b8549389eb",
+    "mode": "0o600",
+    "bytes": 32768
+  },
+  "central-source.tar.gz": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/central-source.tar.gz",
+    "sha256": "b13998b7a9eb211e54fab05a5950f1c1fef8efc5f16ea73581d1b3ff0fde3665",
+    "mode": "0o600",
+    "bytes": 854494
+  },
+  "lamariva-source.tar.gz": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/lamariva-source.tar.gz",
+    "sha256": "b47416af249b03a49ea6fb6cc90e9ad6039699e28cb539b08510141dbd6364e1",
+    "mode": "0o600",
+    "bytes": 3614090
+  },
+  "nginx-pm2.tar.gz": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/nginx-pm2.tar.gz",
+    "sha256": "19d972e884fad87cdefeb5be29f6071ff0572adc94cda9879c5d47eff9ce0c05",
+    "mode": "0o600",
+    "bytes": 9952
+  },
+  "voltlab.dump": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/voltlab.dump",
+    "sha256": "39a1ff9d5bd0792c92ca6f42356714f484b8458bbd914824901730ec3cccbd0c",
+    "mode": "0o600",
+    "bytes": 16722
+  },
+  "itinerary-source.tar.gz": {
+    "path": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/itinerary-source.tar.gz",
+    "sha256": "5bbeb8f0c910cd1230a82350c80eecd70bb32748944c5f7df6bf5f0ab549fefb",
+    "mode": "0o600",
+    "bytes": 80901
+  }
+}

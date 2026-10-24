@@ -1,0 +1,32 @@
+[
+  {
+    "app": "central",
+    "checksumFiles": 11,
+    "status": "PASS"
+  },
+  {
+    "app": "lamariva",
+    "checksumFiles": 11,
+    "status": "PASS"
+  },
+  {
+    "app": "itinerary",
+    "checksumFiles": 11,
+    "status": "PASS"
+  },
+  {
+    "app": "voltlab",
+    "checksumFiles": 11,
+    "status": "PASS"
+  },
+  {
+    "app": "files",
+    "checksumFiles": 11,
+    "status": "PASS"
+  },
+  {
+    "app": "play",
+    "checksumFiles": 11,
+    "status": "PASS"
+  }
+]

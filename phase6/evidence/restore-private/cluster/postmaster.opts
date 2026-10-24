@@ -1,0 +1,1 @@
+/usr/lib/postgresql/16/bin/postgres "-D" "/opt/febro-ecosystem/phase6/evidence/restore-private/cluster" "-c" "listen_addresses=" "-c" "unix_socket_directories=/opt/febro-ecosystem/phase6/evidence/restore-private/socket" "-c" "port=55494"

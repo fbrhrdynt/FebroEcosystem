@@ -1,0 +1,41 @@
+# TEMPLATE REVIEW SAJA. Placeholder wajib diganti operator; jangan install/reload otomatis.
+# Tempatkan di konteks http staging TERPISAH. Tidak menyertakan query/cookie/token dalam access log.
+log_format febro_stage_safe '$remote_addr $request_method $uri $status $body_bytes_sent';
+limit_req_zone $binary_remote_addr zone=febro_stage:10m rate=10r/s;
+server {
+    listen 443 ssl;
+    server_name <AUTHORIZED_STAGING_HOST>;
+    ssl_certificate <SEPARATE_STAGING_CERTIFICATE_PATH>;
+    ssl_certificate_key <SEPARATE_STAGING_PRIVATE_KEY_PATH>;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    access_log <PRIVATE_STAGING_ACCESS_LOG> febro_stage_safe;
+    # Nginx error logs may include request URI/query. Route to private policy-reviewed sink.
+    error_log <PRIVATE_STAGING_ERROR_LOG> crit;
+    client_max_body_size 20m;
+    add_header Strict-Transport-Security "max-age=86400" always;
+    add_header X-Content-Type-Options nosniff always;
+    # Callback responses must never expose their query via logs or Referrer.
+    location ~ ^/(?:profile/auth/google/callback|auth/(?:febro|space|google)/callback|auth/callback|api/auth/(?:febro|google)/callback|api/leaderboard/auth/callback)$ {
+        access_log off;
+        error_log /dev/null crit;
+        add_header Referrer-Policy no-referrer always;
+        limit_req zone=febro_stage burst=20 nodelay;
+        proxy_pass http://127.0.0.1:<SEPARATE_STAGING_PORT>;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Connection "";
+        proxy_http_version 1.1;
+    }
+    location / {
+        limit_req zone=febro_stage burst=20 nodelay;
+        proxy_pass http://127.0.0.1:<SEPARATE_STAGING_PORT>;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Connection "";
+        proxy_http_version 1.1;
+    }
+}

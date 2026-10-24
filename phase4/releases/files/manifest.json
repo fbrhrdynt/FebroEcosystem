@@ -1,0 +1,82 @@
+{
+  "app": "files",
+  "artifact_sha256": "dd35a07ac87ced69e8259fdc5603229228248c6f84a2238e93e2f15282e47acd",
+  "files": {
+    "package-lock.json": {
+      "sha256": "c1a8da91dff09608dc231821af0a5eb0d129cf0e21fff09ff8e630399f87d112",
+      "before": null
+    },
+    "public/app.js": {
+      "sha256": "4e61ccbe3b7741cad8ed38eb1c53d38cc9cffee6de9d0de7ac8b9f3c4ae65e3d",
+      "before": "797cbfd21ed5a7a00a348b7c6d841b9a26f6b4e632cc6fbad5c27a9afba1534a"
+    },
+    "sso/repository.d.mts": {
+      "sha256": "c2cd69a72579b1455630109c4887b7a1022c756ab6a9f8902fd45277298beab3",
+      "before": null
+    },
+    "sso/repository.mjs": {
+      "sha256": "9a0965a99804167b6c2e7d0bfc3571fdd49c6c39f7e361b1cc433f011627c5dc",
+      "before": null
+    },
+    "sso/package.json": {
+      "sha256": "c9d6af629f9ebcc82998c2716693ebfa004980b80fee28dcd7d7f0dc4afc2938",
+      "before": null
+    },
+    "sso/package-lock.json": {
+      "sha256": "df40992f002c785eb4b18d2216a9f720f0a04ede3e860c03d6d38f032ee51550",
+      "before": null
+    },
+    "sso/preflight.mjs": {
+      "sha256": "038abc2506a39ed230d2ea4ce6519c09afe0d0283858b589821b3fd941807f1d",
+      "before": null
+    },
+    "sso/http.d.mts": {
+      "sha256": "aa3eba83a9ebd7a6b923e9c7ab8caa47ba000c9b5368ec4e32e1ecfbfd347666",
+      "before": null
+    },
+    "sso/http.mjs": {
+      "sha256": "50bed20dcc879b7ad8fc846f734da8b4eea1bdce8122c3f9a65594fcd243d51d",
+      "before": null
+    },
+    "sso/migrate-approved.mjs": {
+      "sha256": "1c92d93dc033b45e14d9e72ab91ff9585d9b6f2eaa57ee19215e78ed6a69ba44",
+      "before": null
+    },
+    "sso/provider/interactions.mjs": {
+      "sha256": "c79c063ba75a2df2d4321ca3863183f0b14bd19aaf68ec95bda0507ff19366d6",
+      "before": null
+    },
+    "sso/provider/provider.mjs": {
+      "sha256": "acbd063c867f1024ec149c7d32a1e32e7d454bb8a56d6de9ee81a6f5259cc9dd",
+      "before": null
+    },
+    "sso/provider/mount.mjs": {
+      "sha256": "d04f94fc83a3770d0ea7fc3c8f474ce94aff8d237361b491b072449308df01db",
+      "before": null
+    },
+    "sso/provider/sqlite-adapter.mjs": {
+      "sha256": "d6e446b77a41635c15feb475202fffe7e596c3f09b69c582faa7381080452cba",
+      "before": null
+    },
+    "sso/provider/http-guard.mjs": {
+      "sha256": "2d05ef6b84919cd1ed71df3179d5d777ea57e1484a9297cbf83b91f2f4eea048",
+      "before": null
+    },
+    "sso/adapters/identity-links.mjs": {
+      "sha256": "ff1e7024828031449136fe9dea01961934eb921d811890528a0750ffe9be28df",
+      "before": null
+    },
+    "sso/adapters/client.mjs": {
+      "sha256": "57c324b20edde7aa08e0b71170446d55a3d420bfe3ffdc224b103b9bf809cab9",
+      "before": null
+    },
+    "src/febro-sso.mjs": {
+      "sha256": "b6e42c2ecf23184f43a87aa303257d7a3e9d6260bbb6cbd894fd41af014bc7f6",
+      "before": null
+    },
+    "src/server.mjs": {
+      "sha256": "597dda1d02f515594932e9b2abd4710dc5d496d01a9ab29a0252c3d51f16f140",
+      "before": "3f429e1249cc9b81629cac265490958f42d701900d5a8369f97307afbd9812e4"
+    }
+  }
+}

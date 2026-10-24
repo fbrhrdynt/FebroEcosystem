@@ -1,0 +1,7 @@
+{
+  "unit": "ls-itinerary.service",
+  "manager": "systemd",
+  "path": "/etc/systemd/system/ls-itinerary.service",
+  "backup": "/opt/febro-ecosystem/backups/phase4-20261022T160850360928Z/ls-itinerary.service",
+  "sha256": "067f8fbb4dc9dba118697f2475e9dcb117a998296cb152706f2ff420500c499f"
+}

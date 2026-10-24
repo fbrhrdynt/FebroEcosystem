@@ -1,0 +1,6 @@
+public/app-icon-192.png
+public/app-icon-512.png
+public/app-icon.svg
+public/apple-touch-icon.png
+public/shell.js
+tests/space-access.test.mjs

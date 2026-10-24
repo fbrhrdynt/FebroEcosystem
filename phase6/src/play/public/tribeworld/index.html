@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f7f2e5" />
+  <meta name="description" content="TribeWorld — petualangan membangun desa isometric yang dimainkan langsung di browser. Kumpulkan, bangun, bertani, dan jelajahi!" />
+  <title>TribeWorld Cloud Save — A tiny world to grow · Febro Arcade</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./cloud-save.css?v=11" />
+  <link rel="stylesheet" href="/assets/immersive.css?v=14" />
+</head>
+<body class="arcade-immersive arcade-tribeworld" data-arcade-game="tribeworld">
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-side">
+        <a href="../" class="back-link" title="Kembali ke Febro Arcade" aria-label="Kembali ke Febro Arcade">↗ <span>ARCADE</span></a>
+        <div class="brand-emblem" aria-hidden="true">✦</div>
+        <div class="brand-words"><strong>TRIBE<span>WORLD</span></strong><small>A LITTLE WORLD OF YOUR OWN</small></div>
+      </div>
+      <div class="top-actions">
+        <span class="saved-state" id="saveStatus"><span class="dot"></span> Progres tersimpan</span>
+        <button class="round-icon" id="soundBtn" aria-label="Aktifkan atau matikan suara" title="Suara">♫</button>
+        <button class="round-icon" id="helpBtn" aria-label="Cara bermain" title="Cara bermain">?</button>
+      </div>
+    </header>
+
+    <section class="eyebrow-line"><div><span class="spark">✳</span> FEBRO ARCADE ORIGINAL <span class="tiny-sep">/</span> CHAPTER 01</div><span class="eyebrow-right">GATHER <i></i> BUILD <i></i> THRIVE</span></section>
+
+    <main class="layout">
+      <section class="game-column" aria-label="Area permainan">
+        <div class="game-head">
+          <div><h1>Build your little <em>world.</em></h1><p>Kumpulkan sumber daya, bantu penduduk, dan tumbuhkan desa impianmu.</p></div>
+          <span class="live-chip"><span class="live-dot"></span> LIVE WORLD</span>
+        </div>
+        <div class="game-frame" id="gameFrame">
+          <canvas id="gameCanvas" aria-label="Peta isometrik TribeWorld. Klik objek untuk bergerak dan mengumpulkan sumber daya." tabindex="0"></canvas>
+          <div class="scene-vignette" aria-hidden="true"></div>
+          <div class="game-overlay-top">
+            <div class="region-pill"><span>☀</span><span><b id="regionName">SUNLIT VALLEY</b><small id="regionSub">DAY 01 · SUNNY</small></span></div>
+            <div class="camera-tools"><button id="zoomOut" aria-label="Perkecil peta" title="Zoom out">−</button><button id="zoomIn" aria-label="Perbesar peta" title="Zoom in">+</button><button id="centerCam" aria-label="Tengahkan karakter" title="Tengahkan kamera">⌖</button></div>
+          </div>
+          <div class="quick-feedback" id="worldHint">✦ <span>Ketuk pohon, batu, atau semak untuk mengumpulkan bahan!</span></div>
+          <div class="game-overlay-bottom"><span class="world-badge">◈ ISOMETRIC ADVENTURE</span><span id="mapCoords">X 08 · Y 09</span></div>
+          <div class="movement-pad" aria-label="Kontrol gerak karakter">
+            <button class="pad-up" data-move="up" aria-label="Gerak atas">▲</button>
+            <button class="pad-left" data-move="left" aria-label="Gerak kiri">◀</button>
+            <button class="pad-right" data-move="right" aria-label="Gerak kanan">▶</button>
+            <button class="pad-down" data-move="down" aria-label="Gerak bawah">▼</button>
+          </div>
+          <div id="floatMessages" class="float-messages" aria-live="polite"></div>
+        </div>
+        <div class="game-foot"><div><span class="kbd">W</span><span class="kbd">A</span><span class="kbd">S</span><span class="kbd">D</span> jalan <span class="foot-divider">·</span> Ketuk objek untuk interaksi <span class="foot-divider">·</span> <span class="kbd">Esc</span> batal</div><div class="game-foot-version">NO DOWNLOAD · JUST PLAY</div></div>
+        <div class="mobile-instructions">👆 Ketuk objek untuk berjalan & mengumpulkan. Gunakan panah untuk bergerak.</div>
+      </section>
+
+      <aside class="sidebar" aria-label="Panel pengelolaan desa">
+        <section class="resource-panel" aria-label="Persediaan sumber daya">
+          <div class="sidebar-section-heading"><span>YOUR INVENTORY</span><span id="storageFlag">DAY 01</span></div>
+          <div class="resource-grid">
+            <div class="resource-item"><span class="resource-icon wood">🪵</span><div><small>WOOD</small><strong id="woodCount">24</strong></div></div>
+            <div class="resource-item"><span class="resource-icon stone">🪨</span><div><small>STONE</small><strong id="stoneCount">13</strong></div></div>
+            <div class="resource-item"><span class="resource-icon food">🍎</span><div><small>FOOD</small><strong id="foodCount">18</strong></div></div>
+          </div>
+          <div class="population-bar"><span>👥 <strong id="populationCount">2 / 3</strong> penduduk</span><span>👷 <strong id="workerCount">0</strong> pekerja</span></div>
+        </section>
+
+        <section class="quest-panel">
+          <div class="sidebar-section-heading"><span>YOUR NEXT QUEST</span><span class="chapter-label">CH. 01</span></div>
+          <div class="quest-title-line"><div class="quest-medal">✦</div><div><strong id="questTitle">The First Harvest</strong><p id="questDesc">Kumpulkan 12 kayu untuk desa.</p></div></div>
+          <div class="quest-progress-track"><div id="questProgressBar"></div></div><div class="quest-progress-caption"><span id="questProgressText">0 / 12</span><span id="questReward">REWARD +5 🍎</span></div>
+        </section>
+
+        <section class="build-panel">
+          <div class="sidebar-section-heading"><span>BUILD & EXPAND</span><span>★ VILLAGE</span></div>
+          <div class="section-subtitle">Pilih bangunan, lalu ketuk petak rumput kosong di peta.</div>
+          <div class="build-grid" id="buildGrid"></div>
+          <button id="cancelBuildBtn" class="cancel-selection" hidden>✕ Batal memilih bangunan</button>
+          <button id="expandBtn" class="expand-btn"><span class="expand-icon">🌉</span><span><strong>Open the East Valley</strong><small>Bangun jembatan · 35 🪵 25 🪨 18 🍎</small></span><span class="arrow-mini">↗</span></button>
+        </section>
+
+        <section class="villager-panel">
+          <div class="sidebar-section-heading"><span>YOUR VILLAGERS</span><span id="villagerState">2 FRIENDS</span></div>
+          <div class="villager-characters" id="villagerAvatars"></div>
+          <button class="hire-btn" id="recruitBtn"><span>＋ Rekrut penduduk</span><small>12 🍎</small></button>
+          <div class="worker-control"><div class="worker-heading"><strong>Worker assignments</strong><small>Otomatis setiap 8 detik</small></div><div class="worker-jobs" id="workerJobs"></div></div>
+        </section>
+        <section class="craft-panel">
+          <div class="sidebar-section-heading"><span>CRAFT & UPGRADE</span><span>⚒ TOOLS</span></div>
+          <div class="section-subtitle">Rakit peralatan agar hasil panenmu makin banyak.</div>
+          <div class="craft-grid" id="craftGrid"></div>
+        </section>
+        <div class="side-bottom"><span>✦</span> SMALL STEPS, BIG ADVENTURES. <span>✦</span></div>
+      </aside>
+    </main>
+    <footer class="site-footer"><span>TRIBEWORLD © 2026 · BY FEBRO HERDYANTO</span><span>MADE FOR EXPLORERS, BIG AND SMALL.</span></footer>
+  </div>
+
+  <dialog class="help-dialog" id="helpDialog" aria-labelledby="helpTitle">
+    <div class="dialog-top"><span>FIELD GUIDE · ISSUE 001</span><button id="closeHelp" aria-label="Tutup">✕</button></div>
+    <div class="dialog-body"><div class="dialog-icon">🗺️</div><h2 id="helpTitle">A little world, <em>your rules.</em></h2><p>Jelajahi lembah, kumpulkan bahan, bangun desa, dan biarkan penduduk membantu mengerjakan tugas.</p><div class="guide-steps"><div><b>01 / EXPLORE</b><p>Ketuk lokasi untuk menuju ke sana. Di komputer bisa memakai tombol WASD atau panah. Seret peta dengan mouse atau satu jari untuk melihat sekitar.</p></div><div><b>02 / GATHER</b><p>Ketuk pohon 🌳, batu 🪨, atau semak 🍓. Karakter mendekat otomatis lalu mengumpulkan bahan. Sumber daya tumbuh kembali.</p></div><div><b>03 / BUILD</b><p>Pilih bangunan di panel, lalu ketuk petak kosong yang belum digunakan. Bangunan menghasilkan fungsi berbeda.</p></div><div><b>04 / THRIVE</b><p>Rekrut penduduk dengan makanan, kemudian tugaskan mereka mengambil kayu, batu atau bahan makanan secara otomatis.</p></div><div><b>05 / EXPAND</b><p>Kumpulkan bahan untuk memperbaiki jembatan dan membuka East Valley di seberang sungai.</p></div></div><button id="letsPlay" class="main-action">LET'S EXPLORE →</button></div>
+  </dialog>
+  <dialog id="saveDialog" class="save-dialog" aria-labelledby="saveTitle">
+    <div class="dialog-top"><span>TRIBEWORLD · SAVE CENTER</span><button type="button" id="closeSave" aria-label="Tutup panel penyimpanan">✕</button></div>
+    <div class="tw-save-dialog-body">
+      <h2 id="saveTitle">Desamu tetap aman. ☁</h2>
+      <p class="tw-caption" id="saveDescription">Progres selalu disimpan di browser. Login jika ingin menyimpan ke server dan melanjutkan dari perangkat lain.</p>
+      <div class="tw-save-status" role="status" id="cloudMessage">Memeriksa penyimpanan…</div>
+      <div class="tw-backup-tools">
+        <button type="button" id="saveNowBtn">💾 Simpan sekarang</button>
+        <button type="button" id="exportSaveBtn">↓ Unduh backup</button>
+        <button type="button" id="importSaveBtn">↑ Pulihkan backup</button>
+        <input id="importSaveFile" type="file" accept=".json,application/json" hidden />
+      </div>
+      <section id="cloudGuest" class="tw-account-section">
+        <h3>Simpan juga ke cloud (opsional)</h3>
+        <p>Pakai email dan password untuk melanjutkan desa yang sama di HP/laptop lain. Tanpa login, progres tetap tersimpan secara lokal.</p>
+        <form id="cloudAuthForm" autocomplete="on">
+          <label>Email <input id="cloudEmail" type="email" autocomplete="email" placeholder="email@contoh.com" required maxlength="254" /></label>
+          <label>Password <input id="cloudPassword" type="password" autocomplete="current-password" placeholder="Minimal 10 karakter" minlength="10" maxlength="128" required /></label>
+          <div class="tw-auth-actions"><button type="button" id="cloudLogin">Masuk</button><button type="button" id="cloudRegister">Buat akun</button></div>
+        </form>
+        <small class="tw-privacy">Akun cloud v1.1 belum memiliki verifikasi email atau reset password. Simpan password dengan aman dan unduh backup secara berkala.</small>
+      </section>
+      <section id="cloudLogged" class="tw-account-section" hidden>
+        <div class="tw-account-row"><span>Terhubung sebagai <strong id="cloudAccount"></strong></span><button type="button" id="cloudLogout">Keluar</button></div>
+        <button type="button" id="cloudSyncNow">☁ Sinkronkan sekarang</button>
+        <div id="cloudConflict" class="tw-conflict" hidden>
+          <h3>Pilih desa yang ingin digunakan</h3>
+          <p>Cloud sudah memiliki progres. Pilihan ini hanya mengganti progres ketika kamu menekan salah satu tombol.</p>
+          <div class="tw-auth-actions"><button id="cloudUseRemote" type="button">↓ Gunakan dari cloud</button><button id="cloudUseLocal" type="button">↑ Kirim desa perangkat ini</button></div>
+        </div>
+      </section>
+    </div>
+  </dialog>
+  <noscript><div class="noscript">TribeWorld membutuhkan JavaScript untuk bermain.</div></noscript>
+  <script type="module" src="./game.js?v=11"></script>
+<script src="/assets/immersive.js?v=14" defer></script><script src="/assets/player-name.js?v=16" defer></script></body>
+</html>

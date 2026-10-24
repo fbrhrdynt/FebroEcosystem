@@ -1,0 +1,98 @@
+{
+  "app": "lamariva",
+  "artifact_sha256": "8fa5b3d8758f37c0925ac3bc5d5a1496121639e005b71872a933a4dfe8765096",
+  "files": {
+    "package-lock.json": {
+      "sha256": "06a4574a8dfa832b296d35c3c4fe61c1420c7c3409a4f0ac8836bd3476a9541c",
+      "before": "a5685c42b0629f492bfec15dd9bebb5cd898e7abf60ef602497ab7769417e446"
+    },
+    "next.config.ts": {
+      "sha256": "e4bd883a7f5f6030a31edc563ec82857c5ab6328e800b6dee16e4e70efe2950e",
+      "before": "ce0a131ac85d15cf6fd566f52254581cb15491e98b67204be343c66a5ea580f8"
+    },
+    "sso/repository.d.mts": {
+      "sha256": "c2cd69a72579b1455630109c4887b7a1022c756ab6a9f8902fd45277298beab3",
+      "before": null
+    },
+    "sso/repository.mjs": {
+      "sha256": "9a0965a99804167b6c2e7d0bfc3571fdd49c6c39f7e361b1cc433f011627c5dc",
+      "before": null
+    },
+    "sso/package.json": {
+      "sha256": "c9d6af629f9ebcc82998c2716693ebfa004980b80fee28dcd7d7f0dc4afc2938",
+      "before": null
+    },
+    "sso/package-lock.json": {
+      "sha256": "df40992f002c785eb4b18d2216a9f720f0a04ede3e860c03d6d38f032ee51550",
+      "before": null
+    },
+    "sso/preflight.mjs": {
+      "sha256": "038abc2506a39ed230d2ea4ce6519c09afe0d0283858b589821b3fd941807f1d",
+      "before": null
+    },
+    "sso/http.d.mts": {
+      "sha256": "aa3eba83a9ebd7a6b923e9c7ab8caa47ba000c9b5368ec4e32e1ecfbfd347666",
+      "before": null
+    },
+    "sso/http.mjs": {
+      "sha256": "50bed20dcc879b7ad8fc846f734da8b4eea1bdce8122c3f9a65594fcd243d51d",
+      "before": null
+    },
+    "sso/migrate-approved.mjs": {
+      "sha256": "1c92d93dc033b45e14d9e72ab91ff9585d9b6f2eaa57ee19215e78ed6a69ba44",
+      "before": null
+    },
+    "sso/provider/interactions.mjs": {
+      "sha256": "c79c063ba75a2df2d4321ca3863183f0b14bd19aaf68ec95bda0507ff19366d6",
+      "before": null
+    },
+    "sso/provider/provider.mjs": {
+      "sha256": "acbd063c867f1024ec149c7d32a1e32e7d454bb8a56d6de9ee81a6f5259cc9dd",
+      "before": null
+    },
+    "sso/provider/mount.mjs": {
+      "sha256": "d04f94fc83a3770d0ea7fc3c8f474ce94aff8d237361b491b072449308df01db",
+      "before": null
+    },
+    "sso/provider/sqlite-adapter.mjs": {
+      "sha256": "d6e446b77a41635c15feb475202fffe7e596c3f09b69c582faa7381080452cba",
+      "before": null
+    },
+    "sso/provider/http-guard.mjs": {
+      "sha256": "2d05ef6b84919cd1ed71df3179d5d777ea57e1484a9297cbf83b91f2f4eea048",
+      "before": null
+    },
+    "sso/adapters/identity-links.mjs": {
+      "sha256": "ff1e7024828031449136fe9dea01961934eb921d811890528a0750ffe9be28df",
+      "before": null
+    },
+    "sso/adapters/client.mjs": {
+      "sha256": "57c324b20edde7aa08e0b71170446d55a3d420bfe3ffdc224b103b9bf809cab9",
+      "before": null
+    },
+    "src/lib/febro-sso.ts": {
+      "sha256": "e606a5554df69c3ed5c6cb2e4d640fea9d32346f2e8d10c02cbf55f5b93c5e53",
+      "before": null
+    },
+    "src/lib/auth.ts": {
+      "sha256": "f30204a97ca2cfef0b9f51e0dea10ec98ee08c9ea2157d298f9dd2f066493a81",
+      "before": "303d906470556fe53579f8b12ef081875d474363107df40a02ee22086e3d3fac"
+    },
+    "src/app/auth/febro/[[...flow]]/route.ts": {
+      "sha256": "cc9dc20812f178f234562f5ed1aef1a2893d7a6d2ca5651db0153f77f30fb224",
+      "before": null
+    },
+    "src/app/api/febro-status/route.ts": {
+      "sha256": "79bfb5a0f7aea834be74338e656fbd5080fec9d991fdf071fa995053c15eb877",
+      "before": null
+    },
+    "src/components/febro-login.tsx": {
+      "sha256": "6b94d8c925673a776a86aa9bded7cd4f2ddd0f5c8bafae6b171ed72777b44e7d",
+      "before": null
+    },
+    "src/components/workspace.tsx": {
+      "sha256": "ad1493d64a5d69e774db78e0836c90abdb37dcbadda7a9984a6de45e0e08e13b",
+      "before": "676cadb9cf6d15c3e41319fc31f2ba25207521cad328691130a7bb673c51830e"
+    }
+  }
+}

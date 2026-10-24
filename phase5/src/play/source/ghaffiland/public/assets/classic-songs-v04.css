@@ -1,0 +1,40 @@
+/* Song catalog is isolated from the original GhaffiLand styles. */
+.gl-classic{margin:40px 0 24px;padding:clamp(15px,3vw,26px);border:3px solid #222;box-shadow:6px 7px 0 #242027;border-radius:22px;background:#fffdf7;color:#25212b;}
+.gl-classic *{box-sizing:border-box;}
+.gl-classic-heading h2{font-size:clamp(1.5rem,5vw,2.25rem);line-height:1.15;margin:10px 0 8px;color:#211b27;}
+.gl-classic-heading p{max-width:680px;font-size:.96rem;margin:0 0 14px;line-height:1.5;}
+.gl-classic-overline{font-size:.66rem;font-weight:900;letter-spacing:.09em;}
+.gl-classic-count{display:inline-block;background:#e5dcff;border:2px solid #25212b;border-radius:99px;padding:5px 10px;font-size:.76rem;font-weight:800;}
+.gl-classic-tools{display:flex;align-items:end;gap:10px;margin:22px 0 18px;flex-wrap:wrap;}
+.gl-classic-search-label{display:flex;flex-direction:column;gap:5px;flex:1;min-width:175px;font-size:.8rem;font-weight:850;}
+.gl-classic-search-label input{font:inherit;padding:11px 12px;border:2px solid #262127;border-radius:12px;background:#fff;color:#25212b;width:100%;}
+.gl-classic-random,.gl-classic-close{padding:12px 14px;border:2px solid #262127;border-radius:12px;background:#ffdb70;font-weight:900;box-shadow:3px 3px 0 #262127;cursor:pointer;color:#25212b;}
+.gl-classic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;}
+.gl-classic-card{display:flex;align-items:center;text-align:left;gap:11px;background:#fff;border:2px solid #29232c;box-shadow:3px 4px 0 #29232c;border-radius:14px;padding:10px;min-width:0;cursor:pointer;color:#211b25;}
+.gl-classic-card.active{background:#d5f3e3;}
+.gl-classic-card:focus-visible,.gl-classic-random:focus-visible,.gl-classic-close:focus-visible{outline:4px solid #516df0;outline-offset:3px;}
+.gl-classic-art{width:52px;height:52px;border:2px solid #27222d;border-radius:12px;background:#e9e0ff;display:grid;place-items:center;font-size:1.65rem;flex:none;}
+.gl-classic-card:nth-child(4n + 2) .gl-classic-art{background:#e5f8d6;}
+.gl-classic-card:nth-child(4n + 3) .gl-classic-art{background:#ffe6c2;}
+.gl-classic-card:nth-child(4n + 4) .gl-classic-art{background:#ffcfe0;}
+.gl-classic-card-body{flex:1;min-width:0;display:grid;gap:5px;}
+.gl-classic-card-body strong{font-size:.89rem;line-height:1.25;}
+.gl-classic-card-body small{font-size:.69rem;line-height:1.35;opacity:.74;}
+.gl-classic-play-icon{font-size:.68rem;background:#fff;border:1.7px solid #262127;border-radius:50%;padding:8px;}
+.gl-classic-player{border:3px solid #29232c;border-radius:16px;overflow:hidden;background:#f3edff;margin:0 0 22px;scroll-margin-top:24px;}
+.gl-classic-player[hidden]{display:none;}
+.gl-classic-now{display:flex;gap:12px;padding:12px;align-items:center;}
+.gl-classic-big{font-size:2.3rem;}
+.gl-classic-now>div{flex:1;}
+.gl-classic-now h3{margin:3px 0;font-size:1.2rem;}
+.gl-classic-now p{margin:0;font-size:.77rem;opacity:.75;}
+.gl-classic-close{font-size:1.5rem;line-height:1;padding:5px 12px;}
+.gl-classic-video{width:100%;aspect-ratio:16/9;background:#211c27;}
+.gl-classic-video iframe{border:0;width:100%;height:100%;display:block;}
+.gl-classic-under{display:flex;gap:16px;flex-wrap:wrap;align-items:center;padding:12px;}
+.gl-classic-under p{flex:1;min-width:210px;font-size:.73rem;line-height:1.45;margin:0;}
+.gl-classic-external{background:#baf2bc;border:2px solid #242027;border-radius:10px;padding:9px 12px;color:#211a2c;text-decoration:none;font-weight:900;font-size:.85rem;}
+.gl-classic-disclaimer{font-size:.78rem;line-height:1.55;opacity:.82;margin:20px 0 0;}
+.gl-classic-empty{grid-column:1/-1;margin:20px 0;}
+@media(max-width:600px){.gl-classic{margin:30px 0 16px;padding:14px;box-shadow:4px 5px 0 #25212b;}.gl-classic-grid{grid-template-columns:1fr;}.gl-classic-random{width:100%;}.gl-classic-art{width:46px;height:46px;}}
+@media(prefers-reduced-motion:reduce){.gl-classic *{scroll-behavior:auto!important;}}

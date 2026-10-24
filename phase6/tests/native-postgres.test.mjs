@@ -1,0 +1,75 @@
+import {browserAcceptance} from './browser-helper.mjs';
+import test from 'node:test';import assert from 'node:assert/strict';import http from 'node:http';import net from 'node:net';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import {spawn,spawnSync} from 'node:child_process';import {createRequire} from 'node:module';import {pathToFileURL} from 'node:url';import {generateKeyPairSync,randomBytes,randomUUID,createHash,createHmac} from 'node:crypto';
+import {createProvider} from '../runtime/provider/provider.mjs';import {repository,pgConnection} from '../runtime/repository.mjs';import {DatabaseSync} from 'node:sqlite';
+const require=createRequire('/opt/lamariva/package.json'),{Pool}=require('pg'),pause=ms=>new Promise(r=>setTimeout(r,ms));
+async function port(){const s=net.createServer();await new Promise(r=>s.listen(0,'127.0.0.1',r));const n=s.address().port;await new Promise(r=>s.close(r));return n;}
+const clusterDir=fs.mkdtempSync(path.join(os.tmpdir(),'febro-phase4-pg-')),pgPort=await port(),pgBin='/usr/lib/postgresql/16/bin/';
+function command(name,args){const r=spawnSync(pgBin+name,args,{stdio:'ignore'});assert.equal(r.status,0,'isolated postgres '+name);}
+command('initdb',['-D',clusterDir+'/db','-A','trust','--no-locale','-E','UTF8']);command('pg_ctl',['-D',clusterDir+'/db','-l',clusterDir+'/postgres.log','-o',`-c listen_addresses='127.0.0.1' -c port=${pgPort} -c unix_socket_directories='${clusterDir}'`,'-w','start']);
+function awaitCleanup(){try{fs.rmSync(clusterDir,{recursive:true,force:true,maxRetries:5,retryDelay:200});}catch{/* Isolated fixtures may be retained if a test worker still holds its home. */}}
+test.after(()=>{command('pg_ctl',['-D',clusterDir+'/db','-m','fast','-w','stop']);awaitCleanup();});
+for(const app of ['itinerary','voltlab','lamariva'])test(app+': native session, real OIDC code/PKCE, confirmed linking, existing-account SSO and immutable ownership', {timeout:420000},async t=>{
+ const root=path.resolve('phase6/src/'+app),database='febro_phase4_test_'+app;command('createdb',['-h','127.0.0.1','-p',String(pgPort),database]);const databaseURL=`postgresql://${os.userInfo().username}@127.0.0.1:${pgPort}/${database}`,pool=new Pool({connectionString:databaseURL,max:3});
+ if(app==='itinerary')await pool.query(fs.readFileSync(root+'/db/init.sql','utf8'));
+ if(app==='voltlab')await pool.query(fs.readFileSync(root+'/migrations/001_initial.sql','utf8'));
+ if(app==='lamariva')for(const dir of fs.readdirSync(root+'/prisma/migrations').sort())if(fs.statSync(root+'/prisma/migrations/'+dir).isDirectory())await pool.query(fs.readFileSync(root+'/prisma/migrations/'+dir+'/migration.sql','utf8'));
+ await repository(pgConnection(pool),app).migrate();
+ const localId=app==='itinerary'?'1':randomUUID(),password='Synthetic-local-password-2026!',email='synthetic-local@example.invalid',sessionToken=randomBytes(32).toString('hex');
+ if(app==='itinerary'){const bcrypt=createRequire(root+'/package.json')('bcryptjs');await pool.query("INSERT INTO users(id,name,email,password_hash,role,status) VALUES($1,'Original User',$2,$3,'User','active')",[localId,email,await bcrypt.hash(password,10)]);}
+ if(app==='voltlab'){const {hashPassword}=await import(pathToFileURL(root+'/server/crypto.mjs'));await pool.query("INSERT INTO users(id,name,email,username,password_hash,email_verified,status) VALUES($1,'Original User',$2,'original_user',$3,true,'active')",[localId,email,await hashPassword(password)]);await pool.query("INSERT INTO sessions(token_hash,user_id,expires_at) VALUES($1,$2,now()+interval '1 day')",[createHash('sha256').update(sessionToken).digest('hex'),localId]);}
+ if(app==='lamariva'){const {hashPassword}=await import(pathToFileURL(require.resolve('better-auth/crypto')));await pool.query('INSERT INTO "user"(id,name,email,"emailVerified","updatedAt") VALUES($1,$2,$3,true,now())',[localId,'Original User',email]);await pool.query('INSERT INTO account(id,"accountId","providerId","userId",password,"updatedAt") VALUES($1,$2,\'credential\',$2,$3,now())',[randomUUID(),localId,await hashPassword(password)]);}
+ const appPort=await port(),opPort=await port(),origin='http://127.0.0.1:'+appPort,issuer='http://127.0.0.1:'+opPort,base=app==='itinerary'?'/auth/space':app==='voltlab'?'/api/auth/febro':'/auth/febro',callback=base+'/callback',secret=randomBytes(32).toString('hex');
+ const key=generateKeyPairSync('rsa',{modulusLength:2048}).privateKey.export({format:'jwk'});Object.assign(key,{kid:'synthetic',alg:'RS256',use:'sig'});const opDB=new DatabaseSync(':memory:');let op;
+ const opServer=http.createServer((req,res)=>{if(req.url.startsWith('/interaction/')){(async()=>{const d=await op.interactionDetails(req,res);if(d.prompt.name==='login')return op.interactionFinished(req,res,{login:{accountId:'synthetic-central',ts:Math.floor(Date.now()/1000)}},{mergeWithLastSubmission:false});const g=new op.Grant({accountId:'synthetic-central',clientId:'synthetic-'+app});g.addOIDCScope('openid email profile');return op.interactionFinished(req,res,{consent:{grantId:await g.save()}},{mergeWithLastSubmission:true});})().catch(()=>{res.writeHead(500);res.end();});}else op.callback()(req,res);});
+ op=createProvider({issuer,db:opDB,jwks:{keys:[key]},cookieKeys:[randomBytes(48).toString('hex')],testOnly:true,clients:[{client_id:'synthetic-'+app,client_secret:secret,redirect_uris:[origin+callback],post_logout_redirect_uris:[origin+base+'/logged-out'],grant_types:['authorization_code'],response_types:['code'],token_endpoint_auth_method:'client_secret_basic'}],findIdentity:async id=>({id,email:'verified-central@example.invalid',email_verified:true,name:'Central User'}),allowApp:async()=>true});await new Promise(r=>opServer.listen(opPort,'127.0.0.1',r));
+ const env={PATH:process.env.PATH,HOME:clusterDir,NODE_ENV:'development',HOST:'127.0.0.1',PORT:String(appPort),DATABASE_URL:databaseURL,APP_URL:origin,AUTH_SECRET:randomBytes(48).toString('hex'),SESSION_SECRET:randomBytes(48).toString('hex'),FEBRO_SSO_ENABLED:'true',FEBRO_SSO_TEST_ONLY:'true',FEBRO_SSO_ISSUER:issuer,FEBRO_SSO_CLIENT_ID:'synthetic-'+app,FEBRO_SSO_CLIENT_SECRET:secret,NEXT_TELEMETRY_DISABLED:'1'};
+ const commandArgs=app==='itinerary'?['src/server.js']:['node_modules/next/dist/bin/next','dev','--webpack','-H','127.0.0.1','-p',String(appPort)];const launch=()=>spawn(process.execPath,commandArgs,{cwd:root,env,stdio:'ignore'});let child=launch();
+ t.after(async()=>{child.kill('SIGTERM');await Promise.race([new Promise(r=>child.once('exit',r)),pause(5000)]);if(child.exitCode===null)child.kill('SIGKILL');opServer.closeAllConnections();await new Promise(r=>opServer.close(r));opDB.close();await pool.end();});
+ const jar=new Map(),opJar=new Map();if(app==='voltlab')jar.set('voltlab-session',sessionToken);
+ async function call(p,options={}){const r=await fetch(new URL(p,origin),{redirect:'manual',...options,headers:{cookie:[...jar].map(([k,v])=>k+'='+v).join('; '),...options.headers}});for(const c of r.headers.getSetCookie()){const [k,...v]=c.split(';')[0].split('=');if(v.join('='))jar.set(k,v.join('='));else jar.delete(k);}return r;}
+ let ready=false;for(let i=0;i<180;i++){try{const r=await call(app==='itinerary'?'/health':app==='voltlab'?'/api/auth/me':'/api/health');if(r.status===200){ready=true;break;}}catch{}await pause(500);}assert.ok(ready,'native server ready');
+ if(app==='itinerary'){const r=await call('/login'),csrf=(await r.text()).match(/name="csrf" value="([^"]+)"/)[1];assert.equal((await call('/login',{method:'POST',headers:{origin,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({csrf,email,password})})).status,302);}
+ if(app==='lamariva'){const r=await call('/api/auth/sign-in/email',{method:'POST',headers:{origin,'Content-Type':'application/json'},body:JSON.stringify({email,password})});assert.equal(r.status,200,await r.clone().text());}
+ const me=app==='itinerary'?'/dashboard':app==='voltlab'?'/api/auth/me':'/api/auth/get-session';assert.equal((await call(me)).status,200,'native local session accepted');
+ // Ownership records remain anchored to native local ID through both logins.
+ const table=app==='lamariva'?'"user"':'users';await pool.query(`CREATE TABLE sso_test_owned(id TEXT PRIMARY KEY,owner ${app==='itinerary'?'bigint':app==='voltlab'?'uuid':'text'} REFERENCES ${table}(id))`);await pool.query("INSERT INTO sso_test_owned VALUES('private-content',$1)",[localId]);
+ const otherId=app==='itinerary'?'2':randomUUID(),otherToken=randomBytes(32).toString('hex');let otherCookie;
+ if(app==='lamariva'){
+  await pool.query(`INSERT INTO "user"(id,name,email,"emailVerified","updatedAt") VALUES($1,'Other','other@example.invalid',true,now())`,[otherId]);
+  await pool.query(`INSERT INTO session(id,token,"userId","expiresAt","updatedAt") VALUES($1,$2,$3,now()+interval '1 day',now())`,[randomUUID(),otherToken,otherId]);
+  const name=[...jar.keys()].find(k=>k.endsWith('session_token'));otherCookie=name+'='+encodeURIComponent(otherToken+'.'+createHmac('sha256',env.AUTH_SECRET).update(otherToken).digest('base64'));
+  await pool.query(`INSERT INTO "Document"(id,"userId",kind,title,data,"updatedAt") VALUES('owned-document',$1,'CV','Private document','{}',now())`,[localId]);
+  assert.equal((await call('/api/documents/owned-document')).status,200);
+  assert.equal((await call('/api/documents/owned-document',{headers:{cookie:otherCookie}})).status,404);
+  assert.equal((await call('/api/documents/owned-document/versions',{headers:{cookie:otherCookie}})).status,404);
+ }else if(app==='voltlab'){
+  await pool.query("INSERT INTO users(id,name,email,username,email_verified,status) VALUES($1,'Other','other@example.invalid','other_user',true,'active')",[otherId]);
+  await pool.query("INSERT INTO sessions(token_hash,user_id,expires_at) VALUES($1,$2,now()+interval '1 day')",[createHash('sha256').update(otherToken).digest('hex'),otherId]);otherCookie='voltlab-session='+otherToken;
+  await pool.query('INSERT INTO workspaces(owner_id,data,revision) VALUES($1,$2,1)',[localId,JSON.stringify({circuits:[],completed:[],profile:{name:'Private original workspace',goal:'private'},attempts:[],customCatalog:[],panelTemplates:[]})]);
+  const other=await (await call('/api/workspace',{headers:{cookie:otherCookie}})).json();assert.notEqual(other.data?.profile?.name,'Private original workspace');
+  assert.equal((await call('/api/admin/users')).status,403);
+ }else{
+  await pool.query("INSERT INTO users(id,name,email,role,status) VALUES($1,'Other','other@example.invalid','User','active')",[otherId]);
+  const signature=createRequire(root+'/package.json')('cookie-signature'),sid=randomBytes(24).toString('hex');otherCookie='connect.sid='+encodeURIComponent('s:'+signature.sign(sid,env.SESSION_SECRET));
+  await pool.query("INSERT INTO session(sid,sess,expire) VALUES($1,$2,now()+interval '1 day')",[sid,JSON.stringify({cookie:{originalMaxAge:86400000,expires:new Date(Date.now()+86400000).toISOString(),httpOnly:true,path:'/'},user:{id:otherId,name:'Other',email:'other@example.invalid',role:'User',status:'active'}})]);
+  await pool.query("INSERT INTO trips(id,owner_id,name,trip_type,destination,start_date,end_date) VALUES(1,$1,'Private trip','solo','Test','2026-10-22','2026-10-23')",[localId]);await pool.query("INSERT INTO trip_members(trip_id,user_id,display_name,role) VALUES(1,$1,'Original','owner')",[localId]);
+  assert.equal((await call('/trips/1')).status,200);assert.ok([403,404].includes((await call('/trips/1',{headers:{cookie:otherCookie}})).status));assert.ok([302,403].includes((await call('/admin')).status));
+ }
+ const ui=await call(base);assert.equal(ui.status,200,await ui.clone().text());const csrf=(await ui.text()).match(/name="csrf" value="([^"]+)"/)[1];let r=await call(base+'/start',{method:'POST',headers:{origin,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({csrf,action:'link',password})});assert.equal(r.status,303,await r.clone().text());
+ async function authorize(url){for(let i=0;i<15;i++){if(url.startsWith(origin))return call(url);const r=await fetch(url,{redirect:'manual',headers:{cookie:[...opJar].map(([k,v])=>k+'='+v).join('; ')}});for(const c of r.headers.getSetCookie()){const [k,...v]=c.split(';')[0].split('=');opJar.set(k,v.join('='));}assert.ok(r.headers.get('location'),'provider redirect');url=new URL(r.headers.get('location'),url).href;}throw Error('Loop');}
+ r=await authorize(r.headers.get('location'));assert.equal(r.status,200,await r.clone().text());const confirm=(await r.text()).match(/name="csrf" value="([^"]+)"/)[1];r=await call(base+'/confirm',{method:'POST',headers:{origin,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({csrf:confirm})});assert.equal(r.status,303,await r.clone().text());
+ assert.equal(String((await pool.query('SELECT local_id FROM febro_identities')).rows[0].local_id),localId);assert.equal((await call(me)).status,200);
+ if(app!=='itinerary'){const profile=await (await call(me)).json();assert.equal(profile.user.id,localId,'native SSO session ID');}
+ jar.clear();const ui2=await call(base),csrf2=(await ui2.text()).match(/name="csrf" value="([^"]+)"/)[1];r=await call(base+'/start',{method:'POST',headers:{origin,'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({csrf:csrf2,action:'login'})});assert.equal(r.status,303);r=await authorize(r.headers.get('location'));assert.equal(r.status,303,await r.clone().text());assert.equal((await call(me)).status,200);if(app!=='itinerary')assert.equal((await (await call(me)).json()).user.id,localId);
+ assert.equal(String((await pool.query('SELECT owner FROM sso_test_owned')).rows[0].owner),localId);assert.equal(Number((await pool.query(`SELECT count(*) n FROM ${table}`)).rows[0].n),2,'no duplicate user created');
+ if(app==='lamariva')assert.equal((await call('/api/documents/owned-document')).status,200);
+ if(app==='itinerary')assert.equal((await call('/trips/1')).status,200);
+ if(app==='voltlab')assert.equal((await (await call('/api/workspace')).json()).data.profile.name,'Private original workspace');
+ const stopped=new Promise(r=>child.once('exit',r));child.kill('SIGTERM');await stopped;child=launch();let restarted=false;
+ for(let i=0;i<120;i++){try{const check=await call(me);if(check.status===200){if(app==='itinerary'||(await check.json())?.user?.id===localId){restarted=true;break;}}}catch{}await pause(500);}assert.ok(restarted,'Native session and original account survive application restart');
+ await browserAcceptance({app,origin,base,me,expectedId:localId});
+ if(app==='itinerary'){await pool.query("UPDATE session SET expire=now()-interval '1 second' WHERE sess->'user'->>'id'=$1",[localId]);assert.equal((await call(me)).status,302);}
+ else if(app==='voltlab'){await pool.query("UPDATE sessions SET expires_at=now()-interval '1 second' WHERE user_id=$1",[localId]);assert.equal((await (await call(me)).json()).user,null);}
+ else{await pool.query(`UPDATE session SET "expiresAt"='2000-01-01' WHERE "userId"=$1`,[localId]);assert.ok(await (await call(me)).json()===null,'Expired native session is rejected');}
+
+});

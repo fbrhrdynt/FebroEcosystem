@@ -1,0 +1,93 @@
+{
+  "generatedAt": "2026-10-23T12:07:09.672907+00:00",
+  "automated": {
+    "pass": 98,
+    "fail": 0,
+    "skipped": 0
+  },
+  "externalSkipped": 8,
+  "suites": [
+    {
+      "log": "test-phase5-acceptance.log",
+      "pass": 28,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "log": "test-phase2-regression.log",
+      "pass": 12,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "log": "final-central-regression.log",
+      "pass": 10,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "log": "final-files-regression.log",
+      "pass": 10,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "log": "final-itinerary-regression.log",
+      "pass": 5,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "log": "final-lamariva-regression.log",
+      "pass": 5,
+      "fail": 0,
+      "skipped": 0
+    },
+    {
+      "log": "final-voltlab-regression.log",
+      "pass": 28,
+      "fail": 0,
+      "skipped": 0
+    }
+  ],
+  "skippedAcceptance": [
+    {
+      "task": "Regresi Phase 3 khusus",
+      "reason": "Dokumen/deployment dan runner khusus Phase 3 tidak ditemukan; regresi native dan Phase 2 dijalankan tanpa mengganti label sebagai Phase 3."
+    },
+    {
+      "task": "HTTPS end-to-end stack baru",
+      "reason": "Endpoint staging dan sertifikat terotorisasi belum tersedia."
+    },
+    {
+      "task": "Login Google nyata",
+      "reason": "Client/secret dan persetujuan callback staging terpisah belum tersedia; tes Google sintetis bukan bukti login Google nyata."
+    },
+    {
+      "task": "SMTP eksternal nyata",
+      "reason": "Credential SMTP staging terpisah belum tersedia; SMTP loopback sintetis sudah diuji."
+    },
+    {
+      "task": "Semua navigasi bisnis dalam browser",
+      "reason": "Browser terbatas halaman SSO/login/logout, bukan seluruh layar CV/trip/project/sharing/game."
+    },
+    {
+      "task": "Deploy/restart/migrasi produksi",
+      "reason": "Dilarang oleh ruang lingkup tugas."
+    },
+    {
+      "task": "Rollback proses produksi",
+      "reason": "Dilarang; rehearsal source-only sintetis dan verifikasi backup tersedia."
+    },
+    {
+      "task": "Acceptance logging ingress dan retensi operasional",
+      "reason": "Template disiapkan, belum dipasang/reload; canary ingress HTTPS dan rotasi audit operasional belum diterima."
+    }
+  ],
+  "historicalAttempts": [
+    "test-integrations.log: 21 pass, 1 timeout browser Lamariva",
+    "test-postgres-rerun.log: 0 pass, 3 gagal karena dijalankan dari cwd keliru; tidak ada mutasi produksi",
+    "test-phase5-final.log: 27 pass, 1 readiness VoltLab pada dependency isolation race; diulang setelah penyalinan selesai",
+    "Percobaan awal tes baru salah nama import googleExchange; diperbaiki menjadi googleComplete, 6 tes keamanan akhir lulus."
+  ]
+}

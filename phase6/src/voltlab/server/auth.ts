@@ -1,0 +1,19 @@
+import {cookies} from 'next/headers';
+import {NextResponse} from 'next/server';
+import {db} from './db';
+import {hashToken,randomToken} from './crypto.mjs';
+import {isAdmin,sameOrigin,publicUser} from './policy.mjs';
+export type User={id:string;email:string;username:string;name:string;email_verified:boolean;status:'active'|'blocked';password_hash?:string;google_sub?:string};
+export class HttpError extends Error{constructor(public status:number,message:string){super(message)}}
+export function appUrl(){const value=process.env.APP_URL;if(!value)throw new HttpError(503,'APP_URL belum diatur.');const u=new URL(value);if(process.env.NODE_ENV==='production'&&u.protocol!=='https:')throw new HttpError(503,'APP_URL produksi harus HTTPS.');return u.origin;}
+export function authSecret(){const s=process.env.AUTH_SECRET;if(!s||s.length<32)throw new HttpError(503,'AUTH_SECRET belum diatur.');return s;}
+export const cookieName=()=>process.env.NODE_ENV==='production'?'__Host-voltlab-session':'voltlab-session';
+export const cookieOptions=()=>({httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:'lax' as const,path:'/'});
+export async function currentUser(){const token=(await cookies()).get(cookieName())?.value;if(!token||token.length>200)return null;const {rows}=await db().query<User>('SELECT u.* FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.token_hash=$1 AND s.expires_at>now() AND u.status=$2',[hashToken(token),'active']);return rows[0]||null;}
+export async function requireUser(admin=false){const u=await currentUser();if(!u)throw new HttpError(401,'Silakan login kembali.');if(admin&&!isAdmin(u))throw new HttpError(403,'Hanya administrator yang dapat mengakses halaman ini.');return u;}
+export function checkOrigin(req:Request){if(!sameOrigin(req.headers.get('origin'),appUrl()))throw new HttpError(403,'Origin request tidak valid.');}
+export async function sessionResponse(user:User,redirect=false){const token=randomToken();await db().query('INSERT INTO sessions (token_hash,user_id,expires_at) VALUES ($1,$2,now()+interval \'7 days\')',[hashToken(token),user.id]);await db().query('UPDATE users SET last_login_at=now() WHERE id=$1',[user.id]);const response=redirect?NextResponse.redirect(new URL('/',appUrl())):NextResponse.json({user:publicUser(user)});response.cookies.set(cookieName(),token,{...cookieOptions(),maxAge:604800});return response;}
+export async function rateLimit(key:string,max=8){const result=await db().query<{attempts:number}>('INSERT INTO rate_limits (key,attempts,reset_at) VALUES ($1,1,now()+interval \'15 minutes\') ON CONFLICT (key) DO UPDATE SET attempts=CASE WHEN rate_limits.reset_at<now() THEN 1 ELSE rate_limits.attempts+1 END, reset_at=CASE WHEN rate_limits.reset_at<now() THEN now()+interval \'15 minutes\' ELSE rate_limits.reset_at END RETURNING attempts',[hashToken(key)]);if(result.rows[0].attempts>max)throw new HttpError(429,'Terlalu banyak percobaan. Coba lagi setelah 15 menit.');}
+export function clientIp(req:Request){return req.headers.get('x-real-ip')||'direct';}
+export async function jsonBody(req:Request,max=2000000){if(Number(req.headers.get('content-length')||0)>max)throw new HttpError(413,'Payload terlalu besar.');const reader=req.body?.getReader();if(!reader)throw new HttpError(400,'Body kosong.');const chunks:Uint8Array[]=[];let size=0;while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>max){await reader.cancel();throw new HttpError(413,'Payload terlalu besar.');}chunks.push(value);}try{return JSON.parse(Buffer.concat(chunks).toString());}catch{throw new HttpError(400,'JSON tidak valid.');}}
+export function errorResponse(e:unknown){if(e instanceof HttpError)return NextResponse.json({error:e.message},{status:e.status});console.error('Request failed',e instanceof Error?e.message:'unknown');return NextResponse.json({error:'Layanan sementara tidak tersedia. Coba lagi.'},{status:503});}

@@ -1,0 +1,12 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import os from 'node:os';
+import fs from 'node:fs';
+import path from 'node:path';
+import {createStore} from '../src/store.mjs';
+import {sha256} from '../src/security.mjs';
+const make=()=>{const dir=fs.mkdtempSync(path.join(os.tmpdir(),'febro-test-'));const store=createStore(dir);return {store,close:()=>{store.close();fs.rmSync(dir,{recursive:true,force:true});}};};
+test('session tokens are opaque/hashed, expiry constrained and revocable',()=>{const {store,close}=make();try{const u=store.createUser({email:'me@example.com',name:'Name',verified:true});store.saveSession('secret-token-example',u.id);assert.equal(store.sessionUser('secret-token-example').id,u.id);assert.equal(store.sessionUser('wrong'),undefined);assert.equal(store.db.prepare('SELECT hash FROM sessions').get().hash,sha256('secret-token-example'));store.endSession('secret-token-example');assert.equal(store.sessionUser('secret-token-example'),undefined);}finally{close();}});
+test('one-use email token cannot be replayed',()=>{const {store,close}=make();try{const u=store.createUser({email:'me@example.com',name:'Name'});store.saveToken('another-secret',u.id,'reset',10000);assert.equal(store.consumeToken('another-secret','verify'),null);assert.equal(store.consumeToken('another-secret','reset'),u.id);assert.equal(store.consumeToken('another-secret','reset'),null);}finally{close();}});
+test('short links isolate by user and disable',()=>{const {store,close}=make();try{const a=store.createUser({email:'a@example.com',name:'A'});const b=store.createUser({email:'b@example.com',name:'B'});const l=store.makeLink(a.id,'https://example.org',null,30);assert.equal(store.listLinks(b.id).length,0);assert.equal(store.disableLink(b.id,l.code),0);assert.equal(store.disableLink(a.id,l.code),1);assert.equal(store.getLink(l.code).disabled,1);}finally{close();}});
+test('snippets private by default and user-scoped update',()=>{const {store,close}=make();try{const a=store.createUser({email:'a@example.com',name:'A'});const b=store.createUser({email:'b@example.com',name:'B'});const s=store.createSnippet(a.id,{title:'Example',language:'js',content:'const x = 1',visibility:'private'});assert.equal(store.snippets(b.id).length,0);assert.equal(store.updateSnippet(b.id,s.id,{title:'Other',language:'js',content:'x',visibility:'public'}),0);assert.equal(store.snippet(s.id).title,'Example');}finally{close();}});

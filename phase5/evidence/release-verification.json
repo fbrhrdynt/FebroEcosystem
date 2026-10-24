@@ -1,0 +1,44 @@
+[
+  {
+    "app": "central",
+    "changedFiles": 22,
+    "snapshotFiles": 171,
+    "verified": true,
+    "productionMutation": false
+  },
+  {
+    "app": "lamariva",
+    "changedFiles": 24,
+    "snapshotFiles": 115,
+    "verified": true,
+    "productionMutation": false
+  },
+  {
+    "app": "itinerary",
+    "changedFiles": 20,
+    "snapshotFiles": 66,
+    "verified": true,
+    "productionMutation": false
+  },
+  {
+    "app": "voltlab",
+    "changedFiles": 25,
+    "snapshotFiles": 167,
+    "verified": true,
+    "productionMutation": false
+  },
+  {
+    "app": "files",
+    "changedFiles": 19,
+    "snapshotFiles": 37,
+    "verified": true,
+    "productionMutation": false
+  },
+  {
+    "app": "play",
+    "changedFiles": 20,
+    "snapshotFiles": 167,
+    "verified": true,
+    "productionMutation": false
+  }
+]

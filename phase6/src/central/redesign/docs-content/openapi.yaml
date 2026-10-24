@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: Febro Ecosystem API
+  version: 2.0.0
+  description: Public utility endpoints and API-key protected URL creation. by Febro Herdyanto.
+servers:
+  - url: https://eco.febro.id/api
+    description: Unified ecosystem
+  - url: https://api.febro.id
+paths:
+  /v1/api/uuid:
+    get:
+      summary: Generate UUID v4
+      operationId: newUuid
+      responses:
+        '200':
+          description: A new UUID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid: {type: string, format: uuid}
+                  by: {type: string}
+  /v1/api/qr:
+    get:
+      summary: Generate QR PNG or SVG
+      operationId: newQr
+      parameters:
+        - {name: text, in: query, required: true, schema: {type: string, maxLength: 1600}}
+        - {name: format, in: query, schema: {type: string, enum: [png, svg], default: png}}
+        - {name: width, in: query, schema: {type: integer, minimum: 160, maximum: 1000}}
+        - {name: dark, in: query, schema: {type: string, example: '#182837'}}
+      responses:
+        '200': {description: Binary image (image/png or image/svg+xml)}
+        '429': {description: Rate limit reached}
+  /v1/api/short:
+    post:
+      summary: Create a short link
+      operationId: createShortUrl
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [url]
+              properties:
+                url: {type: string, format: uri, example: 'https://example.com'}
+                alias: {type: string, minLength: 4, maxLength: 32}
+                days: {type: integer, minimum: 1, maximum: 365, default: 30}
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code: {type: string}
+                  url: {type: string}
+                  expiresAt: {type: integer}
+                  shortUrl: {type: string, format: uri}
+        '401': {description: Invalid API key}
+        '429': {description: Rate limit reached}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Create a fb_... API key after signing in at api.febro.id.

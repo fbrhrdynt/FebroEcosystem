@@ -1,0 +1,17 @@
+{
+  "lamariva": {
+    "restore": "passed",
+    "unvalidatedForeignKeys": 0,
+    "target": "isolated unix-socket-only PostgreSQL 16; no production connection"
+  },
+  "itinerary": {
+    "restore": "passed",
+    "unvalidatedForeignKeys": 0,
+    "target": "isolated unix-socket-only PostgreSQL 16; no production connection"
+  },
+  "voltlab": {
+    "restore": "passed",
+    "unvalidatedForeignKeys": 0,
+    "target": "isolated unix-socket-only PostgreSQL 16; no production connection"
+  }
+}

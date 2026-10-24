@@ -1,0 +1,3 @@
+(node:63555) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+PASS: 15 pages at five responsive widths with refresh, theme persistence, login/profile save/logout, session loading/401/network failure, Control Center widths and filtering, drawer navigation, search, screenshots.

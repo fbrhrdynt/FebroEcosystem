@@ -1,0 +1,14 @@
+{
+  "deployment": "staging",
+  "authorized": false,
+  "issuer": "",
+  "separateSecretsConfirmed": false,
+  "google": {"accepted": false, "clientIdConfigured": false, "secretConfigured": false, "callback": ""},
+  "apps": {
+    "lamariva": {"origin": "", "callback": "", "postLogout": ""},
+    "itinerary": {"origin": "", "callback": "", "postLogout": ""},
+    "voltlab": {"origin": "", "callback": "", "postLogout": ""},
+    "files": {"origin": "", "callback": "", "postLogout": ""},
+    "play": {"origin": "", "callback": "", "postLogout": ""}
+  }
+}

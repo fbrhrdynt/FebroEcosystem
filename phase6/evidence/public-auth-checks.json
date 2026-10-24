@@ -1,0 +1,22 @@
+{
+  "https://eco.febro.id/profile/.well-known/openid-configuration": {
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "issuer": "https://auth.febro.id",
+    "validDiscovery": true
+  },
+  "https://auth.febro.id/.well-known/openid-configuration": {
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "issuer": "https://auth.febro.id",
+    "validDiscovery": true
+  },
+  "https://eco.febro.id/profile/v1/auth/google/status": {
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "configured": true,
+    "redirectUri": "https://auth.febro.id/auth/google/callback",
+    "expectedRedirectUri": "https://eco.febro.id/profile/auth/google/callback",
+    "scope": "presence/config only; no Google acceptance"
+  }
+}

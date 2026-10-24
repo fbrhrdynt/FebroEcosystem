@@ -1,0 +1,10 @@
+import {readFileSync,writeFileSync,readdirSync} from 'node:fs';
+const js=readdirSync('dist/assets').find(f=>f.endsWith('.js'));
+const css=readdirSync('dist/assets').find(f=>f.endsWith('.css'));
+const mascot=readFileSync('public/assets/ghaffi-mascot.png').toString('base64');
+let code=readFileSync('dist/assets/'+js,'utf8').replace(/(["'`])\.\/assets\/ghaffi-mascot\.png\1/g,'GHAFFI_MASCOT_ASSET').replaceAll('</script','<\\/script');
+code = `const GHAFFI_MASCOT_ASSET="data:image/png;base64,${mascot}";\n` + code;
+const media=Object.fromEntries(readdirSync('public/videos').filter(f=>/\.(mp4|jpg)$/.test(f)).map(f=>[f,`data:${f.endsWith('.mp4')?'video/mp4':'image/jpeg'};base64,${readFileSync('public/videos/'+f).toString('base64')}`]));
+code = `window.__GHAFFI_MEDIA__=${JSON.stringify(media)};\n` + code;
+const html=`<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#FFF9ED"><title>GhaffiLand · Ayo Main!</title><style>${readFileSync('dist/assets/'+css,'utf8')}</style></head><body><div id="root"></div><script>${code}</script></body></html>`;
+writeFileSync('GhaffiLand-Langsung-Main.html',html);console.log('Standalone HTML created: GhaffiLand-Langsung-Main.html');

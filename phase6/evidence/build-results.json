@@ -1,0 +1,14 @@
+[
+  {
+    "app": "lamariva",
+    "exitCode": 0,
+    "seconds": 84.95,
+    "environment": "synthetic only"
+  },
+  {
+    "app": "voltlab",
+    "exitCode": 0,
+    "seconds": 53.51,
+    "environment": "synthetic only"
+  }
+]

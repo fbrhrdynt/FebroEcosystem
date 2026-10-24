@@ -1,0 +1,29 @@
+{
+  "name": "febro-ecosystem",
+  "version": "2.0.0",
+  "description": "Febro Tools, Labs, API, Docs, QR, Converter, Snippets, Short links and Document Verification",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "dev": "node --watch src/server.mjs",
+    "check": "node --check src/server.mjs && node --check src/store.mjs && node --check src/auth.mjs && node --check src/files.mjs && node --check public/app.js",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "busboy": "^1.6.0",
+    "google-auth-library": "^9.15.1",
+    "nodemailer": "10.2.1",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^4.10.38",
+    "qrcode": "^1.5.4"
+  },
+  "overrides": {
+    "gaxios": {
+      "uuid": "11.1.1"
+    }
+  }
+}

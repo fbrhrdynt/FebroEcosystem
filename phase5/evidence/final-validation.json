@@ -1,0 +1,74 @@
+[
+  {
+    "check": "central-syntax",
+    "exitCode": 0,
+    "seconds": 0.55,
+    "log": "/opt/febro-ecosystem/phase5/evidence/final-central-syntax.log"
+  },
+  {
+    "check": "central-regression",
+    "exitCode": 0,
+    "seconds": 5.78,
+    "log": "/opt/febro-ecosystem/phase5/evidence/final-central-regression.log"
+  },
+  {
+    "check": "files-syntax",
+    "exitCode": 0,
+    "seconds": 0.3,
+    "log": "/opt/febro-ecosystem/phase5/evidence/final-files-syntax.log"
+  },
+  {
+    "check": "files-regression",
+    "exitCode": 0,
+    "seconds": 2.27,
+    "log": "/opt/febro-ecosystem/phase5/evidence/final-files-regression.log"
+  },
+  {
+    "check": "itinerary-syntax",
+    "exitCode": 0,
+    "seconds": 0.61,
+    "log": "/opt/febro-ecosystem/phase5/evidence/final-itinerary-syntax.log"
+  },
+  {
+    "check": "itinerary-regression",
+    "exitCode": 0,
+    "seconds": 0.47,
+    "log": "/opt/febro-ecosystem/phase5/evidence/final-itinerary-regression.log"
+  },
+  {
+    "check": "lamariva-types",
+    "exitCode": 0,
+    "seconds": 16.59,
+    "log": "/opt/febro-ecosystem/phase5/evidence/final-lamariva-types.log"
+  },
+  {
+    "check": "lamariva-regression",
+    "exitCode": 0,
+    "seconds": 5.34,
+    "log": "/opt/febro-ecosystem/phase5/evidence/final-lamariva-regression.log"
+  },
+  {
+    "check": "voltlab-types",
+    "exitCode": 0,
+    "seconds": 23.51,
+    "log": "/opt/febro-ecosystem/phase5/evidence/final-voltlab-types.log"
+  },
+  {
+    "check": "voltlab-regression",
+    "exitCode": 0,
+    "seconds": 3.18,
+    "log": "/opt/febro-ecosystem/phase5/evidence/final-voltlab-regression.log"
+  },
+  {
+    "check": "voltlab-native-api",
+    "exitCode": 0,
+    "seconds": 6.18,
+    "log": "/opt/febro-ecosystem/phase5/evidence/final-voltlab-native-api.log"
+  },
+  {
+    "check": "play-syntax",
+    "exitCode": 0,
+    "seconds": 0.42,
+    "log": "/opt/febro-ecosystem/phase5/evidence/final-play-syntax.log"
+  }
+]

@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+.env
+.env.*
+!.env.example
+*.zip
+*.tar.gz
+backups
+coverage
+.sites-runtime
+.openai

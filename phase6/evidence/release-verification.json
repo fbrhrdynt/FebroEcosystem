@@ -1,0 +1,32 @@
+{
+  "central": {
+    "files": 168,
+    "verified": true,
+    "archiveSHA256": "33149835b66f91d1ecb2889d850fbfe72d87c5d02b91dbe906bb9a6d51a2b811"
+  },
+  "lamariva": {
+    "files": 117,
+    "verified": true,
+    "archiveSHA256": "ec4bc0dbebd518cad8bd8758c79fc2195126f14b07c7eea1f1bc9444eb39ede1"
+  },
+  "itinerary": {
+    "files": 66,
+    "verified": true,
+    "archiveSHA256": "9e266333839fba8eac31b14ab01895d8400a420b88dfffa162db10a7336f0178"
+  },
+  "voltlab": {
+    "files": 167,
+    "verified": true,
+    "archiveSHA256": "a99538fd26c53c8b8ab0b7492b3f9354ae7059084375dd3521e81c6b17ddef80"
+  },
+  "files": {
+    "files": 36,
+    "verified": true,
+    "archiveSHA256": "d48e8c626c7ffd0058045a2b813c98d2383577bb9c1945e7cbd37da3996f8e40"
+  },
+  "play": {
+    "files": 167,
+    "verified": true,
+    "archiveSHA256": "dcade2d74f6b521faad3e794cdffe80aaf23d2426cd4951137f3d5e29fad358d"
+  }
+}

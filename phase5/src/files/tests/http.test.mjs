@@ -1,0 +1,35 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';import os from 'node:os';import path from 'node:path';
+import {randomBytes} from 'node:crypto';
+const dir=fs.mkdtempSync(path.join(os.tmpdir(),'febro-files-http-'));
+process.env.NODE_ENV='test';process.env.DATA_DIR=dir;process.env.APP_URL='http://127.0.0.1:3482';process.env.OIDC_ISSUER='http://127.0.0.1:3470';process.env.SESSION_SECRET=randomBytes(64).toString('hex');process.env.ADMIN_EMAILS='alice@example.com';
+const {server,repo}=await import('../src/server.mjs');
+await new Promise(resolve=>server.listen(3482,'127.0.0.1',resolve));
+const alice=repo.upsertAccount({sub:'aba63119-d81c-48ab-bef9-0a92026f015e',email:'alice@example.com',name:'Alice'}),bob=repo.upsertAccount({sub:'bda63119-d81c-48ab-bef9-0a92026f015e',email:'bob@example.com',name:'Bob'});
+const aliceToken='token-alice-1234',bobToken='token-bob-1234';repo.session(aliceToken,alice.sub);repo.session(bobToken,bob.sub);
+const raw=async(p,{method='GET',data=null,user=aliceToken,contentType='application/json'}={})=>fetch('http://127.0.0.1:3482'+p,{method,headers:{Cookie:'fb_files_dev='+user,Origin:'http://127.0.0.1:3482','Content-Type':contentType},body:data===null?undefined:contentType==='application/json'?JSON.stringify(data):data});
+const call=async(...args)=>{const r=await raw(...args);return {status:r.status,body:await r.json()};};
+test('Files GET HTTP and login state',async()=>{assert.equal((await raw('/health')).status,200);const x=await call('/api/me');assert.equal(x.body.user.email,'alice@example.com');});
+test('upload, quota, ownership, share and download over HTTP',async()=>{
+ const created=await call('/api/folders',{method:'POST',data:{name:'Reports'}});assert.equal(created.status,201);
+ const id=created.body.item.id,content=Buffer.from('%PDF-file-not-really-rendered');
+ const found=await call('/api/search?q=Reports');assert.equal(found.status,200);assert.equal(found.body.items.length,1);
+ const u=await raw('/api/upload?parent='+id+'&name=report.pdf',{method:'POST',data:content,contentType:'application/octet-stream'});assert.equal(u.status,201);const item=(await u.json()).item;
+ assert.equal((await raw('/api/items/'+item.id+'/download',{user:bobToken})).status,404);
+ assert.equal((await raw('/api/items/'+item.id+'/download')).status,200);
+ const s=await call('/api/shares/public',{method:'POST',data:{id,days:1,password:'sharing123',maxDownloads:1}});assert.equal(s.status,201);const token=s.body.url.split('/').pop();
+ assert.equal((await raw('/api/public/'+token)).status,401);
+ const unlock=await raw('/api/public/'+token+'/unlock',{method:'POST',data:{password:'sharing123'}});assert.equal(unlock.status,200);
+ const cookie=unlock.headers.get('set-cookie').split(';')[0];
+ const listing=await fetch('http://127.0.0.1:3482/api/public/'+token,{headers:{Cookie:cookie}});assert.equal(listing.status,200);
+ const download=await fetch('http://127.0.0.1:3482/api/public/'+token+'/download/'+item.id,{headers:{Cookie:cookie}});assert.equal(download.status,200);assert.equal(Buffer.from(await download.arrayBuffer()).toString(),content.toString());
+ const exhausted=await fetch('http://127.0.0.1:3482/api/public/'+token+'/download/'+item.id,{headers:{Cookie:cookie}});assert.equal(exhausted.status,410);
+ const shares=await call('/api/shares/users',{method:'POST',data:{id,email:'bob@example.com'}});assert.equal(shares.status,201);
+ const incoming=await call('/api/shared',{user:bobToken});assert.equal(incoming.body.shares.length,1);
+ const malicious=await call('/api/admin/users',{user:bobToken});assert.equal(malicious.status,403);
+});
+test('Origin protection prevents cross-site modification',async()=>{
+ const r=await fetch('http://127.0.0.1:3482/api/folders',{method:'POST',headers:{Cookie:'fb_files_dev='+aliceToken,Origin:'https://evil.example','Content-Type':'application/json'},body:JSON.stringify({name:'Unsafe'})});assert.equal(r.status,403);
+});
+test.after(async()=>{await new Promise(r=>server.close(r));repo.close();fs.rmSync(dir,{recursive:true,force:true});});

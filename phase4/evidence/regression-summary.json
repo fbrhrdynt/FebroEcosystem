@@ -1,0 +1,44 @@
+{
+  "final-itinerary-regression": {
+    "passes": [
+      5
+    ],
+    "failures": [
+      0
+    ]
+  },
+  "final-central-regression": {
+    "passes": [
+      10
+    ],
+    "failures": [
+      0
+    ]
+  },
+  "final-voltlab-regression": {
+    "passes": [
+      21,
+      7
+    ],
+    "failures": [
+      0,
+      0
+    ]
+  },
+  "final-lamariva-regression": {
+    "passes": [
+      5
+    ],
+    "failures": [
+      0
+    ]
+  },
+  "final-files-regression": {
+    "passes": [
+      10
+    ],
+    "failures": [
+      0
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#c8b7e0" />
+  <link rel="canonical" href="https://play.febro.id/skyhop/" />
+  <meta name="description" content="SkyHop: game platformer pixel art ringan untuk browser. Lompati pulau terapung, kumpulkan koin, dan taklukkan tiga dunia." />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+  <title>SkyHop — Tiny Pixel Adventure</title>
+  <link rel="stylesheet" href="/assets/immersive.css?v=14" />
+</head>
+<body class="arcade-immersive arcade-skyhop" data-arcade-game="skyhop">
+  <main class="site">
+    <div class="arcade-back-row"><a class="arcade-back" href="../">← KEMBALI KE FEBRO ARCADE</a><span>GAME 001 / 004</span> <a class="arcade-back" href="/leaderboard/">🏆 LEADERBOARD</a></div>
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="SkyHop beranda"><span class="brand-mark" aria-hidden="true">✦</span> SKYHOP<span class="brand-dot">.</span></a>
+      <div class="header-right"><span class="made-for">A tiny browser adventure</span><button id="soundButton" class="icon-button" type="button" aria-pressed="false" aria-label="Aktifkan efek suara" title="Suara mati">♫ <span id="soundLabel">OFF</span></button></div>
+    </header>
+
+    <section id="home" class="intro" aria-labelledby="title">
+      <div class="intro-copy"><div class="eyebrow"><span class="sparkle">✦</span> NO DOWNLOAD. JUST PLAY.</div><h1 id="title">SKY<span>HOP!</span></h1><p>Loncat antar pulau, ambil koin, hindari monster, dan temukan bendera di ujung dunia.</p></div>
+      <div class="intro-sticker" aria-hidden="true"><span>✳</span><strong>100%<br>FUN!</strong></div>
+    </section>
+
+    <section class="game-section" aria-label="Game SkyHop">
+      <div class="game-frame" id="gameFrame">
+        <div class="game-topbar" aria-live="polite">
+          <div class="topbar-left"><span class="hud-heart" id="hearts" aria-label="Nyawa">♥ ♥ ♥</span><span class="hud-divider"></span><span class="hud-level">WORLD <strong id="levelNumber">01</strong><span class="level-separator">/</span>03</span></div>
+          <div class="topbar-right"><span class="coin-symbol" aria-hidden="true">●</span><strong id="coinCount">00</strong><button class="game-pause" id="pauseButton" type="button" aria-label="Jeda game" title="Jeda game">Ⅱ</button></div>
+        </div>
+        <canvas id="game" width="960" height="540" aria-label="Area permainan platformer SkyHop. Gunakan tombol arah dan spasi untuk melompat.">Browser Anda tidak mendukung Canvas.</canvas>
+        <div class="game-bottom-label" id="worldLabel">THE FIRST LEAP</div>
+        <div class="touch-controls" aria-label="Kontrol game di layar sentuh">
+          <div class="touch-directions"><button id="leftButton" type="button" class="touch-button" aria-label="Bergerak ke kiri">◀</button><button id="rightButton" type="button" class="touch-button" aria-label="Bergerak ke kanan">▶</button></div>
+          <button id="jumpButton" type="button" class="touch-button touch-jump" aria-label="Lompat">JUMP <span>↑</span></button>
+        </div>
+        <div id="overlay" class="overlay" role="dialog" aria-modal="false" aria-labelledby="overlayHeading">
+          <div class="overlay-card">
+            <div class="overlay-eyebrow" id="overlayEyebrow">WELCOME TO THE SKY!</div>
+            <h2 id="overlayHeading">READY TO <span>HOP?</span></h2>
+            <p id="overlayText">Tiga dunia, banyak koin, dan petualangan kecil yang seru. Seberapa jauh kamu bisa pergi?</p>
+            <div class="level-picker" id="levelPicker" aria-label="Pilih level">
+              <button type="button" data-level="0" class="level-choice selected"><span>01</span><small>MEADOW</small></button>
+              <button type="button" data-level="1" class="level-choice"><span>02</span><small>SKYLINE</small></button>
+              <button type="button" data-level="2" class="level-choice"><span>03</span><small>CASTLE</small></button>
+            </div>
+            <div class="overlay-actions"><button id="primaryButton" type="button" class="primary-button"><span>▶</span> PLAY NOW</button><button id="secondaryButton" type="button" class="secondary-button" hidden>RESTART</button></div>
+            <p class="overlay-hint">Keyboard: ← → / A D untuk jalan · Space / ↑ untuk lompat</p>
+          </div>
+        </div>
+      </div>
+      <div class="under-game"><span><span class="status-dot"></span> PLAYABLE ON MOBILE & DESKTOP</span><button id="restartButton" type="button" class="text-button">↻ RESTART WORLD</button></div>
+      <div class="online-status" id="onlineScoreStatus" role="status">🏆 Skor akan dikirim ke leaderboard setelah ronde selesai. <a href="/leaderboard/">Lihat peringkat ↗</a></div>
+    </section>
+
+    <section class="cards" aria-label="Informasi permainan">
+      <article class="info-card card-goal"><div class="card-icon" aria-hidden="true">★</div><div><h2>YOUR QUEST</h2><p>Ambil koin sebanyak mungkin. Hindari musuh. Capai bendera untuk lanjut ke dunia berikutnya!</p></div></article>
+      <article class="info-card card-control"><div class="card-icon" aria-hidden="true">↗</div><div><h2>HOW TO PLAY</h2><p><strong>PC:</strong> A / D atau ← / → + Space. <strong>HP:</strong> gunakan tombol kiri, kanan, dan JUMP di layar.</p></div></article>
+      <article class="info-card card-save"><div class="card-icon" aria-hidden="true">♥</div><div><h2>YOUR PROGRESS</h2><p id="progressText">Selesaikan level untuk membuka dunia baru. Progres tersimpan di browser ini.</p></div></article>
+    </section>
+    <footer><a href="../" style="color:inherit">FEBRO ARCADE ↗</a> <span>·</span> MADE FOR FUN <span>✦</span> SKYHOP © 2026 <span>·</span> NO ACCOUNTS, NO ADS, NO INSTALL</footer>
+  </main>
+  <script src="/assets/leaderboard-client.js?v=16" defer></script>
+  <script src="game.js?v=3" defer></script>
+<script src="/assets/immersive.js?v=14" defer></script><script src="/assets/player-name.js?v=16" defer></script></body>
+</html>

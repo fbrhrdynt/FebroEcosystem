@@ -1,0 +1,32 @@
+{
+  "voltlab": {
+    "restore": "PASS",
+    "filesVerified": 149,
+    "target": "isolated private directory only"
+  },
+  "central": {
+    "restore": "PASS",
+    "filesVerified": 165,
+    "target": "isolated private directory only"
+  },
+  "files": {
+    "restore": "PASS",
+    "filesVerified": 20,
+    "target": "isolated private directory only"
+  },
+  "lamariva": {
+    "restore": "PASS",
+    "filesVerified": 96,
+    "target": "isolated private directory only"
+  },
+  "play": {
+    "restore": "PASS",
+    "filesVerified": 149,
+    "target": "isolated private directory only"
+  },
+  "itinerary": {
+    "restore": "PASS",
+    "filesVerified": 50,
+    "target": "isolated private directory only"
+  }
+}

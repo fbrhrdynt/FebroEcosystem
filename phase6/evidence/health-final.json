@@ -1,0 +1,26 @@
+{
+  "eco.febro.id": {
+    "status": 200,
+    "scope": "existing production only"
+  },
+  "cv.febro.id": {
+    "status": 200,
+    "scope": "existing production only"
+  },
+  "itinerary.febro.id": {
+    "status": 200,
+    "scope": "existing production only"
+  },
+  "voltlab.febro.id": {
+    "status": 200,
+    "scope": "existing production only"
+  },
+  "files.febro.id": {
+    "status": 200,
+    "scope": "existing production only"
+  },
+  "play.febro.id": {
+    "status": 200,
+    "scope": "existing production only"
+  }
+}

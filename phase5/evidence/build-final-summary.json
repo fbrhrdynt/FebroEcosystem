@@ -1,0 +1,16 @@
+[
+  {
+    "app": "lamariva",
+    "exitCode": 0,
+    "seconds": 49.58,
+    "log": "/opt/febro-ecosystem/phase5/evidence/build-lamariva-final.log",
+    "environment": "ephemeral synthetic build secrets; no production DB or OAuth credentials"
+  },
+  {
+    "app": "voltlab",
+    "exitCode": 0,
+    "seconds": 42.66,
+    "log": "/opt/febro-ecosystem/phase5/evidence/build-voltlab-final.log",
+    "environment": "ephemeral synthetic build secrets; no production DB or OAuth credentials"
+  }
+]

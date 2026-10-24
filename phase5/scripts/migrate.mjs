@@ -1,0 +1,9 @@
+import fs from 'node:fs';import path from 'node:path';import {DatabaseSync} from 'node:sqlite';import {createRequire} from 'node:module';
+import {migration,repository,sqliteConnection,pgConnection} from '../runtime/repository.mjs';
+const [app,mode='--dry-run']=process.argv.slice(2);if(!['--dry-run','--apply-staging'].includes(mode))throw Error('Only dry-run and isolated staging application are allowed');
+const sql=migration(app);if(mode==='--dry-run'){console.log('BEGIN;\n'+sql.join(';\n')+';\nCOMMIT;');process.exit(0);}
+if(process.env.FEBRO_MIGRATION_TARGET!=='isolated-staging')throw Error('Explicit isolated staging target required');
+let conn,close;
+if(['files','play'].includes(app)){const file=path.resolve(process.env.SSO_TEST_DATABASE||'');if(!file.startsWith('/tmp/febro-phase4-'))throw Error('SQLite migration requires isolated /tmp/febro-phase4-* fixture');const db=new DatabaseSync(file);db.exec('PRAGMA foreign_keys=ON');conn=sqliteConnection(db);close=()=>db.close();}
+else{const u=new URL(process.env.SSO_TEST_DATABASE_URL);if(!['127.0.0.1','localhost'].includes(u.hostname)||!/^febro_phase4_test_/.test(u.pathname.slice(1)))throw Error('Dedicated local test database required');const require=createRequire('/opt/lamariva/package.json'),{Pool}=require('pg');const pool=new Pool({connectionString:u.href,max:1});conn=pgConnection(pool);close=()=>pool.end();}
+try{await conn.transaction(async c=>{const before=(await c.query('SELECT COUNT(*) AS n FROM '+({lamariva:'"user"',itinerary:'users',voltlab:'users',files:'accounts',play:'players'}[app]))).rows[0].n;for(const statement of sql)await c.query(statement);const after=(await c.query('SELECT COUNT(*) AS n FROM '+({lamariva:'"user"',itinerary:'users',voltlab:'users',files:'accounts',play:'players'}[app]))).rows[0].n;if(String(before)!==String(after))throw Error('Account invariant failed');});console.log('Additive staging migration complete.');}finally{await close();}

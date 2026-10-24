@@ -1,0 +1,94 @@
+
+> febro-ecosystem@2.0.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# (node:64083) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Request: Login dan verifikasi email diperlukan
+# Request: Hostname tidak dikenali
+# Request: Login ticket kedaluwarsa atau sudah digunakan
+# Request: Origin browser tidak diizinkan
+# Subtest: HTTP smoke: docs, login handoff, admin-only validator, CSRF and public QR metadata privacy
+ok 1 - HTTP smoke: docs, login handoff, admin-only validator, CSRF and public QR metadata privacy
+  ---
+  duration_ms: 103.28757
+  type: 'test'
+  ...
+# Subtest: 10 subdomain memakai template halaman independen
+ok 2 - 10 subdomain memakai template halaman independen
+  ---
+  duration_ms: 2.070834
+  type: 'test'
+  ...
+# Subtest: navigasi tidak menampilkan seluruh ecosystem dan fokus pada produk masing-masing
+ok 3 - navigasi tidak menampilkan seluruh ecosystem dan fokus pada produk masing-masing
+  ---
+  duration_ms: 2.155022
+  type: 'test'
+  ...
+# Subtest: server mengenali stylesheet baru dan halaman khusus subdomain
+ok 4 - server mengenali stylesheet baru dan halaman khusus subdomain
+  ---
+  duration_ms: 0.707206
+  type: 'test'
+  ...
+# (node:64098) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Request: Administrator verified account required
+# Request: Administrator verified account required
+# Subtest: Space preserves Control Center authorization and account/icon deep links
+ok 5 - Space preserves Control Center authorization and account/icon deep links
+  ---
+  duration_ms: 98.322708
+  type: 'test'
+  ...
+# (node:64110) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: session tokens are opaque/hashed, expiry constrained and revocable
+ok 6 - session tokens are opaque/hashed, expiry constrained and revocable
+  ---
+  duration_ms: 171.399223
+  type: 'test'
+  ...
+# Subtest: one-use email token cannot be replayed
+ok 7 - one-use email token cannot be replayed
+  ---
+  duration_ms: 161.368309
+  type: 'test'
+  ...
+# Subtest: short links isolate by user and disable
+ok 8 - short links isolate by user and disable
+  ---
+  duration_ms: 174.471744
+  type: 'test'
+  ...
+# Subtest: snippets private by default and user-scoped update
+ok 9 - snippets private by default and user-scoped update
+  ---
+  duration_ms: 157.854326
+  type: 'test'
+  ...
+# (node:64117) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Request: Endpoint tidak ditemukan
+# Request: Origin browser tidak diizinkan
+# Request: OAuth browser state tidak cocok
+# Request: Login ticket kedaluwarsa atau sudah digunakan
+# Request: Masukkan nama, email valid dan password 12–128 karakter
+# Request: Tautan reset tidak valid atau kedaluwarsa
+# Subtest: Unified modules, legacy compatibility, sessions, CSRF, uploads and persisted records
+ok 10 - Unified modules, legacy compatibility, sessions, CSRF, uploads and persisted records
+  ---
+  duration_ms: 984.32086
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3502.628627

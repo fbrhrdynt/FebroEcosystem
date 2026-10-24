@@ -1,0 +1,46 @@
+{
+  "central": {
+    "configurationFileExists": true,
+    "authConfigurationPresenceOnly": {
+      "GOOGLE_CLIENT_ID": "configured",
+      "GOOGLE_CLIENT_SECRET": "configured",
+      "GOOGLE_REDIRECT_URI": "configured"
+    },
+    "googleProviderAcceptance": "not tested; no production OAuth client modified"
+  },
+  "lamariva": {
+    "configurationFileExists": true,
+    "authConfigurationPresenceOnly": {
+      "GOOGLE_CLIENT_ID": "configured",
+      "GOOGLE_CLIENT_SECRET": "configured"
+    },
+    "googleProviderAcceptance": "not tested; no production OAuth client modified"
+  },
+  "itinerary": {
+    "configurationFileExists": true,
+    "authConfigurationPresenceOnly": {},
+    "googleProviderAcceptance": "not tested; no production OAuth client modified"
+  },
+  "voltlab": {
+    "configurationFileExists": true,
+    "authConfigurationPresenceOnly": {
+      "GOOGLE_CLIENT_ID": "configured",
+      "GOOGLE_CLIENT_SECRET": "configured"
+    },
+    "googleProviderAcceptance": "not tested; no production OAuth client modified"
+  },
+  "files": {
+    "configurationFileExists": true,
+    "authConfigurationPresenceOnly": {
+      "OIDC_ISSUER": "configured",
+      "OIDC_CLIENT_ID": "configured",
+      "OIDC_CLIENT_SECRET": "configured"
+    },
+    "googleProviderAcceptance": "not tested; no production OAuth client modified"
+  },
+  "play": {
+    "configurationFileExists": false,
+    "authConfigurationPresenceOnly": {},
+    "googleProviderAcceptance": "not tested; no production OAuth client modified"
+  }
+}

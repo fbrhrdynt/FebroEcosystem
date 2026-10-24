@@ -1,0 +1,5 @@
+import {db} from '../../../../server/db';
+import {checkOrigin,clientIp,errorResponse,HttpError,jsonBody,rateLimit,sessionResponse,User} from '../../../../server/auth';
+import {isAdmin,adminUsername,ADMIN_IDENTITIES} from '../../../../server/policy.mjs';
+import {verifyPassword} from '../../../../server/crypto.mjs';
+export async function POST(req:Request){try{checkOrigin(req);const body=await jsonBody(req,2048);const identifier=String(body.identifier||'').trim().toLowerCase();await rateLimit('admin-ip:'+clientIp(req),20);await rateLimit('admin-account:'+identifier,8);if(!adminUsername(identifier)&&!Object.values(ADMIN_IDENTITIES).some(name=>name===identifier))throw new HttpError(401,'Username atau password tidak valid.');const {rows}=await db().query<User>('SELECT * FROM users WHERE email=$1 OR username=$1',[identifier]);const u=rows[0];if(!u||!isAdmin(u)||!await verifyPassword(body.password,u.password_hash))throw new HttpError(401,'Username atau password tidak valid.');await db().query('INSERT INTO audit_events (actor_id,action,target_id) VALUES ($1,$2,$1)',[u.id,'admin_password_login']);return sessionResponse(u);}catch(e){return errorResponse(e);}}

@@ -1,0 +1,9 @@
+# REVIEW ONLY: insert inside the correct existing HTTPS server after explicit approval.
+location = /auth/febro/callback {
+    access_log off;
+    error_log /dev/null;
+    proxy_pass http://127.0.0.1:3035;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}

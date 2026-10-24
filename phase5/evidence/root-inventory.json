@@ -1,0 +1,252 @@
+[
+  {
+    "path": "/opt/febro-ecosystem/sso-phase2",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "/opt/febro-ecosystem/ecosystem.config.cjs",
+    "type": "file",
+    "size": 260
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_PHASE4_MIGRATION.md",
+    "type": "file",
+    "size": 3335
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_TEST_RESULTS.md",
+    "type": "file",
+    "size": 3624
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_PHASE4_BACKUP_MANIFEST.md",
+    "type": "file",
+    "size": 2256
+  },
+  {
+    "path": "/opt/febro-ecosystem/phase5",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "/opt/febro-ecosystem/deploy",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "/opt/febro-ecosystem/package.json",
+    "type": "file",
+    "size": 741
+  },
+  {
+    "path": "/opt/febro-ecosystem/docs-content",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "/opt/febro-ecosystem/package-lock.json",
+    "type": "file",
+    "size": 33129
+  },
+  {
+    "path": "/opt/febro-ecosystem/backups",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_DEPLOYMENT_PLAN.md",
+    "type": "file",
+    "size": 10521
+  },
+  {
+    "path": "/opt/febro-ecosystem/public",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_PHASE4_APPLICATION_STATUS.md",
+    "type": "file",
+    "size": 11230
+  },
+  {
+    "path": "/opt/febro-ecosystem/.env",
+    "type": "file",
+    "size": 737
+  },
+  {
+    "path": "/opt/febro-ecosystem/ROUTE_MAPPING.md",
+    "type": "file",
+    "size": 3617
+  },
+  {
+    "path": "/opt/febro-ecosystem/MIGRATION_REPORT.md",
+    "type": "file",
+    "size": 5451
+  },
+  {
+    "path": "/opt/febro-ecosystem/ecosystem.config.cjs.bak.20261013102533",
+    "type": "file",
+    "size": 240
+  },
+  {
+    "path": "/opt/febro-ecosystem/project-docs",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "/opt/febro-ecosystem/DESIGN.md",
+    "type": "file",
+    "size": 774
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_AUDIT.md",
+    "type": "file",
+    "size": 3869
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_PHASE4_SECURITY_REPORT.md",
+    "type": "file",
+    "size": 4992
+  },
+  {
+    "path": "/opt/febro-ecosystem/phase4",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "/opt/febro-ecosystem/FEBRO_SPACE_PROGRESS.md",
+    "type": "file",
+    "size": 1871
+  },
+  {
+    "path": "/opt/febro-ecosystem/FEBRO_SPACE_DEPLOYMENT.md",
+    "type": "file",
+    "size": 4064
+  },
+  {
+    "path": "/opt/febro-ecosystem/data",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "/opt/febro-ecosystem/FEBRO_SPACE_REPORT.md",
+    "type": "file",
+    "size": 5988
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_ARCHITECTURE.md",
+    "type": "file",
+    "size": 8980
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_PHASE4_TEST_RESULTS.md",
+    "type": "file",
+    "size": 5291
+  },
+  {
+    "path": "/opt/febro-ecosystem/node_modules",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "/opt/febro-ecosystem/FEBRO_SPACE_AUDIT.md",
+    "type": "file",
+    "size": 1723
+  },
+  {
+    "path": "/opt/febro-ecosystem/tests",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "/opt/febro-ecosystem/redesign",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_RISK_ASSESSMENT.md",
+    "type": "file",
+    "size": 2903
+  },
+  {
+    "path": "/opt/febro-ecosystem/scripts",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "/opt/febro-ecosystem/UI_V2_1_README.md",
+    "type": "file",
+    "size": 4902
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_PHASE4_DEPLOYMENT.md",
+    "type": "file",
+    "size": 6014
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_PHASE4_PROGRESS.md",
+    "type": "file",
+    "size": 2650
+  },
+  {
+    "path": "/opt/febro-ecosystem/CODEX_ECO_MIGRATION.md",
+    "type": "file",
+    "size": 5625
+  },
+  {
+    "path": "/opt/febro-ecosystem/RELEASE_NOTES.md",
+    "type": "file",
+    "size": 955
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_PHASE4_DISCOVERY.md",
+    "type": "file",
+    "size": 3338
+  },
+  {
+    "path": "/opt/febro-ecosystem/FEBRO_SPACE_PRODUCTION_REPORT.md",
+    "type": "file",
+    "size": 6905
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_APPLICATION_MAPPING.md",
+    "type": "file",
+    "size": 3722
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_PHASE4_FINAL_REPORT.md",
+    "type": "file",
+    "size": 5686
+  },
+  {
+    "path": "/opt/febro-ecosystem/MIGRATION_INVENTORY.md",
+    "type": "file",
+    "size": 3501
+  },
+  {
+    "path": "/opt/febro-ecosystem/SSO_IMPLEMENTATION_PROGRESS.md",
+    "type": "file",
+    "size": 3885
+  },
+  {
+    "path": "/opt/febro-ecosystem/DEPLOYMENT_INSTRUCTIONS.md",
+    "type": "file",
+    "size": 4626
+  },
+  {
+    "path": "/opt/febro-ecosystem/README.md",
+    "type": "file",
+    "size": 14109
+  },
+  {
+    "path": "/opt/febro-ecosystem/src",
+    "type": "directory",
+    "size": 4096
+  },
+  {
+    "path": "/opt/febro-ecosystem/MIGRATION_PROGRESS.md",
+    "type": "file",
+    "size": 2048
+  }
+]

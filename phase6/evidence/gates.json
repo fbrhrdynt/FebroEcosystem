@@ -1,0 +1,43 @@
+{
+  "gates": {
+    "backupRestore": {
+      "status": "PASS",
+      "file": "restore-results.json",
+      "sha256": "ae563e05ba5d43f023c76ae305cbd70541a2e66fe57112e1d39d4c21cdf4913d"
+    },
+    "httpsAcceptance": {
+      "status": "BLOCKED",
+      "reason": "No authorized staging acceptance"
+    },
+    "googleAcceptance": {
+      "status": "BLOCKED",
+      "reason": "No real browser Google acceptance"
+    },
+    "ownershipMapping": {
+      "status": "BLOCKED",
+      "reason": "Synthetic ownership tests pass; real identity mapping acceptance missing"
+    },
+    "integrationSecurity": {
+      "status": "PASS",
+      "file": "central-provider-final.log",
+      "sha256": "60431404a5ffbacbbe4125be1902b2e80c764c37d51ede047eede703ee768fc4"
+    },
+    "dependencies": {
+      "status": "PASS",
+      "file": "final-validation.json",
+      "sha256": "18ec1b8c266d136888b522e3082ef1a2f64cc193bc1bde2b785563a1dcddc32d"
+    },
+    "noHighCritical": {
+      "status": "PASS",
+      "file": "audit-final-summary.json",
+      "sha256": "ae88eed90aa35241ce997d8ff43e5899cc800aa5502122db2bd7faac5b7b80bd"
+    },
+    "rollback": {
+      "status": "PASS",
+      "file": "rollback-rehearsal.json",
+      "sha256": "88ba168d68ed585edde9b988925cb47c96e8ccac2c748ec1bbc95578a2e627f7"
+    }
+  },
+  "operatorApproval": null,
+  "scope": "Review only. No activation authorized."
+}

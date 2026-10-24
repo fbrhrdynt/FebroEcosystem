@@ -1,0 +1,14 @@
+{
+  "missing": [
+    "SSO_PHASE3_DEPLOYMENT.md"
+  ],
+  "read": [
+    "SSO_PHASE4_FINAL_REPORT.md",
+    "SSO_PHASE4_APPLICATION_STATUS.md",
+    "SSO_PHASE4_DEPLOYMENT.md",
+    "SSO_PHASE4_SECURITY_REPORT.md",
+    "SSO_PHASE4_TEST_RESULTS.md",
+    "SSO_PHASE4_MIGRATION.md",
+    "SSO_ARCHITECTURE.md"
+  ]
+}

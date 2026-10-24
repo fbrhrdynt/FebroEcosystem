@@ -1,0 +1,219 @@
+[
+  {
+    "original": "/opt/febro-ecosystem/SSO_PHASE4_MIGRATION.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_PHASE4_MIGRATION.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_TEST_RESULTS.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_TEST_RESULTS.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_PHASE4_BACKUP_MANIFEST.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_PHASE4_BACKUP_MANIFEST.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_DEPLOYMENT_PLAN.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_DEPLOYMENT_PLAN.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_PHASE4_APPLICATION_STATUS.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_PHASE4_APPLICATION_STATUS.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/ROUTE_MAPPING.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/ROUTE_MAPPING.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/MIGRATION_REPORT.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/MIGRATION_REPORT.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/DESIGN.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/DESIGN.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_AUDIT.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_AUDIT.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_PHASE4_SECURITY_REPORT.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_PHASE4_SECURITY_REPORT.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/FEBRO_SPACE_PROGRESS.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/FEBRO_SPACE_PROGRESS.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/FEBRO_SPACE_DEPLOYMENT.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/FEBRO_SPACE_DEPLOYMENT.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/FEBRO_SPACE_REPORT.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/FEBRO_SPACE_REPORT.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_ARCHITECTURE.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_ARCHITECTURE.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_PHASE4_TEST_RESULTS.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_PHASE4_TEST_RESULTS.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/FEBRO_SPACE_AUDIT.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/FEBRO_SPACE_AUDIT.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_RISK_ASSESSMENT.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_RISK_ASSESSMENT.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/UI_V2_1_README.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/UI_V2_1_README.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_PHASE4_DEPLOYMENT.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_PHASE4_DEPLOYMENT.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_PHASE4_PROGRESS.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_PHASE4_PROGRESS.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/CODEX_ECO_MIGRATION.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/CODEX_ECO_MIGRATION.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/RELEASE_NOTES.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/RELEASE_NOTES.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_PHASE4_DISCOVERY.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_PHASE4_DISCOVERY.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/FEBRO_SPACE_PRODUCTION_REPORT.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/FEBRO_SPACE_PRODUCTION_REPORT.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_APPLICATION_MAPPING.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_APPLICATION_MAPPING.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_PHASE4_FINAL_REPORT.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_PHASE4_FINAL_REPORT.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/MIGRATION_INVENTORY.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/MIGRATION_INVENTORY.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/SSO_IMPLEMENTATION_PROGRESS.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/SSO_IMPLEMENTATION_PROGRESS.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/DEPLOYMENT_INSTRUCTIONS.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/DEPLOYMENT_INSTRUCTIONS.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/README.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/README.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  },
+  {
+    "original": "/opt/febro-ecosystem/MIGRATION_PROGRESS.md",
+    "new": "/opt/febro-ecosystem/project-docs/archive/MIGRATION_PROGRESS.md",
+    "action": "salin arsip; sumber tetap",
+    "reason": "Laporan historis tercatat dalam manifest/checksum Phase 4 atau masih mungkin dirujuk dokumen/runner; mempertahankan jalur asli mencegah rusaknya referensi.",
+    "rollback": "Tidak perlu rollback sumber. Salinan arsip dapat dibiarkan; jangan menghapus sumber asli."
+  }
+]

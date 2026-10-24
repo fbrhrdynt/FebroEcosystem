@@ -1,0 +1,74 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {randomBytes} from 'node:crypto';
+import http from 'node:http';
+const folder=fs.mkdtempSync(path.join(os.tmpdir(),'febro-http-test-'));
+process.env.NODE_ENV='production';
+process.env.DATA_DIR=folder;
+process.env.ADMIN_EMAILS='owner@example.com';
+process.env.APP_SECRET=randomBytes(64).toString('base64url');
+const {server,store,config}=await import('../src/server.mjs');
+const origin='http://localhost';
+const request=(base,host,pathname,init={})=>new Promise((resolve,reject)=>{const endpoint=new URL(base);const req=http.request({hostname:'127.0.0.1',port:Number(endpoint.port),method:init.method||'GET',path:pathname,headers:{Host:host,...init.headers}},res=>{const chunks=[];res.on('data',c=>chunks.push(c));res.on('end',()=>resolve(new Response(res.statusCode===204?null:Buffer.concat(chunks),{status:res.statusCode,headers:res.headers})));});req.on('error',reject);req.end(init.body);});
+
+const {hashPassword}=await import('../src/auth.mjs');
+const {PDFDocument}=await import('pdf-lib');
+test('Unified modules, legacy compatibility, sessions, CSRF, uploads and persisted records',async()=>{
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+ const base=`http://127.0.0.1:${server.address().port}`,host='eco.febro.id',origin='https://eco.febro.id';
+ let cookie='';
+ const post=(p,b,extra={})=>request(base,host,p,{method:'POST',headers:{Origin:origin,Cookie:cookie,'Content-Type':'application/json',...extra},body:JSON.stringify(b)});
+ try{
+  const routes={tools:'tools',lab:'lab','qr-generator':'qr',converter:'convert','url-shortener':'short',snippets:'snip',profile:'auth',verify:'verify',api:'api',docs:'docs'};
+  for(const [route,site] of Object.entries(routes)){
+   let r=await request(base,host,'/'+route);assert.equal(r.status,200,route);let html=await r.text();assert.match(html,new RegExp(`data-site="${site}"`));assert.match(html,/data-unified="true"/);assert.match(html,/aria-label="Ecosystem"/);
+   r=await request(base,site+'.febro.id','/');assert.equal(r.status,200);assert.doesNotMatch(await r.text(),/data-unified/);
+  }
+  for(const p of ['/','/profile/register','/profile/account','/profile/forgot','/profile/reset?token=dummy','/snippets/s/123','/docs/article/utility-api','/verify/v/00000000-0000-0000-0000-000000000000','/assets/app.js','/assets/app.css','/assets/unified.css','/assets/pdf.mjs','/assets/pdf.worker.mjs','/docs/openapi.yaml'])assert.equal((await request(base,host,p)).status,200,p);
+  assert.equal((await request(base,host,'/api/v1/missing')).status,404);
+  assert.equal((await request(base,host,'/api/v1/api/uuid')).status,200);
+  assert.equal((await request(base,host,'/v1/api/uuid')).status,200);
+  assert.equal((await request(base,host,'/qr-generator/v1/qr?text=hello')).status,200);
+  let r=await request(base,host,'/api/v1/api/uuid',{method:'OPTIONS'});assert.equal(r.status,204);assert.equal(r.headers.get('access-control-allow-origin'),'*');
+  const user=store.createUser({email:config.admins[0],name:'Owner',verified:true,passwordHash:hashPassword('migration-password-123')});
+  r=await post('/profile/v1/auth/login',{email:user.email,password:'migration-password-123'});assert.equal(r.status,200);cookie=r.headers.get('set-cookie').split(';')[0];assert.match(r.headers.get('set-cookie'),/Path=\/; HttpOnly; SameSite=Lax/);assert.doesNotMatch(r.headers.get('set-cookie'),/Domain=/);assert.match(cookie,/^__Host-fb_session=/);assert.match(r.headers.get('set-cookie'),/Secure/);
+  r=await request(base,host,'/snippets/v1/auth/me',{headers:{Cookie:cookie}});assert.equal((await r.json()).user.id,user.id);
+  assert.equal((await post('/profile/v1/account/profile',{name:'Updated Owner',headline:'Engineer',city:'Jakarta',website:'https://example.com',bio:'Hello'})).status,200);
+  assert.equal((await post('/profile/v1/auth/logout',{}, {Origin:'https://auth.febro.id'})).status,403);
+  r=await post('/url-shortener/v1/links',{url:'https://example.com',alias:'migration-test',days:1});assert.equal(r.status,201);const link=await r.json();assert.equal(new URL(link.shortUrl).origin,origin);assert.match(link.shortUrl,/\/url-shortener\//);
+  r=await request(base,host,new URL(link.shortUrl).pathname);assert.equal(r.status,302);assert.equal(r.headers.get('location'),'https://example.com/');
+  r=await post('/snippets/v1/snippets',{title:'Migration snippet',content:'hello',language:'text',visibility:'public'});assert.equal(r.status,201);const snip=await r.json();assert.match(snip.publicUrl,/eco.febro.id\/snippets\/s\//);
+  const pdf=await PDFDocument.create();pdf.addPage();const bytes=Buffer.from(await pdf.save());
+  const boundary='febro-migration-boundary';
+  const multipart=(fields)=>Buffer.concat([Buffer.from(Object.entries(fields).map(([k,v])=>`--${boundary}\r\nContent-Disposition: form-data; name="${k}"\r\n\r\n${v}\r\n`).join('')+`--${boundary}\r\nContent-Disposition: form-data; name="file"; filename="sample.pdf"\r\nContent-Type: application/pdf\r\n\r\n`),bytes,Buffer.from(`\r\n--${boundary}--\r\n`)]);
+  r=await request(base,host,'/verify/v1/verify/documents',{method:'POST',headers:{Origin:origin,Cookie:cookie,'Content-Type':`multipart/form-data; boundary=${boundary}`},body:multipart({title:'Migration test document'})});assert.equal(r.status,201);const {document}=await r.json();assert.match(document.verifyUrl,/eco.febro.id\/verify\/v\//);
+  r=await post(`/verify/v1/verify/documents/${document.id}/stamp`,{pageIndex:0,x:.6,y:.1,size:.2});assert.equal(r.status,200);const stamped=await r.json();r=await request(base,host,stamped.downloadUrl,{headers:{Cookie:cookie}});assert.equal(r.status,200);assert.equal(r.headers.get('content-type'),'application/pdf');
+  assert.equal(store.doc(document.id).status,'valid');assert.ok(fs.existsSync(store.doc(document.id).output_path));
+  const converted=new FormData();converted.set('operation','txt-to-pdf');converted.append('files',new Blob(['Hello migration']),'sample.txt');const encoded=new Request('http://localhost',{method:'POST',body:converted});
+  r=await request(base,host,'/converter/v1/convert',{method:'POST',headers:{Origin:origin,'Content-Type':encoded.headers.get('content-type')},body:Buffer.from(await encoded.arrayBuffer())});assert.equal(r.status,200);assert.equal(r.headers.get('content-type'),'application/pdf');
+  const previousGoogle={googleClientId:config.googleClientId,googleClientSecret:config.googleClientSecret,googleRedirectUri:config.googleRedirectUri};
+  Object.assign(config,{googleClientId:'migration.apps.googleusercontent.com',googleClientSecret:'test-only-secret',googleRedirectUri:'https://auth.febro.id/auth/google/callback'});
+  r=await request(base,host,'/profile/auth/google/start?next='+encodeURIComponent(origin+'/tools'));assert.equal(r.status,302);assert.match(r.headers.get('location'),/^https:\/\/auth.febro.id\/auth\/google\/start/);
+  r=await request(base,host,'/profile/auth/google/start?link=1&next='+encodeURIComponent(origin+'/profile/account'),{headers:{Cookie:cookie}});assert.equal(r.status,409);
+  config.googleRedirectUri=origin+'/profile/auth/google/callback';
+  r=await request(base,host,'/profile/auth/google/start?link=1',{headers:{Cookie:cookie}});assert.equal(r.status,302);assert.equal(new URL(r.headers.get('location')).hostname,'accounts.google.com');
+  r=await request(base,host,'/profile/auth/google/callback?code=test&state=test');assert.equal(r.status,400);
+  Object.assign(config,previousGoogle);
+  const {DatabaseSync}=await import('node:sqlite');const reader=new DatabaseSync(path.join(folder,'ecosystem.sqlite'),{readOnly:true});assert.equal(reader.prepare('SELECT name FROM users WHERE id=?').get(user.id).name,'Updated Owner');reader.close();
+  const discovery=await request(base,'auth.febro.id','/.well-known/openid-configuration');assert.equal((await discovery.json()).issuer,'https://auth.febro.id');
+  r=await request(base,'auth.febro.id','/auth/handoff?next='+encodeURIComponent(origin+'/profile/account'),{headers:{Cookie:cookie}});assert.equal(r.status,302);const ticket=new URLSearchParams(new URL(r.headers.get('location')).hash.slice(1)).get('fb_ticket');assert.ok(ticket);
+  r=await post('/v1/auth/claim',{ticket});assert.equal(r.status,200);assert.equal((await post('/v1/auth/claim',{ticket})).status,401);
+  assert.equal((await post('/profile/v1/auth/logout',{})).status,200);r=await request(base,host,'/v1/auth/me',{headers:{Cookie:cookie}});assert.equal((await r.json()).user,null);
+  assert.equal((await post('/profile/v1/auth/register',{email:'invalid',name:'X',password:'short'})).status,400);
+  const resetToken='migration-reset-token-'.padEnd(40,'x');store.saveToken(resetToken,user.id,'reset',60000);
+  assert.equal((await post('/profile/v1/auth/reset',{token:resetToken,password:'migration-new-password-123'})).status,200);
+  assert.equal((await post('/profile/v1/auth/reset',{token:resetToken,password:'migration-new-password-123'})).status,400);
+  assert.equal((await post('/profile/v1/auth/login',{email:user.email,password:'migration-new-password-123'})).status,200);
+  const verifyToken='migration-verify-token-'.padEnd(40,'x');store.saveToken(verifyToken,user.id,'verify',60000);
+  r=await request(base,host,'/profile/auth/verify?token='+verifyToken);assert.equal(r.status,302);assert.equal(new URL(r.headers.get('location')).hostname,host);assert.equal(new URL(r.headers.get('location')).pathname,'/profile/');
+  assert.equal(store.getUserById(user.id).name,'Updated Owner');assert.equal(store.listLinks(user.id).length,1);assert.equal(store.snippets(user.id).length,1);
+ }finally{await new Promise(resolve=>server.close(resolve));store.close();fs.rmSync(folder,{recursive:true,force:true});}
+});

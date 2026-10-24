@@ -1,0 +1,21 @@
+# User-generated data: never commit the SQLite databases or player identity data.
+/storage/
+/backups/
+
+# Runtime metadata, secrets, and archives
+.env
+.env.*
+!.env.example
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.log
+*.pid
+*.zip
+node_modules/
+.DS_Store
+*.backup
+*.bak
+*.bak-*
+__pycache__/

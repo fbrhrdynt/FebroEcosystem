@@ -1,0 +1,15 @@
+{
+  "central-prepare": 0,
+  "central-verify": 0,
+  "lamariva-prepare": 0,
+  "lamariva-verify": 0,
+  "itinerary-prepare": 0,
+  "itinerary-verify": 0,
+  "voltlab-prepare": 0,
+  "voltlab-verify": 0,
+  "files-prepare": 0,
+  "files-verify": 0,
+  "play-prepare": 0,
+  "play-verify": 0,
+  "deploy-without-approval-denied": true
+}

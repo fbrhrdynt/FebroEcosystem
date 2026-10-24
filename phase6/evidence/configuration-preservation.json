@@ -1,0 +1,18 @@
+{
+  "/etc/nginx/conf.d/voltlab.conf": true,
+  "/etc/nginx/conf.d/eco.febro.id.conf": true,
+  "/etc/nginx/conf.d/play.febro.id.conf": true,
+  "/etc/nginx/conf.d/febro-files.conf": true,
+  "/etc/nginx/conf.d/lamariva.conf": true,
+  "/etc/nginx/conf.d/itinerary.febro.id.conf": true,
+  "/etc/systemd/system/ls-itinerary.service": true,
+  "voltlab:.env.example": true,
+  "voltlab:.env": true,
+  "central:.env": true,
+  "files:.env.example": true,
+  "files:.env": true,
+  "lamariva:.env.example": true,
+  "lamariva:.env": true,
+  "itinerary:.env.example": true,
+  "itinerary:.env": true
+}

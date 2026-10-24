@@ -1,0 +1,135 @@
+/* Febro Arcade Player v1.4 — non-scrolling viewport shell. */
+html:has(body.arcade-immersive) {width:100%;height:100%;overflow:hidden;scroll-behavior:auto}
+body.arcade-immersive {--player-bar:62px;display:flex;flex-direction:column;width:100%;height:100vh;height:100dvh;min-width:0!important;max-height:100dvh;overflow:hidden!important;overscroll-behavior:none}
+body.arcade-immersive *, body.arcade-immersive *::before, body.arcade-immersive *::after {box-sizing:border-box}
+body.arcade-immersive .arcade-player-header {flex:0 0 auto;z-index:40;position:relative;width:100%;min-height:var(--player-bar);padding:calc(9px + env(safe-area-inset-top,0px)) max(15px,env(safe-area-inset-right,0px)) 9px max(15px,env(safe-area-inset-left,0px));display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fffdf5;border-bottom:3px solid #222034;color:#222034;box-shadow:0 2px 0 #0000000d;font:700 14px/1.2 system-ui,-apple-system,'Segoe UI',sans-serif}
+.arcade-player-route{display:flex;gap:10px;align-items:center;white-space:nowrap;overflow:hidden;min-width:0}
+.arcade-player-route a{font-size:clamp(13px,1.4vw,19px);font-weight:900;letter-spacing:-.035em;color:inherit;text-decoration:none;white-space:nowrap}
+.arcade-player-route .arcade-logo{display:grid;place-items:center;border:2px solid #222034;background:#ffd66c;border-radius:8px;width:30px;height:30px;font-size:18px;box-shadow:2px 2px #222034;flex:0 0 auto}
+.arcade-player-route .arcade-slash{color:#aaa2b4;font-size:22px;font-weight:600}
+.arcade-player-route strong{overflow:hidden;text-overflow:ellipsis;font-size:clamp(12px,1.4vw,17px);font-weight:900;min-width:0}
+.arcade-player-actions{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+.arcade-player-actions button,.arcade-player-actions a{font:800 12px/1 system-ui,-apple-system,'Segoe UI',sans-serif;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:white;border:2px solid #222034;border-radius:8px;color:#222034;min-height:37px;padding:9px 12px;text-decoration:none;box-shadow:2px 2px 0 #222034;cursor:pointer;touch-action:manipulation}
+.arcade-player-actions button:active,.arcade-player-actions a:active{box-shadow:none;transform:translate(2px,2px)}
+.arcade-player-actions button:hover,.arcade-player-actions a:hover{background:#f7f0ff}
+.arcade-player-actions .arcade-home{background:#e5f4d8}.arcade-player-actions .arcade-close{background:#ffe8e8}
+.arcade-player-actions .arcade-village{background:#ffdf83;display:none}
+.arcade-player-actions .arcade-expand{background:#e5efff}
+.arcade-player-actions button:focus-visible,.arcade-player-actions a:focus-visible{outline:3px solid #5d7af4;outline-offset:3px}
+.arcade-player-toast{position:fixed;z-index:70;bottom:max(12px,env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);border:2px solid #242035;background:#fff9dc;padding:8px 12px;border-radius:8px;max-width:min(94vw,480px);box-shadow:3px 3px #242035;font:700 12px/1.4 system-ui,sans-serif;pointer-events:none;text-align:center}
+body.arcade-immersive #soundButton{font-size:12px;min-height:37px;padding:8px 9px;border:2px solid #222034;border-radius:8px;box-shadow:2px 2px #222034;white-space:nowrap}
+/* SkyHop: preserve all gameplay DOM, hide marketing content, dedicate remaining viewport to canvas. */
+body.arcade-skyhop .site{width:100%;max-width:none;margin:0;padding:0;flex:1 1 auto;min-height:0;min-width:0;display:flex;flex-direction:column}
+body.arcade-skyhop .arcade-back-row,body.arcade-skyhop .site-header,body.arcade-skyhop .intro,body.arcade-skyhop .cards,body.arcade-skyhop .site footer,body.arcade-skyhop .under-game,body.arcade-skyhop .online-status{display:none!important}
+body.arcade-skyhop .game-section{flex:1 1 auto;display:flex;flex-direction:column;min-height:0;min-width:0;padding:0;margin:0}
+body.arcade-skyhop .game-frame{height:100%;min-height:0;flex:1 1 auto;min-width:0;border:0;box-shadow:none;border-radius:0;margin:0}
+body.arcade-skyhop .game-frame canvas{width:100%;height:100%;min-height:0;max-height:none}
+body.arcade-skyhop .game-topbar{top:12px;left:12px;right:12px}
+body.arcade-skyhop .touch-controls{display:flex;bottom:max(15px,env(safe-area-inset-bottom,0px));left:13px;right:13px}
+body.arcade-skyhop .game-bottom-label{bottom:110px}
+body.arcade-skyhop .overlay-card{max-height:calc(100% - 4px);overflow:auto;overscroll-behavior:contain}
+/* Neon Snake and Orbit Run: game is the full height; buttons and HUD are part of a compact player cockpit. */
+body.arcade-minigame .topline,body.arcade-minigame .sitebar,body.arcade-minigame .heading,body.arcade-minigame .footer,body.arcade-minigame .online-status{display:none!important}
+body.arcade-minigame .wrap{width:100%;max-width:none;padding:0;margin:0;flex:1 1 auto;min-width:0;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+body.arcade-minigame .stage-layout{display:flex;flex:1 1 auto;min-height:0;min-width:0;gap:0}
+body.arcade-minigame .stage-card{position:relative;flex:1 1 auto;min-height:0;min-width:0;display:flex;flex-direction:column;border:0;box-shadow:none;border-radius:0}
+body.arcade-minigame .stage-toolbar{padding:6px 14px;min-height:27px;font-size:10px;flex:0 0 auto}
+body.arcade-minigame .stage-screen{min-height:0;min-width:0;flex:1 1 auto;overflow:hidden;padding:6px;touch-action:none}
+body.arcade-minigame .stage-screen canvas{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;flex:0 0 auto}
+body.arcade-minigame .game-overlay{inset:0;padding:10px;overflow:auto;overscroll-behavior:contain}
+body.arcade-minigame .overlay-panel{max-height:100%;overflow:auto;overscroll-behavior:contain;padding:10px 15px}
+body.arcade-minigame .overlay-panel h2{font-size:clamp(19px,3vh,32px);margin:5px 0}
+body.arcade-minigame .overlay-panel p{font-size:11px;margin-bottom:8px}
+body.arcade-minigame .overlay-emoji{font-size:clamp(19px,4vh,32px)}
+body.arcade-minigame .gamebar{flex:0 0 auto;min-height:42px;padding:5px 12px;gap:6px;border-top:2px solid #221d2c}
+body.arcade-minigame .mini-btn{padding:6px 9px;min-height:31px;font-size:11px;box-shadow:1px 1px #221d2c}
+body.arcade-minigame .control-row{flex:0 0 auto;min-height:66px;padding:5px 12px max(6px,env(safe-area-inset-bottom,0px));align-items:center;justify-content:center}
+body.arcade-minigame .control-hint{display:none}
+body.arcade-minigame .pad{grid-template-columns:repeat(3,48px);grid-template-rows:repeat(2,34px);gap:3px}
+body.arcade-minigame .pad button{font-size:19px;border-radius:7px}
+body.arcade-minigame .motion-pad button{height:43px;min-width:94px;max-width:180px;font-size:15px}
+body.arcade-minigame .side{display:none!important}
+body.arcade-minigame .arcade-score-strip{flex:0 0 auto;padding:4px 10px;background:#fffaf0;border-bottom:2px solid #221d2c}
+body.arcade-minigame .arcade-score-strip .aside-title,body.arcade-minigame .arcade-score-strip .fine{display:none}
+body.arcade-minigame .arcade-score-strip .stat-grid{display:flex;justify-content:center;gap:clamp(5px,2vw,18px)}
+body.arcade-minigame .arcade-score-strip .stat{flex:0 1 105px;min-width:0;border:0;border-radius:5px;padding:2px 7px;background:transparent!important;text-align:center}
+body.arcade-minigame .arcade-score-strip .stat small{font-size:9px;line-height:1}
+body.arcade-minigame .arcade-score-strip .stat strong{font-size:clamp(15px,2vw,21px);line-height:1.25}
+body.arcade-minigame .arcade-speed-label{display:flex;align-items:center;gap:6px;white-space:nowrap;font:800 10px ui-monospace,monospace;margin-left:auto}
+body.arcade-minigame .arcade-speed-label select{margin:0;width:auto;max-width:115px;padding:5px 18px 5px 6px;border:2px solid #221d2c;border-radius:5px;background:#fff;color:#221d2c;font:800 10px ui-monospace,monospace}
+/* TribeWorld uses the map as primary workspace and a scrollable side panel for village actions. */
+body.arcade-tribeworld .app-shell{flex:1 1 auto;display:flex;flex-direction:column;width:100%;max-width:none;min-width:0;min-height:0;padding:0;margin:0;overflow:hidden}
+body.arcade-tribeworld .app-shell>.topbar,body.arcade-tribeworld .eyebrow-line,body.arcade-tribeworld .game-head,body.arcade-tribeworld .game-foot,body.arcade-tribeworld .mobile-instructions,body.arcade-tribeworld .site-footer{display:none!important}
+body.arcade-tribeworld .layout{flex:1 1 auto;min-height:0;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) clamp(290px,25vw,350px);gap:0;align-items:stretch}
+body.arcade-tribeworld .game-column{min-width:0;min-height:0;display:flex;flex-direction:column}
+body.arcade-tribeworld .game-frame{flex:1 1 auto;min-height:0;height:100%;max-height:none;border:0;box-shadow:none;border-radius:0}
+body.arcade-tribeworld .sidebar{display:flex;flex-direction:column;min-height:0;min-width:0;overflow:auto;overscroll-behavior:contain;gap:12px;padding:12px;background:#f3f1e7;border-left:2px solid #d7ddcf}
+body.arcade-tribeworld .sidebar section{flex:0 0 auto}
+body.arcade-tribeworld .game-overlay-top{top:12px;left:12px;right:12px}
+body.arcade-tribeworld .movement-pad{display:block;bottom:max(50px,calc(23px + env(safe-area-inset-bottom,0px)));left:13px}
+body.arcade-tribeworld .quick-feedback{bottom:53px;max-width:calc(100% - 145px);right:10px;left:auto;transform:none;white-space:normal}
+body.arcade-tribeworld .game-overlay-bottom{bottom:max(8px,env(safe-area-inset-bottom,0px))}
+body.arcade-tribeworld .arcade-sidebar-shade{display:none}
+@media(max-width:900px){
+ body.arcade-tribeworld .layout{display:flex;position:relative}
+ body.arcade-tribeworld .game-column{flex:1 1 auto;width:100%}
+ body.arcade-tribeworld .arcade-village{display:inline-flex}
+ body.arcade-tribeworld .sidebar{position:absolute!important;z-index:31;right:0;top:0;bottom:0;width:min(390px,90vw);box-shadow:-10px 0 30px #15282044;transform:translateX(103%);transition:transform .2s;visibility:hidden}
+ body.arcade-tribeworld.arcade-drawer-open .sidebar{transform:translateX(0);visibility:visible}
+ body.arcade-tribeworld .arcade-sidebar-shade{display:block;position:absolute;z-index:30;inset:0;background:#192c2680;border:0;visibility:hidden;opacity:0;transition:opacity .2s}
+ body.arcade-tribeworld.arcade-drawer-open .arcade-sidebar-shade{visibility:visible;opacity:1}
+ body.arcade-tribeworld .sidebar::before{content:'🏡 PENGELOLAAN DESA';display:block;flex:0 0 auto;font:900 13px system-ui,sans-serif;letter-spacing:.04em;padding:4px 2px}
+}
+@media(max-width:650px){
+ body.arcade-immersive{--player-bar:55px}
+ body.arcade-immersive .arcade-player-header{gap:5px;padding:calc(7px + env(safe-area-inset-top,0px)) 8px 7px}
+ .arcade-player-route{gap:5px}
+ .arcade-player-route .arcade-logo{width:25px;height:25px;font-size:14px}
+ .arcade-player-route a{font-size:12px}
+ .arcade-player-route strong{font-size:11px}
+ .arcade-player-route .arcade-slash{font-size:14px}
+ .arcade-player-actions{gap:5px}
+ .arcade-player-actions button,.arcade-player-actions a{min-height:31px;padding:5px 7px;border-width:1.5px;box-shadow:1px 1px #222034;font-size:11px}
+ .arcade-player-actions .arcade-expand span,.arcade-player-actions .arcade-home span,.arcade-player-actions .arcade-close span,.arcade-player-actions .arcade-village span{display:none}
+ body.arcade-skyhop #soundButton{padding:5px;min-height:30px;font-size:11px;box-shadow:1px 1px #222034}
+ body.arcade-skyhop #soundLabel{display:none}
+ body.arcade-skyhop .game-topbar{top:8px;left:6px;right:6px}
+ body.arcade-skyhop .touch-controls{bottom:max(12px,env(safe-area-inset-bottom,0px));left:10px;right:10px}
+ body.arcade-skyhop .touch-button{height:clamp(44px,10dvh,65px);min-width:clamp(45px,10dvh,65px);border-width:2px}
+ body.arcade-skyhop .touch-jump{min-width:80px}
+ body.arcade-skyhop .game-bottom-label{bottom:clamp(68px,12dvh,90px)}
+ body.arcade-minigame .gamebar{padding:3px 7px;gap:5px}
+ body.arcade-minigame .control-row{padding:4px 6px max(5px,env(safe-area-inset-bottom,0px))}
+ body.arcade-minigame .arcade-score-strip{padding:1px 4px}
+ body.arcade-minigame .arcade-score-strip .stat{padding:2px 4px}
+ body.arcade-minigame .arcade-speed-label{font-size:0}
+ body.arcade-minigame .arcade-speed-label select{font-size:10px;max-width:90px}
+ body.arcade-tribeworld .game-overlay-top{top:8px;left:8px;right:8px}
+ body.arcade-tribeworld .region-pill{padding:4px;gap:4px}
+ body.arcade-tribeworld .region-pill>span:first-child{width:24px;height:24px;font-size:14px}
+ body.arcade-tribeworld .region-pill b{font-size:8px}
+ body.arcade-tribeworld .region-pill small{font-size:7px}
+ body.arcade-tribeworld .camera-tools button{width:26px;height:26px}
+}
+@media(max-height:530px) and (orientation:landscape){
+ body.arcade-minigame .stage-toolbar{display:none}
+ body.arcade-minigame .arcade-score-strip{padding:0 5px}
+ body.arcade-minigame .arcade-score-strip .stat strong{font-size:16px}
+ body.arcade-minigame .control-row{min-height:42px}
+ body.arcade-minigame .pad{grid-template-columns:repeat(3,40px);grid-template-rows:repeat(2,25px);gap:2px}
+ body.arcade-minigame .motion-pad button{height:34px}
+ body.arcade-minigame .gamebar{min-height:30px}
+ body.arcade-minigame .mini-btn{min-height:25px;padding:3px 7px}
+ body.arcade-skyhop .overlay h2{font-size:28px}
+ body.arcade-skyhop .overlay-card{padding:8px 11px}
+ body.arcade-skyhop .overlay-eyebrow{padding:3px 6px}
+ body.arcade-skyhop .overlay-card>p:not(.overlay-hint){margin:4px auto;font-size:10px}
+ body.arcade-skyhop .level-picker{margin:5px 0}
+ body.arcade-skyhop .overlay .overlay-hint{display:none}
+}
+@media(prefers-reduced-motion:reduce){body.arcade-tribeworld .sidebar{transition:none!important}}
+/* Canvas is a replaced element; its intrinsic 600/760px height must not force a taller flex container. */
+body.arcade-minigame .stage-screen{display:flex;flex:1 1 0px;height:0;align-items:center;justify-content:center;min-height:0;min-width:0}
+body.arcade-minigame .stage-screen canvas{flex:none;min-width:0;min-height:0}
+body.arcade-minigame .stage-layout{align-items:stretch}
+body.arcade-minigame .stage-card{height:100%}

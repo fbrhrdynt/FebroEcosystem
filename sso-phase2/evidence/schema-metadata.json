@@ -1,0 +1,2938 @@
+{
+  "observedAt": "2026-10-22T15:35:02.452Z",
+  "sqlite": {
+    "central": {
+      "users": {
+        "columns": [
+          {
+            "name": "id",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "email",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "name",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "password_hash",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "email_verified",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "google_sub",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "created_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "headline",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "city",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "website",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "bio",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "disabled",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": []
+      },
+      "sessions": {
+        "columns": [
+          {
+            "name": "hash",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "user_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "expires_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "users",
+            "from": "user_id",
+            "to": "id",
+            "on_update": "NO ACTION",
+            "on_delete": "CASCADE",
+            "match": "NONE"
+          }
+        ]
+      },
+      "auth_tokens": {
+        "columns": [
+          {
+            "name": "hash",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "user_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "kind",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "expires_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "users",
+            "from": "user_id",
+            "to": "id",
+            "on_update": "NO ACTION",
+            "on_delete": "CASCADE",
+            "match": "NONE"
+          }
+        ]
+      },
+      "oauth_states": {
+        "columns": [
+          {
+            "name": "hash",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "user_id",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "return_to",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "verifier",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "expires_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": []
+      },
+      "handoff_tickets": {
+        "columns": [
+          {
+            "name": "hash",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "user_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "site",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "expires_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "users",
+            "from": "user_id",
+            "to": "id",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          }
+        ]
+      },
+      "links": {
+        "columns": [
+          {
+            "name": "code",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "url",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "user_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "created_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "expires_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "clicks",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "disabled",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "users",
+            "from": "user_id",
+            "to": "id",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          }
+        ]
+      },
+      "snippets": {
+        "columns": [
+          {
+            "name": "id",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "user_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "title",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "language",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "content",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "visibility",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "created_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "updated_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "users",
+            "from": "user_id",
+            "to": "id",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          }
+        ]
+      },
+      "api_keys": {
+        "columns": [
+          {
+            "name": "id",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "user_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "name",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "prefix",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "token_hash",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "created_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "revoked_at",
+            "type": "INTEGER",
+            "notnull": 0,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "users",
+            "from": "user_id",
+            "to": "id",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          }
+        ]
+      },
+      "documents": {
+        "columns": [
+          {
+            "name": "id",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "owner_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "title",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "original_name",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "source_path",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "output_path",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "status",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "source_hash",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "output_hash",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "page_count",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "page_index",
+            "type": "INTEGER",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "x",
+            "type": "REAL",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "y",
+            "type": "REAL",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "size",
+            "type": "REAL",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "validator_name",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "validator_email",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "validated_at",
+            "type": "INTEGER",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "revoked_at",
+            "type": "INTEGER",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "created_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "users",
+            "from": "owner_id",
+            "to": "id",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          }
+        ]
+      },
+      "oidc_codes": {
+        "columns": [
+          {
+            "name": "hash",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "client_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "user_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "redirect_uri",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "challenge",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "nonce",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "expires_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": []
+      },
+      "sso_user_apps": {
+        "columns": [
+          {
+            "name": "user_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 1
+          },
+          {
+            "name": "app",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 2
+          },
+          {
+            "name": "enabled",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "updated_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "updated_by",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "users",
+            "from": "user_id",
+            "to": "id",
+            "on_update": "NO ACTION",
+            "on_delete": "CASCADE",
+            "match": "NONE"
+          }
+        ]
+      },
+      "sso_control_audit": {
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "actor_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "action",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "target_id",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "app",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "event_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": []
+      }
+    },
+    "files": {
+      "accounts": {
+        "columns": [
+          {
+            "name": "sub",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "email",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "name",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "created_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "updated_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "quota_override",
+            "type": "INTEGER",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "blocked",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "used_bytes",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": []
+      },
+      "settings": {
+        "columns": [
+          {
+            "name": "k",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "v",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": []
+      },
+      "sessions": {
+        "columns": [
+          {
+            "name": "hash",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "sub",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "expires_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "accounts",
+            "from": "sub",
+            "to": "sub",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          }
+        ]
+      },
+      "nodes": {
+        "columns": [
+          {
+            "name": "id",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "owner_sub",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "parent_id",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "kind",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "name",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "storage_key",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "size",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "mime",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "sha256",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "created_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "updated_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "trashed_at",
+            "type": "INTEGER",
+            "notnull": 0,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "nodes",
+            "from": "parent_id",
+            "to": "id",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          },
+          {
+            "id": 1,
+            "seq": 0,
+            "table": "accounts",
+            "from": "owner_sub",
+            "to": "sub",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          }
+        ]
+      },
+      "share_links": {
+        "columns": [
+          {
+            "name": "id",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "token_hash",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "owner_sub",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "node_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "expires_at",
+            "type": "INTEGER",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "max_downloads",
+            "type": "INTEGER",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "download_count",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "password_hash",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "created_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "revoked_at",
+            "type": "INTEGER",
+            "notnull": 0,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "nodes",
+            "from": "node_id",
+            "to": "id",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          },
+          {
+            "id": 1,
+            "seq": 0,
+            "table": "accounts",
+            "from": "owner_sub",
+            "to": "sub",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          }
+        ]
+      },
+      "user_shares": {
+        "columns": [
+          {
+            "name": "id",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "owner_sub",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "node_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "recipient_email",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "created_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "revoked_at",
+            "type": "INTEGER",
+            "notnull": 0,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "nodes",
+            "from": "node_id",
+            "to": "id",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          },
+          {
+            "id": 1,
+            "seq": 0,
+            "table": "accounts",
+            "from": "owner_sub",
+            "to": "sub",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          }
+        ]
+      },
+      "audit_log": {
+        "columns": [
+          {
+            "name": "id",
+            "type": "INTEGER",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "actor_sub",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "action",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "node_id",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "details",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 0
+          },
+          {
+            "name": "created_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": []
+      },
+      "oauth_flows": {
+        "columns": [
+          {
+            "name": "state_hash",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "verifier",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "nonce",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "expires_at",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": []
+      }
+    },
+    "play": {
+      "players": {
+        "columns": [
+          {
+            "name": "id",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "nickname",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "created_ms",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "name_set",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": []
+      },
+      "sessions": {
+        "columns": [
+          {
+            "name": "id",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "player_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "game",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "mode",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "created_ms",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "finished_ms",
+            "type": "INTEGER",
+            "notnull": 0,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "players",
+            "from": "player_id",
+            "to": "id",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          }
+        ]
+      },
+      "runs": {
+        "columns": [
+          {
+            "name": "id",
+            "type": "TEXT",
+            "notnull": 0,
+            "pk": 1
+          },
+          {
+            "name": "player_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "game",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "mode",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "score",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "finished_ms",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "players",
+            "from": "player_id",
+            "to": "id",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          }
+        ]
+      },
+      "bests": {
+        "columns": [
+          {
+            "name": "player_id",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 1
+          },
+          {
+            "name": "game",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 2
+          },
+          {
+            "name": "mode",
+            "type": "TEXT",
+            "notnull": 1,
+            "pk": 3
+          },
+          {
+            "name": "score",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          },
+          {
+            "name": "achieved_ms",
+            "type": "INTEGER",
+            "notnull": 1,
+            "pk": 0
+          }
+        ],
+        "foreignKeys": [
+          {
+            "id": 0,
+            "seq": 0,
+            "table": "players",
+            "from": "player_id",
+            "to": "id",
+            "on_update": "NO ACTION",
+            "on_delete": "NO ACTION",
+            "match": "NONE"
+          }
+        ]
+      }
+    }
+  },
+  "postgres": {
+    "lamariva": [
+      {
+        "table_name": "Application",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Application",
+        "column_name": "userId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Application",
+        "column_name": "company",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Application",
+        "column_name": "title",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Application",
+        "column_name": "status",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Application",
+        "column_name": "location",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Application",
+        "column_name": "url",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Application",
+        "column_name": "source",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Application",
+        "column_name": "cvId",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "Application",
+        "column_name": "letterId",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "Application",
+        "column_name": "appliedDate",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Application",
+        "column_name": "followUpDate",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Application",
+        "column_name": "notes",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Application",
+        "column_name": "createdAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Application",
+        "column_name": "updatedAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "AuditLog",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "AuditLog",
+        "column_name": "actorId",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "AuditLog",
+        "column_name": "action",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "AuditLog",
+        "column_name": "target",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "AuditLog",
+        "column_name": "reason",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "AuditLog",
+        "column_name": "createdAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Document",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Document",
+        "column_name": "userId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Document",
+        "column_name": "kind",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Document",
+        "column_name": "title",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Document",
+        "column_name": "templateId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Document",
+        "column_name": "data",
+        "data_type": "jsonb",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Document",
+        "column_name": "revision",
+        "data_type": "integer",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Document",
+        "column_name": "createdAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Document",
+        "column_name": "updatedAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "DocumentExport",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "DocumentExport",
+        "column_name": "userId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "DocumentExport",
+        "column_name": "documentId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "DocumentExport",
+        "column_name": "format",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "DocumentExport",
+        "column_name": "createdAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "DocumentVersion",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "DocumentVersion",
+        "column_name": "documentId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "DocumentVersion",
+        "column_name": "revision",
+        "data_type": "integer",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "DocumentVersion",
+        "column_name": "title",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "DocumentVersion",
+        "column_name": "templateId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "DocumentVersion",
+        "column_name": "data",
+        "data_type": "jsonb",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "DocumentVersion",
+        "column_name": "createdAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "providerId",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "externalId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "title",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "company",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "location",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "country",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "arrangement",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "employmentType",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "seniority",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "salary",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "description",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "url",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "source",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "postedAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "expiresAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "syncedAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Job",
+        "column_name": "active",
+        "data_type": "boolean",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "JobProvider",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "JobProvider",
+        "column_name": "kind",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "JobProvider",
+        "column_name": "source",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "JobProvider",
+        "column_name": "active",
+        "data_type": "boolean",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "JobProvider",
+        "column_name": "intervalHours",
+        "data_type": "integer",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "JobProvider",
+        "column_name": "lastSyncAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "JobProvider",
+        "column_name": "lastError",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "JobProvider",
+        "column_name": "syncingUntil",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "JobProvider",
+        "column_name": "createdAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Profile",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Profile",
+        "column_name": "userId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Profile",
+        "column_name": "data",
+        "data_type": "jsonb",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Profile",
+        "column_name": "updatedAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "RecoveryToken",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "RecoveryToken",
+        "column_name": "userId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "RecoveryToken",
+        "column_name": "hash",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "RecoveryToken",
+        "column_name": "kind",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "RecoveryToken",
+        "column_name": "expiresAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "RecoveryToken",
+        "column_name": "createdAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SavedJob",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SavedJob",
+        "column_name": "userId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SavedJob",
+        "column_name": "jobId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SavedJob",
+        "column_name": "createdAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Setting",
+        "column_name": "key",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Setting",
+        "column_name": "value",
+        "data_type": "jsonb",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Setting",
+        "column_name": "updatedAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SupportTicket",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SupportTicket",
+        "column_name": "userId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SupportTicket",
+        "column_name": "subject",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SupportTicket",
+        "column_name": "message",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SupportTicket",
+        "column_name": "reply",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SupportTicket",
+        "column_name": "status",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SupportTicket",
+        "column_name": "createdAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SupportTicket",
+        "column_name": "updatedAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SystemEvent",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SystemEvent",
+        "column_name": "kind",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SystemEvent",
+        "column_name": "status",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SystemEvent",
+        "column_name": "message",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "SystemEvent",
+        "column_name": "createdAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Template",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Template",
+        "column_name": "name",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Template",
+        "column_name": "kind",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Template",
+        "column_name": "ats",
+        "data_type": "boolean",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Template",
+        "column_name": "active",
+        "data_type": "boolean",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Template",
+        "column_name": "isDefault",
+        "data_type": "boolean",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Template",
+        "column_name": "position",
+        "data_type": "integer",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Template",
+        "column_name": "version",
+        "data_type": "integer",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Template",
+        "column_name": "config",
+        "data_type": "jsonb",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "Template",
+        "column_name": "updatedAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "_prisma_migrations",
+        "column_name": "id",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "_prisma_migrations",
+        "column_name": "checksum",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "_prisma_migrations",
+        "column_name": "finished_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "_prisma_migrations",
+        "column_name": "migration_name",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "_prisma_migrations",
+        "column_name": "logs",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "_prisma_migrations",
+        "column_name": "rolled_back_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "_prisma_migrations",
+        "column_name": "started_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "_prisma_migrations",
+        "column_name": "applied_steps_count",
+        "data_type": "integer",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "account",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "account",
+        "column_name": "accountId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "account",
+        "column_name": "providerId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "account",
+        "column_name": "userId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "account",
+        "column_name": "accessToken",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "account",
+        "column_name": "refreshToken",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "account",
+        "column_name": "idToken",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "account",
+        "column_name": "accessTokenExpiresAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "account",
+        "column_name": "refreshTokenExpiresAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "account",
+        "column_name": "scope",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "account",
+        "column_name": "password",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "account",
+        "column_name": "createdAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "account",
+        "column_name": "updatedAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "session",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "session",
+        "column_name": "token",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "session",
+        "column_name": "expiresAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "session",
+        "column_name": "ipAddress",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "session",
+        "column_name": "userAgent",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "session",
+        "column_name": "createdAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "session",
+        "column_name": "updatedAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "session",
+        "column_name": "userId",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "user",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "user",
+        "column_name": "name",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "user",
+        "column_name": "email",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "user",
+        "column_name": "emailVerified",
+        "data_type": "boolean",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "user",
+        "column_name": "image",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "user",
+        "column_name": "role",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "user",
+        "column_name": "permissions",
+        "data_type": "ARRAY",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "user",
+        "column_name": "suspended",
+        "data_type": "boolean",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "user",
+        "column_name": "locale",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "user",
+        "column_name": "consentAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "user",
+        "column_name": "createdAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "user",
+        "column_name": "updatedAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "user",
+        "column_name": "defaultTemplateId",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "verification",
+        "column_name": "id",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "verification",
+        "column_name": "identifier",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "verification",
+        "column_name": "value",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "verification",
+        "column_name": "expiresAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "verification",
+        "column_name": "createdAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "verification",
+        "column_name": "updatedAt",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      }
+    ],
+    "itinerary": [
+      {
+        "table_name": "accommodations",
+        "column_name": "id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "accommodations",
+        "column_name": "trip_id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "accommodations",
+        "column_name": "name",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "accommodations",
+        "column_name": "location",
+        "data_type": "character varying",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "accommodations",
+        "column_name": "check_in",
+        "data_type": "date",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "accommodations",
+        "column_name": "check_out",
+        "data_type": "date",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "accommodations",
+        "column_name": "booking_ref",
+        "data_type": "character varying",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "accommodations",
+        "column_name": "total_cost",
+        "data_type": "numeric",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "accommodations",
+        "column_name": "notes",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "accommodations",
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "admin_audit_logs",
+        "column_name": "id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "admin_audit_logs",
+        "column_name": "administrator_id",
+        "data_type": "bigint",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "admin_audit_logs",
+        "column_name": "action",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "admin_audit_logs",
+        "column_name": "target_type",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "admin_audit_logs",
+        "column_name": "target_id",
+        "data_type": "bigint",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "admin_audit_logs",
+        "column_name": "details",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "admin_audit_logs",
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "expense_splits",
+        "column_name": "id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "expense_splits",
+        "column_name": "expense_id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "expense_splits",
+        "column_name": "member_id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "expense_splits",
+        "column_name": "share_amount",
+        "data_type": "numeric",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "expenses",
+        "column_name": "id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "expenses",
+        "column_name": "trip_id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "expenses",
+        "column_name": "expense_date",
+        "data_type": "date",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "expenses",
+        "column_name": "description",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "expenses",
+        "column_name": "category",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "expenses",
+        "column_name": "amount",
+        "data_type": "numeric",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "expenses",
+        "column_name": "paid_by_member_id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "expenses",
+        "column_name": "notes",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "expenses",
+        "column_name": "created_by",
+        "data_type": "bigint",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "expenses",
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "itinerary_items",
+        "column_name": "id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "itinerary_items",
+        "column_name": "trip_id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "itinerary_items",
+        "column_name": "item_date",
+        "data_type": "date",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "itinerary_items",
+        "column_name": "start_time",
+        "data_type": "time without time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "itinerary_items",
+        "column_name": "end_time",
+        "data_type": "time without time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "itinerary_items",
+        "column_name": "title",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "itinerary_items",
+        "column_name": "category",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "itinerary_items",
+        "column_name": "location",
+        "data_type": "character varying",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "itinerary_items",
+        "column_name": "notes",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "itinerary_items",
+        "column_name": "estimated_cost",
+        "data_type": "numeric",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "itinerary_items",
+        "column_name": "created_by",
+        "data_type": "bigint",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "itinerary_items",
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "session",
+        "column_name": "sid",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "session",
+        "column_name": "sess",
+        "data_type": "json",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "session",
+        "column_name": "expire",
+        "data_type": "timestamp without time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "transportation",
+        "column_name": "id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "transportation",
+        "column_name": "trip_id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "transportation",
+        "column_name": "mode",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "transportation",
+        "column_name": "provider",
+        "data_type": "character varying",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "transportation",
+        "column_name": "origin",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "transportation",
+        "column_name": "destination",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "transportation",
+        "column_name": "departure_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "transportation",
+        "column_name": "arrival_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "transportation",
+        "column_name": "booking_ref",
+        "data_type": "character varying",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "transportation",
+        "column_name": "total_cost",
+        "data_type": "numeric",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "transportation",
+        "column_name": "notes",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "transportation",
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trip_members",
+        "column_name": "id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trip_members",
+        "column_name": "trip_id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trip_members",
+        "column_name": "user_id",
+        "data_type": "bigint",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "trip_members",
+        "column_name": "display_name",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trip_members",
+        "column_name": "email",
+        "data_type": "character varying",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "trip_members",
+        "column_name": "role",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trip_members",
+        "column_name": "budget_limit",
+        "data_type": "numeric",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trip_members",
+        "column_name": "joined_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trips",
+        "column_name": "id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trips",
+        "column_name": "owner_id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trips",
+        "column_name": "name",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trips",
+        "column_name": "trip_type",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trips",
+        "column_name": "destination",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trips",
+        "column_name": "start_date",
+        "data_type": "date",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trips",
+        "column_name": "end_date",
+        "data_type": "date",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trips",
+        "column_name": "currency",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trips",
+        "column_name": "overall_budget",
+        "data_type": "numeric",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trips",
+        "column_name": "notes",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "trips",
+        "column_name": "invite_code",
+        "data_type": "character varying",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "trips",
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "trips",
+        "column_name": "updated_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "name",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "email",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "password_hash",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "users",
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "role",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "status",
+        "data_type": "character varying",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "updated_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "last_login_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "users",
+        "column_name": "febro_sub",
+        "data_type": "text",
+        "is_nullable": "YES"
+      }
+    ],
+    "voltlab": [
+      {
+        "table_name": "audit_events",
+        "column_name": "id",
+        "data_type": "bigint",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "audit_events",
+        "column_name": "actor_id",
+        "data_type": "uuid",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "audit_events",
+        "column_name": "action",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "audit_events",
+        "column_name": "target_id",
+        "data_type": "uuid",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "audit_events",
+        "column_name": "detail",
+        "data_type": "jsonb",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "audit_events",
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "rate_limits",
+        "column_name": "key",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "rate_limits",
+        "column_name": "attempts",
+        "data_type": "integer",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "rate_limits",
+        "column_name": "reset_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "schema_migrations",
+        "column_name": "name",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "schema_migrations",
+        "column_name": "applied_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "sessions",
+        "column_name": "token_hash",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "sessions",
+        "column_name": "user_id",
+        "data_type": "uuid",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "sessions",
+        "column_name": "expires_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "sessions",
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "id",
+        "data_type": "uuid",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "email",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "username",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "name",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "google_sub",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "users",
+        "column_name": "email_verified",
+        "data_type": "boolean",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "password_hash",
+        "data_type": "text",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "users",
+        "column_name": "status",
+        "data_type": "text",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "created_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "users",
+        "column_name": "last_login_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "YES"
+      },
+      {
+        "table_name": "workspaces",
+        "column_name": "owner_id",
+        "data_type": "uuid",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "workspaces",
+        "column_name": "data",
+        "data_type": "jsonb",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "workspaces",
+        "column_name": "revision",
+        "data_type": "integer",
+        "is_nullable": "NO"
+      },
+      {
+        "table_name": "workspaces",
+        "column_name": "updated_at",
+        "data_type": "timestamp with time zone",
+        "is_nullable": "NO"
+      }
+    ]
+  }
+}

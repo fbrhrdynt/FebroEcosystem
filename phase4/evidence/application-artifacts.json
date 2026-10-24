@@ -1,0 +1,175 @@
+{
+  "central": {
+    "artifact_sha256": "61939378bf95d640c6eb4d27611fc433364527edff1aa70981fc36afd77372ff",
+    "modifiedNativeFiles": [
+      "public/app.js",
+      "src/control-plane.mjs",
+      "src/febro-provider.mjs",
+      "src/auth.mjs",
+      "src/server.mjs"
+    ],
+    "sharedRuntimeFiles": [
+      "sso/repository.d.mts",
+      "sso/repository.mjs",
+      "sso/package.json",
+      "sso/package-lock.json",
+      "sso/preflight.mjs",
+      "sso/http.d.mts",
+      "sso/http.mjs",
+      "sso/migrate-approved.mjs",
+      "sso/provider/interactions.mjs",
+      "sso/provider/provider.mjs",
+      "sso/provider/mount.mjs",
+      "sso/provider/sqlite-adapter.mjs",
+      "sso/provider/http-guard.mjs",
+      "sso/adapters/identity-links.mjs",
+      "sso/adapters/client.mjs"
+    ],
+    "productionReady": false
+  },
+  "lamariva": {
+    "artifact_sha256": "8fa5b3d8758f37c0925ac3bc5d5a1496121639e005b71872a933a4dfe8765096",
+    "modifiedNativeFiles": [
+      "package-lock.json",
+      "next.config.ts",
+      "src/lib/febro-sso.ts",
+      "src/lib/auth.ts",
+      "src/app/auth/febro/[[...flow]]/route.ts",
+      "src/app/api/febro-status/route.ts",
+      "src/components/febro-login.tsx",
+      "src/components/workspace.tsx"
+    ],
+    "sharedRuntimeFiles": [
+      "sso/repository.d.mts",
+      "sso/repository.mjs",
+      "sso/package.json",
+      "sso/package-lock.json",
+      "sso/preflight.mjs",
+      "sso/http.d.mts",
+      "sso/http.mjs",
+      "sso/migrate-approved.mjs",
+      "sso/provider/interactions.mjs",
+      "sso/provider/provider.mjs",
+      "sso/provider/mount.mjs",
+      "sso/provider/sqlite-adapter.mjs",
+      "sso/provider/http-guard.mjs",
+      "sso/adapters/identity-links.mjs",
+      "sso/adapters/client.mjs"
+    ],
+    "productionReady": false
+  },
+  "itinerary": {
+    "artifact_sha256": "932fe086c7983213bc40c82b65c9930dbfca32a1a062bede6917e2a5ed5413ee",
+    "modifiedNativeFiles": [
+      "views/auth/login.ejs",
+      "src/server.js",
+      "src/routes/auth.js",
+      "src/services/febro-sso.js"
+    ],
+    "sharedRuntimeFiles": [
+      "sso/repository.d.mts",
+      "sso/repository.mjs",
+      "sso/package.json",
+      "sso/package-lock.json",
+      "sso/preflight.mjs",
+      "sso/http.d.mts",
+      "sso/http.mjs",
+      "sso/migrate-approved.mjs",
+      "sso/provider/interactions.mjs",
+      "sso/provider/provider.mjs",
+      "sso/provider/mount.mjs",
+      "sso/provider/sqlite-adapter.mjs",
+      "sso/provider/http-guard.mjs",
+      "sso/adapters/identity-links.mjs",
+      "sso/adapters/client.mjs"
+    ],
+    "productionReady": false
+  },
+  "voltlab": {
+    "artifact_sha256": "1e9772fd1d57201331aa56572a81ef4fe262438f6543451ebdfeb86a486b4a44",
+    "modifiedNativeFiles": [
+      "package.json",
+      "package-lock.json",
+      "server/febro-sso.ts",
+      "app/login/page.tsx",
+      "app/api/auth/google/callback/route.ts",
+      "app/api/auth/febro-status/route.ts",
+      "app/api/auth/febro/[[...flow]]/route.ts",
+      "components/VoltLab.tsx",
+      "components/FebroLink.tsx"
+    ],
+    "sharedRuntimeFiles": [
+      "sso/repository.d.mts",
+      "sso/repository.mjs",
+      "sso/package.json",
+      "sso/package-lock.json",
+      "sso/preflight.mjs",
+      "sso/http.d.mts",
+      "sso/http.mjs",
+      "sso/migrate-approved.mjs",
+      "sso/provider/interactions.mjs",
+      "sso/provider/provider.mjs",
+      "sso/provider/mount.mjs",
+      "sso/provider/sqlite-adapter.mjs",
+      "sso/provider/http-guard.mjs",
+      "sso/adapters/identity-links.mjs",
+      "sso/adapters/client.mjs"
+    ],
+    "productionReady": false
+  },
+  "files": {
+    "artifact_sha256": "dd35a07ac87ced69e8259fdc5603229228248c6f84a2238e93e2f15282e47acd",
+    "modifiedNativeFiles": [
+      "package-lock.json",
+      "public/app.js",
+      "src/febro-sso.mjs",
+      "src/server.mjs"
+    ],
+    "sharedRuntimeFiles": [
+      "sso/repository.d.mts",
+      "sso/repository.mjs",
+      "sso/package.json",
+      "sso/package-lock.json",
+      "sso/preflight.mjs",
+      "sso/http.d.mts",
+      "sso/http.mjs",
+      "sso/migrate-approved.mjs",
+      "sso/provider/interactions.mjs",
+      "sso/provider/provider.mjs",
+      "sso/provider/mount.mjs",
+      "sso/provider/sqlite-adapter.mjs",
+      "sso/provider/http-guard.mjs",
+      "sso/adapters/identity-links.mjs",
+      "sso/adapters/client.mjs"
+    ],
+    "productionReady": false
+  },
+  "play": {
+    "artifact_sha256": "aeabd42806ef38741be2406a2d60ce8da78627510949213e446b67f778a0a584",
+    "modifiedNativeFiles": [
+      "public/index.html",
+      "public/assets/febro-account.js",
+      "services/leaderboard/package-lock.json",
+      "services/leaderboard/febro-sso.mjs",
+      "services/leaderboard/server.mjs"
+    ],
+    "sharedRuntimeFiles": [
+      "sso/repository.d.mts",
+      "sso/repository.mjs",
+      "sso/package.json",
+      "sso/package-lock.json",
+      "sso/preflight.mjs",
+      "sso/http.d.mts",
+      "sso/http.mjs",
+      "sso/migrate-approved.mjs",
+      "sso/provider/interactions.mjs",
+      "sso/provider/provider.mjs",
+      "sso/provider/mount.mjs",
+      "sso/provider/sqlite-adapter.mjs",
+      "sso/provider/http-guard.mjs",
+      "sso/adapters/identity-links.mjs",
+      "sso/adapters/client.mjs"
+    ],
+    "productionReady": false
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "central": {
+    "root": "/opt/febro-ecosystem",
+    "stagingCandidate": "/opt/febro-ecosystem/phase5/src/central",
+    "database": "/opt/febro-ecosystem/data/ecosystem.sqlite",
+    "packageManifests": [
+      "package.json",
+      "package-lock.json"
+    ]
+  },
+  "lamariva": {
+    "root": "/opt/lamariva",
+    "stagingCandidate": "/opt/febro-ecosystem/phase5/src/lamariva",
+    "database": {
+      "engine": "PostgreSQL",
+      "host": "127.0.0.1",
+      "port": 5432,
+      "name": "lamariva"
+    },
+    "packageManifests": [
+      "package.json",
+      "package-lock.json"
+    ]
+  },
+  "itinerary": {
+    "root": "/opt/ls_itinerary",
+    "stagingCandidate": "/opt/febro-ecosystem/phase5/src/itinerary",
+    "database": {
+      "engine": "PostgreSQL",
+      "host": "127.0.0.1",
+      "port": 5432,
+      "name": "logisource_itinerary"
+    },
+    "packageManifests": [
+      "package.json",
+      "package-lock.json"
+    ]
+  },
+  "voltlab": {
+    "root": "/opt/voltlab",
+    "stagingCandidate": "/opt/febro-ecosystem/phase5/src/voltlab",
+    "database": {
+      "engine": "PostgreSQL",
+      "host": "127.0.0.1",
+      "port": 5432,
+      "name": "voltlab"
+    },
+    "packageManifests": [
+      "package.json",
+      "package-lock.json"
+    ]
+  },
+  "files": {
+    "root": "/opt/febro-files",
+    "stagingCandidate": "/opt/febro-ecosystem/phase5/src/files",
+    "database": "/opt/febro-files/data/files.sqlite",
+    "packageManifests": [
+      "package.json"
+    ]
+  },
+  "play": {
+    "root": "/opt/play",
+    "stagingCandidate": "/opt/febro-ecosystem/phase5/src/play",
+    "database": "/opt/play/storage/leaderboard/arcade.sqlite",
+    "packageManifests": []
+  }
+}

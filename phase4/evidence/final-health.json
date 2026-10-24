@@ -1,0 +1,94 @@
+{
+  "observedAt": "2026-10-22T16:53:37.183449+00:00",
+  "local": {
+    "eco.febro.id": {
+      "status": 200,
+      "certificateVerified": false
+    },
+    "cv.febro.id": {
+      "status": 200,
+      "certificateVerified": false
+    },
+    "itinerary.febro.id": {
+      "status": 200,
+      "certificateVerified": false
+    },
+    "voltlab.febro.id": {
+      "status": 200,
+      "certificateVerified": false
+    },
+    "files.febro.id": {
+      "status": 200,
+      "certificateVerified": false
+    },
+    "play.febro.id": {
+      "status": 200,
+      "certificateVerified": false
+    }
+  },
+  "publicHTTPS": {
+    "eco.febro.id": {
+      "status": 200,
+      "certificateVerified": true
+    },
+    "cv.febro.id": {
+      "status": 200,
+      "certificateVerified": true
+    },
+    "itinerary.febro.id": {
+      "status": 200,
+      "certificateVerified": true
+    },
+    "voltlab.febro.id": {
+      "status": 200,
+      "certificateVerified": true
+    },
+    "files.febro.id": {
+      "status": 200,
+      "certificateVerified": true
+    },
+    "play.febro.id": {
+      "status": 200,
+      "certificateVerified": true
+    }
+  },
+  "productionSourceDrift": {
+    "central": [],
+    "lamariva": [],
+    "itinerary": [],
+    "voltlab": [],
+    "files": [],
+    "play": []
+  },
+  "pm2": [
+    {
+      "name": "voltlab",
+      "pid": 52633,
+      "status": "online"
+    },
+    {
+      "name": "febro-ecosystem",
+      "pid": 65746,
+      "status": "online"
+    },
+    {
+      "name": "febro-files",
+      "pid": 52653,
+      "status": "online"
+    },
+    {
+      "name": "lamariva",
+      "pid": 52664,
+      "status": "online"
+    },
+    {
+      "name": "febro-arcade-api",
+      "pid": 57391,
+      "status": "online"
+    }
+  ],
+  "itineraryService": [
+    "MainPID=1091",
+    "ActiveState=active"
+  ]
+}

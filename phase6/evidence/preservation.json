@@ -1,0 +1,42 @@
+{
+  "sourceDrift": {
+    "voltlab": [],
+    "central": [],
+    "files": [],
+    "lamariva": [],
+    "play": [],
+    "itinerary": []
+  },
+  "pidChanged": {
+    "voltlab": false,
+    "central": false,
+    "files": false,
+    "lamariva": false,
+    "play": false,
+    "itinerary": false
+  },
+  "sqliteRestore": {
+    "central": "PASS",
+    "files": "PASS",
+    "play": "PASS"
+  },
+  "backupChecksums": {
+    "files.sqlite": "d4b662d17bbff351d6d279b8acd21c6c97b06eca1fe259aaeed51f210a8d5bcd",
+    "private-assets.tar.gz": "f7807bc5ef8bcc858478732339348d52299afd242f3024482ba4a6ea2b353e1f",
+    "central.sqlite": "3822b9d261d2f40d2d04aaac696afdde53a95c7b14f848ce6d09097ea025ca9a",
+    "systemd-env-0": "2cc064fabcdf05d66ef19649154de7bc10038e6ba63770f137b77f004b623bdd",
+    "play-source.tar.gz": "e625ed5ca15018cae52ae17045db1e7a4833d66067a39899cdbe170c125ef8a0",
+    "files-source.tar.gz": "2a43bac15ad3718e475ced57fecc0399d2286ba997a1d894ee13928a84e6e8ca",
+    "lamariva.dump": "a6c8fadb5a49e1833874a20fbd23e41f8525341d56d10d2ed8d971c33d899dbb",
+    "itinerary.dump": "d4e595ffaf220b7da3078ad29b4c592bc0f639cffd4e4fbc51f2796b17059581",
+    "voltlab-source.tar.gz": "6654606fab6a5eb8861ccb1ee656b389e1676fe1e71dac1d83e4e53dac52fc4a",
+    "play.sqlite": "5e2f7aeb5c8a1d79839f37b850a8079837449c138156ef83d61a56e419b548e3",
+    "systemd-env-manifest.json": "1484b0546c6b65434a2da0f214dc5da6f10106c4206e19fc30133095868ceb23",
+    "central-source.tar.gz": "5721a7b7eeec4593c39a2613cc2e9b9b34ea8fffae9bd57ceafdb749ef4d9694",
+    "lamariva-source.tar.gz": "7e859843d8a317bf325ef35cf586dd8108ae6efe9e43e7a4ed11f10d8fd1c2f4",
+    "pm2-definitions.json": "669d04b2f4c268e17a13a80c9aa46eef35ac60e24cff78490f562820e04034bd",
+    "service-config.tar.gz": "4b69eac548ba5d4a8d5be082c927bf866d6c88e3ffe4b804cc86d484bc54433e",
+    "voltlab.dump": "c1a284f7d4cb64dce32aa6be5005cc084c912fc463c56f00d2698de01e546570",
+    "itinerary-source.tar.gz": "f5f2035eb855adc1fb0146d0c4a5fdfccba2f297712f75f7358dfe660af94863"
+  }
+}

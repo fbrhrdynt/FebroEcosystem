@@ -1,0 +1,2 @@
+import {Art} from './Art';
+export function Guide({text,avatar=true,celebrate=false}:{text:string;avatar?:boolean;celebrate?:boolean}){return <div className={`guide ${celebrate?'celebrate':''}`}><div className="guide-avatar">{avatar?<img src="./assets/ghaffi-mascot.png" alt="Karikatur Ghaffi, teman belajar"/>:<Art name="star" size={64}/>}</div><div className="bubble" role="status" aria-live="polite">{text}</div></div>;}

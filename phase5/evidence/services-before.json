@@ -1,0 +1,45 @@
+{
+  "pm2": [
+    {
+      "name": "voltlab",
+      "pid": 52633,
+      "status": "online",
+      "cwd": "/opt/voltlab",
+      "script": "/opt/voltlab/scripts/start-server.mjs"
+    },
+    {
+      "name": "febro-ecosystem",
+      "pid": 65746,
+      "status": "online",
+      "cwd": "/opt/febro-ecosystem",
+      "script": "/opt/febro-ecosystem/src/server.mjs"
+    },
+    {
+      "name": "febro-files",
+      "pid": 52653,
+      "status": "online",
+      "cwd": "/opt/febro-files",
+      "script": "/opt/febro-files/src/server.mjs"
+    },
+    {
+      "name": "lamariva",
+      "pid": 52664,
+      "status": "online",
+      "cwd": "/opt/lamariva",
+      "script": "/opt/lamariva/node_modules/next/dist/bin/next"
+    },
+    {
+      "name": "febro-arcade-api",
+      "pid": 57391,
+      "status": "online",
+      "cwd": "/opt/play/services/leaderboard",
+      "script": "/opt/play/services/leaderboard/server.mjs"
+    }
+  ],
+  "itinerary": [
+    "MainPID=1091",
+    "WorkingDirectory=/opt/ls_itinerary",
+    "ActiveState=active",
+    "FragmentPath=/etc/systemd/system/ls-itinerary.service"
+  ]
+}

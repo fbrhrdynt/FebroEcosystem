@@ -1,0 +1,407 @@
+{
+  "observedAt": "2026-10-23T12:08:01.866317+00:00",
+  "sourceDrift": {
+    "central": [],
+    "lamariva": [],
+    "itinerary": [],
+    "voltlab": [],
+    "files": [],
+    "play": []
+  },
+  "backupChecksums": {
+    "files.sqlite": {
+      "match": true,
+      "bytes": 94208
+    },
+    "files.sqlite-wal": {
+      "match": true,
+      "bytes": 0
+    },
+    "central.sqlite-wal": {
+      "match": true,
+      "bytes": 0
+    },
+    "central.sqlite": {
+      "match": true,
+      "bytes": 151552
+    },
+    "play-source.tar.gz": {
+      "match": true,
+      "bytes": 5026090
+    },
+    "files-source.tar.gz": {
+      "match": true,
+      "bytes": 41782
+    },
+    "lamariva.dump": {
+      "match": true,
+      "bytes": 36650
+    },
+    "itinerary.dump": {
+      "match": true,
+      "bytes": 35449
+    },
+    "voltlab-source.tar.gz": {
+      "match": true,
+      "bytes": 2295128
+    },
+    "central.sqlite-shm": {
+      "match": true,
+      "bytes": 32768
+    },
+    "assets-and-private-config.tar.gz": {
+      "match": true,
+      "bytes": 1035119
+    },
+    "ls-itinerary.service": {
+      "match": true,
+      "bytes": 401
+    },
+    "play.sqlite": {
+      "match": true,
+      "bytes": 45056
+    },
+    "files.sqlite-shm": {
+      "match": true,
+      "bytes": 32768
+    },
+    "central-source.tar.gz": {
+      "match": true,
+      "bytes": 854494
+    },
+    "lamariva-source.tar.gz": {
+      "match": true,
+      "bytes": 3614090
+    },
+    "nginx-pm2.tar.gz": {
+      "match": true,
+      "bytes": 9952
+    },
+    "voltlab.dump": {
+      "match": true,
+      "bytes": 16722
+    },
+    "itinerary-source.tar.gz": {
+      "match": true,
+      "bytes": 80901
+    },
+    "central-source": {
+      "match": true
+    },
+    "lamariva-source": {
+      "match": true
+    },
+    "itinerary-source": {
+      "match": true
+    },
+    "voltlab-source": {
+      "match": true
+    },
+    "files-source": {
+      "match": true
+    },
+    "play-source": {
+      "match": true
+    }
+  },
+  "sqlite": {
+    "central": {
+      "integrity": "ok",
+      "foreignKeyViolations": 0
+    },
+    "files": {
+      "integrity": "ok",
+      "foreignKeyViolations": 0
+    },
+    "play": {
+      "integrity": "ok",
+      "foreignKeyViolations": 0
+    }
+  },
+  "packages": {
+    "central": {
+      "name": "febro-ecosystem",
+      "version": "2.0.0",
+      "description": "Febro Tools, Labs, API, Docs, QR, Converter, Snippets, Short links and Document Verification",
+      "type": "module",
+      "private": true,
+      "engines": {
+        "node": ">=22.13.0"
+      },
+      "scripts": {
+        "start": "node src/server.mjs",
+        "dev": "node --watch src/server.mjs",
+        "check": "node --check src/server.mjs && node --check src/store.mjs && node --check src/auth.mjs && node --check src/files.mjs && node --check public/app.js",
+        "test": "node --test tests/*.test.mjs"
+      },
+      "dependencies": {
+        "busboy": "^1.6.0",
+        "google-auth-library": "^9.15.1",
+        "nodemailer": "^6.10.1",
+        "pdf-lib": "^1.17.1",
+        "pdfjs-dist": "^4.10.38",
+        "qrcode": "^1.5.4"
+      }
+    },
+    "lamariva": {
+      "name": "lamariva",
+      "version": "1.0.0",
+      "private": true,
+      "type": "module",
+      "engines": {
+        "node": ">=22.16"
+      },
+      "scripts": {
+        "dev": "next dev --hostname 127.0.0.1 --port 3035",
+        "build": "prisma generate && next build --webpack",
+        "start": "next start --hostname 127.0.0.1 --port ${PORT:-3035}",
+        "typecheck": "tsc --noEmit",
+        "db:migrate": "prisma migrate deploy",
+        "db:seed": "node --import tsx scripts/seed.ts",
+        "admin:create": "node --import tsx scripts/admin.ts",
+        "jobs:sync": "node --import tsx scripts/sync.ts",
+        "test": "node --import tsx --test tests/model.test.ts",
+        "test:acceptance": "node --import tsx scripts/qa-runner.ts",
+        "test:e2e": "playwright test"
+      },
+      "dependencies": {
+        "@prisma/adapter-pg": "^7.0.0",
+        "@prisma/client": "^7.0.0",
+        "@react-pdf/renderer": "^4.3.0",
+        "better-auth": "1.7.7",
+        "docx": "^9.5.0",
+        "dotenv": "^17.2.0",
+        "next": "16.4.0",
+        "nodemailer": "10.0.16",
+        "pg": "^8.16.3",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+        "react-hook-form": "^7.65.0",
+        "sanitize-html": "^2.17.0",
+        "zod": "^4.1.0"
+      },
+      "overrides": {
+        "deepmerge-ts": "8.0.2",
+        "mysql2": "3.24.5"
+      },
+      "devDependencies": {
+        "@electric-sql/pglite": "^0.5.8",
+        "@electric-sql/pglite-socket": "^0.2.11",
+        "@playwright/test": "^1.56.0",
+        "@sparticuz/chromium": "^153.0.0",
+        "@types/node": "^22.0.0",
+        "@types/nodemailer": "^7.0.0",
+        "@types/pg": "^8.15.0",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "@types/sanitize-html": "^2.16.0",
+        "@types/smtp-server": "^3.5.13",
+        "prettier": "^3.9.9",
+        "prisma": "^7.0.0",
+        "smtp-server": "^3.19.18",
+        "tsx": "^4.20.0",
+        "typescript": "^5.9.0"
+      }
+    },
+    "itinerary": {
+      "name": "logisource-itinerary",
+      "version": "1.2.0",
+      "private": true,
+      "description": "Travel itinerary, group planning and per-person budget manager by LogiSource Digital",
+      "type": "module",
+      "scripts": {
+        "dev": "node --watch src/server.js",
+        "start": "node src/server.js",
+        "check": "node --check src/server.js && node --check src/database.js && node --check src/utils.js && node --check src/routes/auth.js && node --check src/routes/dashboard.js && node --check src/routes/admin.js && node --check src/routes/trips.js && node --check public/app.js",
+        "test": "node --test tests/*.test.js"
+      },
+      "engines": {
+        "node": ">=22"
+      },
+      "dependencies": {
+        "bcryptjs": "^3.0.2",
+        "connect-pg-simple": "^10.0.0",
+        "dotenv": "^17.2.2",
+        "ejs": "^3.1.10",
+        "express": "^5.2.1",
+        "express-rate-limit": "^8.1.0",
+        "express-session": "^1.18.2",
+        "helmet": "^8.1.0",
+        "jose": "^6.1.3",
+        "method-override": "^3.0.0",
+        "pg": "^8.16.3"
+      }
+    },
+    "voltlab": {
+      "name": "voltlab-vps",
+      "version": "2.4.1",
+      "private": true,
+      "engines": {
+        "node": ">=22.13.0"
+      },
+      "scripts": {
+        "dev": "next dev --hostname 127.0.0.1 --port 3025",
+        "build": "next build --webpack",
+        "start": "node scripts/start-server.mjs",
+        "check": "tsc --noEmit",
+        "test": "node scripts/test-engine.mjs && node tests/security.test.mjs",
+        "db:migrate": "node --env-file=.env scripts/migrate.mjs",
+        "admin:setup": "node --env-file=.env scripts/admin-setup.mjs",
+        "test:api": "node scripts/test-api.mjs",
+        "db:setup": "node --env-file=.env scripts/setup-postgres.mjs",
+        "db:backup": "node --env-file=.env scripts/backup.mjs"
+      },
+      "dependencies": {
+        "@base-ui/react": "^1.7.0",
+        "@hookform/resolvers": "^5.7.1",
+        "@shadcn/react": "^0.3.0",
+        "class-variance-authority": "0.7.1",
+        "clsx": "2.1.1",
+        "cmdk": "^1.1.1",
+        "date-fns": "^4.4.0",
+        "embla-carousel-react": "^8.6.0",
+        "input-otp": "^1.4.2",
+        "jose": "6.1.3",
+        "lucide-react": "^1.31.0",
+        "next": "16.3.4",
+        "next-themes": "^0.4.6",
+        "pg": "8.16.3",
+        "radix-ui": "^1.6.7",
+        "react": "19.2.6",
+        "react-day-picker": "^10.0.1",
+        "react-dom": "19.2.6",
+        "react-hook-form": "^7.85.0",
+        "react-resizable-panels": "^4.12.2",
+        "recharts": "^3.8.0",
+        "sonner": "^2.0.8",
+        "tailwind-merge": "3.6.0",
+        "vaul": "^1.1.2",
+        "zod": "^3.25.76"
+      },
+      "devDependencies": {
+        "@electric-sql/pglite": "^0.3.14",
+        "@tailwindcss/postcss": "4.2.1",
+        "@types/node": "22.19.19",
+        "@types/pg": "8.15.6",
+        "@types/react": "19.2.14",
+        "@types/react-dom": "19.2.3",
+        "eslint": "9.39.4",
+        "eslint-config-next": "16.3.4",
+        "tailwindcss": "4.2.1",
+        "tw-animate-css": "^1.4.0",
+        "typescript": "5.9.3"
+      },
+      "type": "module"
+    },
+    "files": {
+      "name": "febro-files",
+      "version": "1.0.0",
+      "private": true,
+      "type": "module",
+      "description": "Private file manager with hosted OIDC SSO \u2014 by Febro Herdyanto",
+      "engines": {
+        "node": ">=22.13.0"
+      },
+      "scripts": {
+        "start": "node src/server.mjs",
+        "check": "node --check src/server.mjs && node --check src/db.mjs && node --check public/app.js",
+        "test": "node --test tests/*.test.mjs"
+      },
+      "dependencies": {}
+    },
+    "play": {
+      "name": "febro-arcade-leaderboard",
+      "version": "1.0.0",
+      "private": true,
+      "type": "module",
+      "scripts": {
+        "start": "node server.mjs",
+        "check": "node --check server.mjs"
+      },
+      "engines": {
+        "node": ">=22.13.0"
+      }
+    }
+  },
+  "pm2": [
+    {
+      "name": "voltlab",
+      "pid": 52633,
+      "status": "online"
+    },
+    {
+      "name": "febro-ecosystem",
+      "pid": 65746,
+      "status": "online"
+    },
+    {
+      "name": "febro-files",
+      "pid": 52653,
+      "status": "online"
+    },
+    {
+      "name": "lamariva",
+      "pid": 52664,
+      "status": "online"
+    },
+    {
+      "name": "febro-arcade-api",
+      "pid": 57391,
+      "status": "online"
+    }
+  ],
+  "itinerary": [
+    "MainPID=1091",
+    "ActiveState=active"
+  ],
+  "health": {
+    "eco.febro.id": {
+      "loopback": {
+        "status": 200
+      },
+      "https": {
+        "status": 200
+      }
+    },
+    "cv.febro.id": {
+      "loopback": {
+        "status": 200
+      },
+      "https": {
+        "status": 200
+      }
+    },
+    "itinerary.febro.id": {
+      "loopback": {
+        "status": 200
+      },
+      "https": {
+        "status": 200
+      }
+    },
+    "voltlab.febro.id": {
+      "loopback": {
+        "status": 200
+      },
+      "https": {
+        "status": 200
+      }
+    },
+    "files.febro.id": {
+      "loopback": {
+        "status": 200
+      },
+      "https": {
+        "status": 200
+      }
+    },
+    "play.febro.id": {
+      "loopback": {
+        "status": 200
+      },
+      "https": {
+        "status": 200
+      }
+    }
+  }
+}

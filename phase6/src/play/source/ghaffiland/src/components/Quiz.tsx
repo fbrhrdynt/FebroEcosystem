@@ -1,0 +1,34 @@
+import {useEffect,useReducer,useState,useRef} from 'react';
+import {type Question,visibleChoices,type Choice} from '../data/curriculum';
+import {initial,reducer,interpret} from '../engine/dialog';
+import {speak,stopAll,stopMic,listen,capabilities} from '../services/speech';
+import type {Settings} from '../services/store';
+import {Art} from './Art';
+import {Guide} from './Guide';
+export function ChoiceVisual({choice,arabic=false}:{choice:Choice;arabic?:boolean}){return <>{choice.count!==undefined&&<span className="choice-objects" aria-label={`${choice.count} apel`}>{Array.from({length:choice.count},(_,i)=><Art key={i} name="apple" size={34}/>)}</span>}{choice.art&&<Art name={choice.art} size={90}/ >}{choice.color&&<span className="swatch" style={{background:choice.color}}/>}<span className={arabic?'arabic':!choice.art&&!choice.color&&choice.count===undefined?'big-type':''} lang={arabic?'ar':undefined} dir={arabic?'rtl':undefined}>{choice.label}</span></>;}
+export default function Quiz({questions,settings,mic,demo,onDone,onQuit}:{questions:Question[];settings:Settings;mic:boolean;demo:boolean;onDone:(attempts:number,rounds:number)=>void;onQuit:()=>void}){
+ const [s,dispatch]=useReducer(reducer,initial);const [status,setStatus]=useState('Mikrofon mati.');const [marked,setMarked]=useState<number[]>([]);const [typed,setTyped]=useState('');const finished=useRef(false);const q=questions[s.round];const options=visibleChoices(q,settings.level,s.errors);const done=s.phase==='PRAISE';
+ const read=(text:string)=>{dispatch({type:'STOP'});speak(text,settings.narrator,'id-ID',setStatus);};
+ useEffect(()=>{speak(q.spoken||q.prompt,settings.narrator,'id-ID',setStatus);setMarked([]);document.getElementById('question-title')?.focus();return stopAll;},[s.round]);
+ useEffect(()=>{if(s.message)speak(s.message,settings.narrator,'id-ID',setStatus);},[s.message]);
+ useEffect(()=>{if(!mic){stopMic();dispatch({type:'STOP'});}},[mic]);
+ useEffect(()=>{if(s.phase==='COMPLETE'&&!finished.current){finished.current=true;onDone(s.attempts,questions.length);}},[s.phase]);
+ function answer(id:string){stopAll();dispatch({type:'ANSWER',id,q});}
+ function voice(text:string){const intent=interpret(text,options);if(intent.type==='choice')answer(intent.id);else if(intent.type==='command'){if(intent.command==='repeat')read(q.spoken||q.prompt);if(intent.command==='hint')dispatch({type:'HINT',q});if(intent.command==='quit')onQuit();if(intent.command==='skip')setStatus('Boleh berhenti atau pilih petunjuk. Kita belajar tanpa terburu-buru.');}else dispatch({type:'UNKNOWN'});}
+ const object=(i:number)=><button key={i} className={`count-object ${marked.includes(i)?'marked':''}`} aria-label={`Apel ${i+1}${marked.includes(i)?', sudah dihitung':''}`} aria-pressed={marked.includes(i)} disabled={done} onClick={()=>{if(!marked.includes(i)){setMarked([...marked,i]);read(String(marked.length+1));}}}><Art name="apple" size={56}/><span>{marked.includes(i)?'✓':i+1}</span></button>;
+ return <section className="player" aria-label="Permainan"><div className="round-bar"><span>Soal {s.round+1} dari {questions.length}</span><div className="round-progress" role="progressbar" aria-label="Kemajuan soal" aria-valuenow={s.round+1} aria-valuemin={1} aria-valuemax={questions.length}><span style={{width:`${(s.round+1)/questions.length*100}%`}}/></div><span>Pelan-pelan saja</span></div>
+ <Guide text={s.message||q.prompt} avatar={settings.avatar} celebrate={done}/>
+ <div className="question-stage"><h2 id="question-title" tabIndex={-1}>{q.prompt}</h2>
+ {q.pronunciation&&<div className="pronounce"><strong>Huruf: {q.pronunciation}</strong><button onClick={()=>read(`${q.pronunciation}. ${q.pronunciation}.`)}>🔊 Dengar: {q.pronunciation}</button><p className="note">Suara panduan Bahasa Indonesia dari perangkat. Untuk makhraj Arab yang tepat, dengarkan bersama pendamping.</p></div>}
+ {q.target&&<div className={`target ${q.activity==='H01'?'arabic-target':''}`}><ChoiceVisual choice={q.target} arabic={q.activity==='H01'}/></div>}
+ {q.pattern&&<div className="pattern-row">{q.pattern.map((c,i)=><div className="pattern-item" key={i}><ChoiceVisual choice={c}/></div>)}<div className="pattern-item missing">?</div></div>}
+ {q.subtract&&<div className="subtraction-removed"><span>Diambil: {q.subtract[1]} apel</span><div className="removed-objects">{Array.from({length:q.subtract[1]},(_,i)=><span className="removed-apple" key={i} aria-label="Apel sudah diambil"><Art name="apple" size={52}/><b aria-hidden="true">×</b></span>)}</div><strong>Hitung apel yang masih utuh:</strong>{q.objects===0&&<p>Tidak ada apel tersisa.</p>}</div>}
+ {q.objects!==undefined&&<div className="counting-area">{q.addends?<><div className="object-group">{Array.from({length:q.addends[0]},(_,i)=>object(i))}</div><strong className="plus">+</strong><div className="object-group">{Array.from({length:q.addends[1]},(_,i)=>object(i+q.addends![0]))}</div></>:<div className="object-group">{Array.from({length:q.objects},(_,i)=>object(i))}</div>}
+ <p className="count-label">{marked.length} apel sudah disentuh</p></div>}
+ </div>
+ <div className="answers" style={{'--choices':options.length} as React.CSSProperties}>{options.map((c,i)=><button key={c.id} data-answer={c.id} disabled={done} className={`answer option-${i} ${s.errors>=2&&c.id===q.answer?'hinted':''} ${done&&c.id===q.answer?'correct':''}`} onClick={()=>answer(c.id)} aria-label={`Pilih ${c.label}`}><ChoiceVisual choice={c} arabic={q.activity==='H01'}/>{s.errors>=2&&c.id===q.answer&&<span className="hint-tag">★ Coba ini</span>}{done&&c.id===q.answer&&<span>✓ Cocok!</span>}</button>)}</div>
+ {done?<button autoFocus className="primary next" onClick={()=>dispatch({type:'NEXT',total:questions.length})}>{s.round===questions.length-1?'Lihat hasil bermain':'Ayo, coba yang berikutnya'} →</button>:<div className="controls"><button onClick={()=>read(q.spoken||q.prompt)}>↻ Ulangi</button><button onClick={()=>{stopAll();dispatch({type:'HINT',q});}}>Bantu aku</button>{q.english&&<button onClick={()=>{dispatch({type:'STOP'});speak(q.english!,settings.narrator,'en-US',setStatus);}}>Dengar English</button>}{mic&&capabilities().mic&&(s.phase==='LISTENING'?<button className="pink" onClick={()=>{stopMic();dispatch({type:'STOP'});setStatus('Mikrofon mati.');}}>Hentikan mikrofon</button>:<button className="sky" onClick={()=>{dispatch({type:'LISTEN'});listen(voice,setStatus,()=>dispatch({type:'STOP'}));}}>Jawab pakai suara</button>)}</div>}
+ <p className="audio-status" role="status">{status}</p>
+ {demo&&<form className="demo" onSubmit={e=>{e.preventDefault();voice(typed);setTyped('');}}><label>Demo orang tua (tidak disimpan)<input value={typed} onChange={e=>setTyped(e.target.value)} autoComplete="off" maxLength={80}/></label><button disabled={done}>Kirim jawaban</button><code>State: {s.phase} · attempts: {s.attempts}</code></form>}
+ </section>;
+}

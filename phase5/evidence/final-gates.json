@@ -1,0 +1,12 @@
+{
+  "automatedTests": 98,
+  "failed": 0,
+  "runnerSkipped": 0,
+  "acceptanceSkipped": 8,
+  "nextBuildsPassed": 2,
+  "productionHealthChecksPassed": 12,
+  "productionSourceDrift": 0,
+  "productionPidsUnchanged": true,
+  "releaseBundlesVerified": 6,
+  "productionDeployment": "NOT_EXECUTED"
+}

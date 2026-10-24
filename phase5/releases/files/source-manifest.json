@@ -1,0 +1,117 @@
+{
+  "app": "files",
+  "artifact_sha256": "b64a211ab1b756bee73dabb7ff3329f58f4e3dfabcd8780566fe4ddbd683b838",
+  "files": {
+    ".gitignore": {
+      "sha256": "28f6ccd0a53d0dcd2d0e0186933726c49f3983f07424a0567ee16f335ad36222"
+    },
+    "README.md": {
+      "sha256": "22602960f5295a8702fe0d4cde8f1873109c8b6d4d6dba4d7cb96158c0e619fb"
+    },
+    "SSO_INTEGRATION.md": {
+      "sha256": "0eb9cf653bcfe183f7807011f583e1012f5b329d94c9d2ff60e96f2ca1d40345"
+    },
+    "ecosystem.config.cjs": {
+      "sha256": "fccff18c0587da23fdd633653169e81280e7b826767f78ff7b4b3fad4e94acc1"
+    },
+    "package-lock.json": {
+      "sha256": "c1a8da91dff09608dc231821af0a5eb0d129cf0e21fff09ff8e630399f87d112"
+    },
+    "package.json": {
+      "sha256": "602cef15bbb61808c075c797c5feb9ef5a0e02899757b74a8ddadbc3cca7aeab"
+    },
+    "auth-patch/oidc-routing.inc": {
+      "sha256": "2e8b55d52c6d14289857172a12e9fffbeb650074b38d66b792cc49eb57310074"
+    },
+    "auth-patch/oidc.mjs": {
+      "sha256": "bab51fb2d687b358b566bb2044129db4d0e3c5b5dc0ef4411e85a4f421eced17"
+    },
+    "deploy/nginx-files.febro.id.conf": {
+      "sha256": "afacd8c3348002d0c8e12730d5964fc829c1e50bcee223275f82a3754dbc9521"
+    },
+    "public/app.css": {
+      "sha256": "17ce9f5e186f563b24da05edaa122821ce189f62ea64be060a31c40fe58f8974"
+    },
+    "public/app.js": {
+      "sha256": "4e61ccbe3b7741cad8ed38eb1c53d38cc9cffee6de9d0de7ac8b9f3c4ae65e3d"
+    },
+    "public/app.js.bak-20261013055443": {
+      "sha256": "84fa6674508474e218e9afd8f414cf9483f86d82162dbbbe77d42fbaff333b33"
+    },
+    "public/app.js.orig": {
+      "sha256": "229dd5729008d05b61bcd2ea0d0df18f10928bd2f3d17b7ee81d8e9a0f2e8c2f"
+    },
+    "public/favicon.svg": {
+      "sha256": "be1e99b416e0b469a7d65b877d3758372ac9eec8bd2e1c7878a50fecf047aa6b"
+    },
+    "public/index.html": {
+      "sha256": "d2ea4f1f739e9876ed95d95ff4a10ae2d7c6fa919fda15c18d3aca89bb47e4b7"
+    },
+    "scripts/install-config.mjs": {
+      "sha256": "a13240a73216713c4f60be4a02c1c17786aaa4afc728ce9c3f8a86e95b056fb7"
+    },
+    "scripts/patch-auth.mjs": {
+      "sha256": "1794da6a4cc03221f8487ecfcc4be41eba2aaf439a8992166a17f50ec62c26b0"
+    },
+    "src/db.mjs": {
+      "sha256": "c068979d8006ff497225c06e5c4235d0d80e6b644cd0e5256766e1b71dad50fd"
+    },
+    "src/febro-sso.mjs": {
+      "sha256": "b6e42c2ecf23184f43a87aa303257d7a3e9d6260bbb6cbd894fd41af014bc7f6"
+    },
+    "src/server.mjs": {
+      "sha256": "597dda1d02f515594932e9b2abd4710dc5d496d01a9ab29a0252c3d51f16f140"
+    },
+    "sso/http.d.mts": {
+      "sha256": "aa3eba83a9ebd7a6b923e9c7ab8caa47ba000c9b5368ec4e32e1ecfbfd347666"
+    },
+    "sso/http.mjs": {
+      "sha256": "50bed20dcc879b7ad8fc846f734da8b4eea1bdce8122c3f9a65594fcd243d51d"
+    },
+    "sso/migrate-approved.mjs": {
+      "sha256": "1c92d93dc033b45e14d9e72ab91ff9585d9b6f2eaa57ee19215e78ed6a69ba44"
+    },
+    "sso/package-lock.json": {
+      "sha256": "df40992f002c785eb4b18d2216a9f720f0a04ede3e860c03d6d38f032ee51550"
+    },
+    "sso/package.json": {
+      "sha256": "c9d6af629f9ebcc82998c2716693ebfa004980b80fee28dcd7d7f0dc4afc2938"
+    },
+    "sso/preflight.mjs": {
+      "sha256": "038abc2506a39ed230d2ea4ce6519c09afe0d0283858b589821b3fd941807f1d"
+    },
+    "sso/repository.d.mts": {
+      "sha256": "c2cd69a72579b1455630109c4887b7a1022c756ab6a9f8902fd45277298beab3"
+    },
+    "sso/repository.mjs": {
+      "sha256": "9a0965a99804167b6c2e7d0bfc3571fdd49c6c39f7e361b1cc433f011627c5dc"
+    },
+    "sso/adapters/client.mjs": {
+      "sha256": "f5d8272e9681acbc9947228242227a883d69d35ef804ef9b568f516b5b178283"
+    },
+    "sso/adapters/identity-links.mjs": {
+      "sha256": "ff1e7024828031449136fe9dea01961934eb921d811890528a0750ffe9be28df"
+    },
+    "sso/provider/http-guard.mjs": {
+      "sha256": "2d05ef6b84919cd1ed71df3179d5d777ea57e1484a9297cbf83b91f2f4eea048"
+    },
+    "sso/provider/interactions.mjs": {
+      "sha256": "c79c063ba75a2df2d4321ca3863183f0b14bd19aaf68ec95bda0507ff19366d6"
+    },
+    "sso/provider/mount.mjs": {
+      "sha256": "d04f94fc83a3770d0ea7fc3c8f474ce94aff8d237361b491b072449308df01db"
+    },
+    "sso/provider/provider.mjs": {
+      "sha256": "d8feb5ce7c6c8a7c6546b8eb5b377f49742fa20756bc43e783538e0e05e223e1"
+    },
+    "sso/provider/sqlite-adapter.mjs": {
+      "sha256": "d6e446b77a41635c15feb475202fffe7e596c3f09b69c582faa7381080452cba"
+    },
+    "tests/db.test.mjs": {
+      "sha256": "984d8aa6ca0ce5656e1229fc56632c924c0306f46ba9052964fbed27df051fce"
+    },
+    "tests/http.test.mjs": {
+      "sha256": "92a456918d328cacc11f6ecb0cb5b91799514d906abf7f67ed769d803d4a9bd7"
+    }
+  }
+}

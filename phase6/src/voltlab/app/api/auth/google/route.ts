@@ -1,0 +1,6 @@
+import {NextResponse} from 'next/server';
+import {createHash} from 'node:crypto';
+import {appUrl,authSecret,cookieOptions,errorResponse,HttpError,rateLimit,clientIp} from '../../../../server/auth';
+import {randomToken,signState} from '../../../../server/crypto.mjs';
+export const dynamic='force-dynamic';
+export async function GET(req:Request){try{if(!process.env.GOOGLE_CLIENT_ID||!process.env.GOOGLE_CLIENT_SECRET)throw new HttpError(503,'Login Google belum dikonfigurasi administrator.');await rateLimit('oauth:'+clientIp(req),40);const state=randomToken(),nonce=randomToken(),verifier=randomToken();const url=new URL('https://accounts.google.com/o/oauth2/v2/auth');url.search=new URLSearchParams({client_id:process.env.GOOGLE_CLIENT_ID,redirect_uri:appUrl()+'/api/auth/google/callback',response_type:'code',scope:'openid email profile',state,nonce,code_challenge:createHash('sha256').update(verifier).digest('base64url'),code_challenge_method:'S256',prompt:'select_account'}).toString();const response=NextResponse.redirect(url);response.cookies.set('voltlab-oauth',signState({state,nonce,verifier,exp:Date.now()+600000},authSecret()),{...cookieOptions(),maxAge:600});return response;}catch(e){return errorResponse(e);}}

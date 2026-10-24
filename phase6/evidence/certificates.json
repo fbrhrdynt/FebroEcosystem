@@ -1,0 +1,26 @@
+{
+  "/etc/letsencrypt/live/voltlab.febro.id/fullchain.pem": {
+    "exitCode": 1,
+    "publicMetadata": ""
+  },
+  "/etc/letsencrypt/live/eco.febro.id/fullchain.pem": {
+    "exitCode": 1,
+    "publicMetadata": ""
+  },
+  "/etc/letsencrypt/live/play.febro.id/fullchain.pem": {
+    "exitCode": 1,
+    "publicMetadata": ""
+  },
+  "/etc/letsencrypt/live/files.febro.id/fullchain.pem": {
+    "exitCode": 1,
+    "publicMetadata": ""
+  },
+  "/etc/letsencrypt/live/cv.febro.id/fullchain.pem": {
+    "exitCode": 1,
+    "publicMetadata": ""
+  },
+  "/etc/letsencrypt/live/itinerary.febro.id/fullchain.pem": {
+    "exitCode": 1,
+    "publicMetadata": ""
+  }
+}

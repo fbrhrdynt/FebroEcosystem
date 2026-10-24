@@ -1,0 +1,14 @@
+{
+  "lamariva": {
+    "compiled": true,
+    "typecheck": true,
+    "complete": true,
+    "log": "phase4/evidence/build-lamariva-final.log"
+  },
+  "voltlab": {
+    "compiled": true,
+    "typecheck": true,
+    "complete": true,
+    "log": "phase4/evidence/build-voltlab-final.log"
+  }
+}

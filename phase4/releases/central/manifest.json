@@ -1,0 +1,86 @@
+{
+  "app": "central",
+  "artifact_sha256": "61939378bf95d640c6eb4d27611fc433364527edff1aa70981fc36afd77372ff",
+  "files": {
+    "public/app.js": {
+      "sha256": "afdf3bc0e2afc590938281cd6f810bd101f5e091d134449658a4f7206b6c2421",
+      "before": "444ffa9ef959b8358d598734e171b4eeb72bbea5d0e7f90a90974ececf523d58"
+    },
+    "sso/repository.d.mts": {
+      "sha256": "c2cd69a72579b1455630109c4887b7a1022c756ab6a9f8902fd45277298beab3",
+      "before": null
+    },
+    "sso/repository.mjs": {
+      "sha256": "9a0965a99804167b6c2e7d0bfc3571fdd49c6c39f7e361b1cc433f011627c5dc",
+      "before": null
+    },
+    "sso/package.json": {
+      "sha256": "c9d6af629f9ebcc82998c2716693ebfa004980b80fee28dcd7d7f0dc4afc2938",
+      "before": null
+    },
+    "sso/package-lock.json": {
+      "sha256": "df40992f002c785eb4b18d2216a9f720f0a04ede3e860c03d6d38f032ee51550",
+      "before": null
+    },
+    "sso/preflight.mjs": {
+      "sha256": "038abc2506a39ed230d2ea4ce6519c09afe0d0283858b589821b3fd941807f1d",
+      "before": null
+    },
+    "sso/http.d.mts": {
+      "sha256": "aa3eba83a9ebd7a6b923e9c7ab8caa47ba000c9b5368ec4e32e1ecfbfd347666",
+      "before": null
+    },
+    "sso/http.mjs": {
+      "sha256": "50bed20dcc879b7ad8fc846f734da8b4eea1bdce8122c3f9a65594fcd243d51d",
+      "before": null
+    },
+    "sso/migrate-approved.mjs": {
+      "sha256": "1c92d93dc033b45e14d9e72ab91ff9585d9b6f2eaa57ee19215e78ed6a69ba44",
+      "before": null
+    },
+    "sso/provider/interactions.mjs": {
+      "sha256": "c79c063ba75a2df2d4321ca3863183f0b14bd19aaf68ec95bda0507ff19366d6",
+      "before": null
+    },
+    "sso/provider/provider.mjs": {
+      "sha256": "acbd063c867f1024ec149c7d32a1e32e7d454bb8a56d6de9ee81a6f5259cc9dd",
+      "before": null
+    },
+    "sso/provider/mount.mjs": {
+      "sha256": "d04f94fc83a3770d0ea7fc3c8f474ce94aff8d237361b491b072449308df01db",
+      "before": null
+    },
+    "sso/provider/sqlite-adapter.mjs": {
+      "sha256": "d6e446b77a41635c15feb475202fffe7e596c3f09b69c582faa7381080452cba",
+      "before": null
+    },
+    "sso/provider/http-guard.mjs": {
+      "sha256": "2d05ef6b84919cd1ed71df3179d5d777ea57e1484a9297cbf83b91f2f4eea048",
+      "before": null
+    },
+    "sso/adapters/identity-links.mjs": {
+      "sha256": "ff1e7024828031449136fe9dea01961934eb921d811890528a0750ffe9be28df",
+      "before": null
+    },
+    "sso/adapters/client.mjs": {
+      "sha256": "57c324b20edde7aa08e0b71170446d55a3d420bfe3ffdc224b103b9bf809cab9",
+      "before": null
+    },
+    "src/control-plane.mjs": {
+      "sha256": "7b16bd56075d5b095e4ed60e35bb7542ce8b7158ffb57074ab3affeeb1332713",
+      "before": "a4d3fe8ccbd6a0f8c81b9e92c5ee3f8da4eb6991ce3d014a41767349500573bd"
+    },
+    "src/febro-provider.mjs": {
+      "sha256": "72a69b7317d455dd29fdbe9f021509c22790a48f0bd836ea39da8d17040f6f66",
+      "before": null
+    },
+    "src/auth.mjs": {
+      "sha256": "0db5ea2494c2e1137e807bd442db1512fcf733498f39f500803f06b2d55cd956",
+      "before": "e5b701ea8ab47b3291bf687ab215e6228e095643bb246e8e661da54b20c23da7"
+    },
+    "src/server.mjs": {
+      "sha256": "58b1fef67ac70a6ee01184fab10c7fc3012c6b5a4059066db7a9865557b75106",
+      "before": "ffa783bb4c4c21cf2b9de3fdb139128c9bc48e5139e31d65ea7504a095562c7b"
+    }
+  }
+}
