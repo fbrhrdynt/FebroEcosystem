@@ -51,7 +51,7 @@ function bytes(res,status,buf,mime,name){res.writeHead(status,{'Content-Type':mi
 function siteFor(req,u){const host=String(req.headers.host||'').split(':')[0].toLowerCase();if(host===ecoHost){
  const match=Object.entries(modulePaths).find(([,prefix])=>u.pathname===prefix||u.pathname.startsWith(prefix+'/'));
  if(match){u.pathname=u.pathname.slice(match[1].length)||'/';return match[0];}
- if(u.pathname.startsWith('/v1/')){const part=u.pathname.split('/')[2];return ({account:'auth',control:'auth',auth:'auth',links:'short',snippets:'snip',convert:'convert',qr:'qr',verify:'verify',api:'api',catalog:'docs'})[part]||'tools';}
+ if(u.pathname.startsWith('/v1/')){const part=u.pathname.split('/')[2];return ({account:'auth',control:'auth',telemetry:'auth',auth:'auth',links:'short',snippets:'snip',convert:'convert',qr:'qr',verify:'verify',api:'api',catalog:'docs'})[part]||'tools';}
  if(u.pathname==='/control-center.js'||u.pathname==='/control-center.css')return 'auth';
  return u.pathname==='/'?'dashboard':'tools';
  }if(domains[host])return domains[host];if(!config.production&&['localhost','127.0.0.1','[::1]'].includes(host)){const candidate=u.searchParams.get('site')||'tools';return SITES.includes(candidate)?candidate:'tools';}return null;}
