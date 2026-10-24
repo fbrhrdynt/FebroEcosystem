@@ -20,3 +20,35 @@ $('#refresh').onclick=load;$('#previous').onclick=()=>{offset=Math.max(0,offset-
 
 function filterUsers(){const query=$('#user-search').value.toLowerCase();let visible=0;$('#users').querySelectorAll('tr').forEach(row=>{row.hidden=!row.textContent.toLowerCase().includes(query);if(!row.hidden)visible++;});$('#filter-empty').classList.toggle('hidden',visible>0);}
 $('#user-search').oninput=filterUsers;
+
+async function loadOverview(){
+ try{
+  const d=await api('/v1/control/overview');
+  const fields={'#metric-users':d.users.total,'#metric-verified':d.users.verified,'#metric-pending':d.users.pending,'#metric-sessions':d.sessions.active,'#metric-session-users':d.sessions.uniqueUsers,'#metric-new':d.users.new7d};
+  for(const [id,value] of Object.entries(fields))text($(id),Number(value).toLocaleString());
+  text($('#usage-status'),d.appUsage.message);
+  text($('#metrics-updated'),'Updated: '+new Date(d.generatedAt).toLocaleString());
+  const chart=$('#signup-chart');chart.replaceChildren();
+  const days=new Map(d.dailySignups.map(x=>[x.day,x.count]));
+  const max=Math.max(1,...days.values());
+  for(let i=29;i>=0;i--){
+   const date=new Date(Date.now()-i*86400000).toISOString().slice(0,10);
+   const count=days.get(date)||0;
+   const row=document.createElement('div');row.style.cssText='display:flex;gap:10px;align-items:center;margin:5px 0;font-size:12px';
+   const label=document.createElement('span');label.style.width='90px';text(label,date);
+   const bar=document.createElement('div');bar.style.cssText='height:12px;border-radius:5px;background:#648bd9;min-width:2px;width:'+Math.max(1,Math.round(count/max*70))+'%';
+   const value=document.createElement('span');text(value,count);
+   row.append(label,bar,value);chart.append(row);
+  }
+  const events=$('#security-events');events.replaceChildren();
+  for(const item of d.activity.recent){
+   const row=document.createElement('div');row.className='audit-row';
+   const when=document.createElement('time');text(when,new Date(item.at).toLocaleString());
+   const action=document.createElement('span');text(action,item.action+(item.app?' · '+item.app:''));
+   row.append(when,action);events.append(row);
+  }
+  if(!d.activity.recent.length)text(events,'No admin actions recorded.');
+ }catch(e){message('Analytics: '+e.message);}
+}
+$('#overview-refresh').addEventListener('click',loadOverview);
+loadOverview();
