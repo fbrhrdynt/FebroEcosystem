@@ -26,7 +26,7 @@ async function loadOverview(){
   const d=await api('/v1/control/overview');
   const fields={'#metric-users':d.users.total,'#metric-verified':d.users.verified,'#metric-pending':d.users.pending,'#metric-sessions':d.sessions.active,'#metric-session-users':d.sessions.uniqueUsers,'#metric-new':d.users.new7d};
   for(const [id,value] of Object.entries(fields))text($(id),Number(value).toLocaleString());
-  text($('#usage-status'),d.appUsage.message);
+  text($('#usage-status'),d.telemetry.apps.length ? d.telemetry.apps.map(a=>a.app+': '+a.uniqueUsers+' users / '+a.events+' events').join(' · ') : 'Endpoint telemetry ready. Awaiting application integration; no events recorded yet.');
   text($('#metrics-updated'),'Updated: '+new Date(d.generatedAt).toLocaleString());
   const chart=$('#signup-chart');chart.replaceChildren();
   const days=new Map(d.dailySignups.map(x=>[x.day,x.count]));
