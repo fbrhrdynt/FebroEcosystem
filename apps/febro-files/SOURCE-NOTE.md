@@ -1,0 +1,1 @@
+Application source imported from the existing standalone /opt/febro-files installation. Production continues to run from /opt/febro-files. No environment, database, uploads, keys, runtime files or candidate authentication activation are included. The prepared SSO rollout remains gated on real Google login and explicit ownership acceptance.

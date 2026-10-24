@@ -1,0 +1,14 @@
+.env
+.env.*
+node_modules/
+data/
+uploads/
+storage/
+runtime/
+*.sqlite*
+*.db*
+*.pem
+*.key
+*.log
+*.bak*
+*.orig

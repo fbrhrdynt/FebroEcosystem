@@ -1,0 +1,1 @@
+module.exports={apps:[{name:'febro-files',cwd:'/opt/febro-files',script:'src/server.mjs',instances:1,exec_mode:'fork',autorestart:true,watch:false,max_memory_restart:'600M',env:{NODE_ENV:'production',RUN_SERVER:'true'}}]};
